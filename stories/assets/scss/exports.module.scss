@@ -1,0 +1,5 @@
+@import "variables.module.scss";
+// access vars in JS
+:export {
+  audioPlayerWidth: $audioPlayerWidth;
+}

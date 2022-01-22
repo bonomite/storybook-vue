@@ -5,7 +5,7 @@ module.exports = {
   },
   "extends": [
     // "plugin:storybook/recommended",
-    "eslint:recommended",
+    // "eslint:recommended",
     "plugin:vue/vue3-recommended",
     "prettier"
   ],

@@ -29,10 +29,11 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
-import scssVars from '~/assets/scss/exports.module.scss'
+// import scssVars from './assets/scss/exports.module.scss'
 // use esm versions of gsap plugins
-import { ScrollTrigger } from '~/assets/gsap/ScrollTrigger.js'
+import { ScrollTrigger } from './assets/gsap/ScrollTrigger.js'
 gsap.registerPlugin(ScrollTrigger)
 
 export default {
@@ -48,22 +49,18 @@ export default {
   setup: (props) => {
     // props vars
     const fixed = ref(props.fixed)
+    const isMinimized = ref(false)
+    const isPlaying = ref(false)
 
     // local data vars
     let timeoutHandler = ref(null)
     const showPlayer = ref(!props.fixed)
 
-    // global vars for all components to share
-    const isMinimized = useState('isMinimized', () => false)
-    const isPlaying = useState('isPlaying', () => false)
-
-    // global vars from composables/states.ts
-    // const color = useColor()
-
     // local vars
     const audioPlayer = '#audioPlayerFixed'
     const animSpeed = 0.5
-    const playerFullWidth = scssVars.audioPlayerWidth.slice(0, -2)
+    // const playerFullWidth = scssVars.audioPlayerWidth.slice(0, -2)
+    const playerFullWidth = 375
 
     // methods
     const togglePlay = () => {
@@ -100,7 +97,7 @@ export default {
     const minimizeTimeoutReset = () => {
       // minimzes player after 6 soconds of inactivity
       if (fixed.value) {
-        if (timeoutHandler) {
+        if (timeoutHandler.value) {
           isMinimized.value = false
           clearTimeout(timeoutHandler)
         }
@@ -121,7 +118,7 @@ export default {
     }
 
     onMounted(() => {
-      if (fixed) {
+      if (fixed.value) {
         minimizeTimeoutReset()
         ScrollTrigger.create({
           trigger: '#audioPlayer',
