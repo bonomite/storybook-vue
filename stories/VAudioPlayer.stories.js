@@ -1,21 +1,14 @@
 import VAudioPlayer from './VAudioPlayer.vue'
 
-// More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
   title: 'Components/VAudioPlayer',
   component: VAudioPlayer,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
-    backgroundColor: { control: 'color' },
-    onClick: {},
-    size: {
-      control: { type: 'select' },
-      options: ['small', 'medium', 'large'],
-    },
+    fixed: { control: 'boolean' },
   },
 }
 
-// More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template = (args) => ({
   // Components used in your story `template` are defined in the `components` object
   components: { VAudioPlayer },
@@ -27,8 +20,10 @@ const Template = (args) => ({
   template: '<v-audio-player v-bind="args" />',
 })
 
-export const Primary = Template.bind({})
+
+export const Inline_Only = Template.bind({})
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
-Primary.args = {
+Inline_Only.args = {
   fixed: false,
 }
+

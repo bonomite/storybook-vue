@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     'primevue/resources/themes/saga-blue/theme.css',
     'primevue/resources/primevue.css',
     'primeicons/primeicons.css',
-    'primeflex/primeflex.css',
+    'primeflex/primeflex.scss',
   ],
   ssr: true,
   vite: {
@@ -32,8 +32,5 @@ export default defineNuxtConfig({
         },
       },
     },
-  },
-  storybook: {
-    // Options
   },
 })

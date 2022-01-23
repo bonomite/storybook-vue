@@ -1,30 +1,5 @@
 <template>
-  <div
-    v-show="showPlayer"
-    :id="pFixed ? 'audioPlayerFixed' : 'audioPlayer'"
-    class="audioPlayer"
-    :class="{ minimized: pIsMinimized, fixed: pFixed }"
-  >
-    <div class="content">
-      <h3>Audio Player!</h3>
-      <button
-        v-if="pFixed"
-        @click="closePlayer"
-        @mouseover="minimizeTimeoutReset"
-      >
-        &times;
-      </button>
-    </div>
-    <div class="min-content">
-      <Button
-        class="playPauseButton"
-        :icon="`pi ${pIsPlaying ? 'pi-pause' : 'pi-play'}`"
-        @click="togglePlay"
-        @mouseover="minimizeTimeoutReset"
-      >
-      </Button>
-    </div>
-  </div>
+  <div></div>
 </template>
 
 <script>
