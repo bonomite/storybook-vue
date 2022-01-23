@@ -1,61 +1,68 @@
 <template>
-  <div></div>
+  <div>
+    <v-audio-player
+      id="audioPlayer"
+      :is-playing="isPlaying"
+      @emit-toggle-play="onTogglePlay"
+    />
+    <v-audio-player
+      v-show="pIsPersistent && showPlayer"
+      id="audioPlayerFixed"
+      class="fixed"
+      :is-playing="isPlaying"
+      :is-minimized="isMinimized"
+      is-fixed
+      @mouseenter="minimizeTimeoutReset"
+      @emit-toggle-play="onTogglePlay"
+      @emit-close-player="onClosePlayer"
+    />
+  </div>
 </template>
 
 <script>
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
-import Button from 'primevue/button'
+import VAudioPlayer from './VAudioPlayer'
 // import scssVars from './assets/scss/exports.module.scss'
 // use esm versions of gsap plugins
 import { ScrollTrigger } from './assets/gsap/ScrollTrigger.js'
 gsap.registerPlugin(ScrollTrigger)
 
 export default {
-  name: 'VAudioPlayer',
+  name: 'VAudioPlayerSystem',
   components: {
-    Button,
+    VAudioPlayer,
   },
-  mixins: [],
-
   props: {
-    fixed: {
-      type: Boolean,
-      default: false,
-    },
-    isMinimized: {
-      type: Boolean,
-      default: false,
-    },
-    isPlaying: {
+    persistent: {
       type: Boolean,
       default: false,
     },
   },
   setup: (props) => {
     // props vars
-    const pFixed = ref(props.fixed)
-    const pIsMinimized = ref(props.isMinimized)
-    const pIsPlaying = ref(props.isPlaying)
+    const pIsPersistent = ref(props.persistent)
 
     // local data vars
-    let timeoutHandler = ref(null)
-    let showPlayer = ref(!props.fixed)
+    const isMinimized = ref(false)
+    const isPlaying = ref(false)
+    const showPlayer = ref(false)
 
     // local vars
+    let timeoutHandler = null
     const audioPlayer = '#audioPlayerFixed'
     const animSpeed = 0.5
     // const playerFullWidth = scssVars.audioPlayerWidth.slice(0, -2)
     const playerFullWidth = 375
 
     // methods
-    const togglePlay = () => {
+    const onTogglePlay = () => {
       minimizeTimeoutReset()
-      console.log('togglePlay = ', pIsPlaying.value)
-      pIsPlaying.value = !pIsPlaying.value
+      console.log('togglePlay = ', isPlaying.value)
+      isPlaying.value = !isPlaying.value
     }
     const togglePlayer = (bool) => {
-      if (showPlayer.value && pFixed.value) {
+      if (pIsPersistent.value) {
         if (bool) {
           minimizeTimeoutReset()
           slideIn()
@@ -82,39 +89,40 @@ export default {
       })
     }
     const minimizeTimeoutReset = () => {
-      // minimzes player after 6 soconds of inactivity
-      if (pFixed.value) {
-        if (timeoutHandler.value) {
-          pIsMinimized.value = false
+      console.log('onenter')
+      // minimizes player after 6 soconds of inactivity
+      if (pIsPersistent.value) {
+        if (timeoutHandler) {
+          isMinimized.value = false
           clearTimeout(timeoutHandler)
         }
         timeoutHandler = setTimeout(() => {
-          pIsMinimized.value = true
+          isMinimized.value = true
           clearTimeout(timeoutHandler)
         }, 6000)
       }
     }
-    const closePlayer = () => {
-      if (pIsPlaying.value) {
-        pIsMinimized.value = true
+    const onClosePlayer = () => {
+      if (isPlaying.value) {
+        console.log('is playing')
+        isMinimized.value = true
       } else {
         slideOut(() => {
+          console.log('is NOT playing')
           showPlayer.value = false
         })
       }
     }
 
     onMounted(() => {
-      if (pFixed.value) {
+      if (pIsPersistent.value) {
         minimizeTimeoutReset()
         ScrollTrigger.create({
           trigger: '#audioPlayer',
           markers: true,
           onLeave: () => {
-            console.log('pIsPlaying.value = ', pIsPlaying.value)
-            if (pIsPlaying.value) {
+            if (isPlaying.value) {
               showPlayer.value = true
-              console.log('onLeave')
             }
             togglePlayer(true)
           },
@@ -126,17 +134,14 @@ export default {
     })
 
     return {
-      pFixed,
-      pIsMinimized,
-      pIsPlaying,
+      pIsPersistent,
+      isMinimized,
+      isPlaying,
       showPlayer,
-      togglePlay,
-      closePlayer,
+      onTogglePlay,
+      onClosePlayer,
       minimizeTimeoutReset,
     }
-  },
-  head() {
-    return {}
   },
 }
 </script>

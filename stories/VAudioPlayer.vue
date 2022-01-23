@@ -1,26 +1,20 @@
 <template>
-  <div
-    v-show="showPlayer"
-    :id="pFixed ? 'audioPlayerFixed' : 'audioPlayer'"
-    class="audioPlayer"
-    :class="{ minimized: pIsMinimized, fixed: pFixed }"
-  >
+  <div class="audioPlayer" :class="{ minimized: isMinimized }">
     <div class="content">
       <h3>Audio Player!</h3>
-      <button
-        v-if="pFixed"
-        @click="closePlayer"
-        @mouseover="minimizeTimeoutReset"
+      <Button
+        v-if="isFixed"
+        class="ClosePlayerButton"
+        icon="pi pi-times"
+        @click="$emit('emitClosePlayer')"
       >
-        &times;
-      </button>
+      </Button>
     </div>
     <div class="min-content">
       <Button
         class="playPauseButton"
-        :icon="`pi ${pIsPlaying ? 'pi-pause' : 'pi-play'}`"
-        @click="togglePlay"
-        @mouseover="minimizeTimeoutReset"
+        :icon="`pi ${isPlaying ? 'pi-pause' : 'pi-play'}`"
+        @click="$emit('emitTogglePlay')"
       >
       </Button>
     </div>
@@ -28,23 +22,17 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
-import { gsap } from 'gsap'
+import { ref } from 'vue'
 import Button from 'primevue/button'
 // import scssVars from './assets/scss/exports.module.scss'
-// use esm versions of gsap plugins
-import { ScrollTrigger } from './assets/gsap/ScrollTrigger.js'
-gsap.registerPlugin(ScrollTrigger)
 
 export default {
   name: 'VAudioPlayer',
   components: {
     Button,
   },
-  mixins: [],
-
   props: {
-    fixed: {
+    isFixed: {
       type: Boolean,
       default: false,
     },
@@ -57,110 +45,16 @@ export default {
       default: false,
     },
   },
+  emits: ['emitTogglePlay', 'emitClosePlayer'],
   setup: (props) => {
     // props vars
-    const pFixed = ref(props.fixed)
-    const pIsMinimized = ref(props.isMinimized)
-    const pIsPlaying = ref(props.isPlaying)
 
     // local data vars
-    let timeoutHandler = ref(null)
-    let showPlayer = ref(!props.fixed)
 
     // local vars
-    const audioPlayer = '#audioPlayerFixed'
-    const animSpeed = 0.5
-    // const playerFullWidth = scssVars.audioPlayerWidth.slice(0, -2)
-    const playerFullWidth = 375
 
     // methods
-    const togglePlay = () => {
-      minimizeTimeoutReset()
-      console.log('togglePlay = ', pIsPlaying.value)
-      pIsPlaying.value = !pIsPlaying.value
-    }
-    const togglePlayer = (bool) => {
-      if (showPlayer.value && pFixed.value) {
-        if (bool) {
-          minimizeTimeoutReset()
-          slideIn()
-        } else {
-          slideOut(() => minimizeTimeoutReset())
-        }
-      }
-    }
-    const slideIn = () => {
-      gsap.to(audioPlayer, {
-        duration: animSpeed,
-        right: 0,
-        overwrite: true,
-      })
-    }
-    const slideOut = (onCompleteFunc) => {
-      gsap.to(audioPlayer, {
-        duration: animSpeed,
-        right: -playerFullWidth,
-        overwrite: true,
-        onComplete: () => {
-          onCompleteFunc()
-        },
-      })
-    }
-    const minimizeTimeoutReset = () => {
-      // minimzes player after 6 soconds of inactivity
-      if (pFixed.value) {
-        if (timeoutHandler.value) {
-          pIsMinimized.value = false
-          clearTimeout(timeoutHandler)
-        }
-        timeoutHandler = setTimeout(() => {
-          pIsMinimized.value = true
-          clearTimeout(timeoutHandler)
-        }, 6000)
-      }
-    }
-    const closePlayer = () => {
-      if (pIsPlaying.value) {
-        pIsMinimized.value = true
-      } else {
-        slideOut(() => {
-          showPlayer.value = false
-        })
-      }
-    }
 
-    onMounted(() => {
-      if (pFixed.value) {
-        minimizeTimeoutReset()
-        ScrollTrigger.create({
-          trigger: '#audioPlayer',
-          markers: true,
-          onLeave: () => {
-            console.log('pIsPlaying.value = ', pIsPlaying.value)
-            if (pIsPlaying.value) {
-              showPlayer.value = true
-              console.log('onLeave')
-            }
-            togglePlayer(true)
-          },
-          onEnterBack: () => {
-            togglePlayer(false)
-          },
-        })
-      }
-    })
-
-    return {
-      pFixed,
-      pIsMinimized,
-      pIsPlaying,
-      showPlayer,
-      togglePlay,
-      closePlayer,
-      minimizeTimeoutReset,
-    }
-  },
-  head() {
     return {}
   },
 }
