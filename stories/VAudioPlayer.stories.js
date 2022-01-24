@@ -6,6 +6,7 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
     persistent: { control: 'boolean' },
+    always: { control: 'boolean' },
   },
 }
 
@@ -20,16 +21,18 @@ const Template = (args) => ({
   template: '<v-audio-player-system v-bind="args" /> <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>',
 })
 
-export const Alone = Template.bind({})
+export const Default = Template.bind({})
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
-Alone.args = {
+Default.args = {
   persistent: false,
+  always: false,
 }
 
 export const Persistent = Template.bind({})
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Persistent.args = {
   persistent: true,
+  always: false,
 }
 
 export const AlwaysPersistent = Template.bind({})
