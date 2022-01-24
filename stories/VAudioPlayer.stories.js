@@ -20,10 +20,22 @@ const Template = (args) => ({
   template: '<v-audio-player-system v-bind="args" /> <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>',
 })
 
+export const Alone = Template.bind({})
+// More on args: https://storybook.js.org/docs/vue/writing-stories/args
+Alone.args = {
+  persistent: false,
+}
 
 export const Persistent = Template.bind({})
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Persistent.args = {
   persistent: true,
+}
+
+export const AlwaysPersistent = Template.bind({})
+// More on args: https://storybook.js.org/docs/vue/writing-stories/args
+AlwaysPersistent.args = {
+  persistent: true,
+  always: true,
 }
 

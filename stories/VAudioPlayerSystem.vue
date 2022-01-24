@@ -38,10 +38,15 @@ export default {
       type: Boolean,
       default: false,
     },
+    always: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup: (props) => {
     // props vars
     const pIsPersistent = ref(props.persistent)
+    const pIsAlways = ref(props.always)
 
     // local data vars
     const isMinimized = ref(false)
@@ -58,7 +63,6 @@ export default {
     // methods
     const onTogglePlay = () => {
       minimizeTimeoutReset()
-      console.log('togglePlay = ', isPlaying.value)
       isPlaying.value = !isPlaying.value
     }
     const togglePlayer = (bool) => {
@@ -89,7 +93,6 @@ export default {
       })
     }
     const minimizeTimeoutReset = () => {
-      console.log('onenter')
       // minimizes player after 6 soconds of inactivity
       if (pIsPersistent.value) {
         if (timeoutHandler) {
@@ -104,11 +107,9 @@ export default {
     }
     const onClosePlayer = () => {
       if (isPlaying.value) {
-        console.log('is playing')
         isMinimized.value = true
       } else {
         slideOut(() => {
-          console.log('is NOT playing')
           showPlayer.value = false
         })
       }
@@ -119,9 +120,9 @@ export default {
         minimizeTimeoutReset()
         ScrollTrigger.create({
           trigger: '#audioPlayer',
-          markers: true,
+          // markers: true,
           onLeave: () => {
-            if (isPlaying.value) {
+            if (isPlaying.value || pIsAlways.value) {
               showPlayer.value = true
             }
             togglePlayer(true)
@@ -135,6 +136,7 @@ export default {
 
     return {
       pIsPersistent,
+      pIsAlways,
       isMinimized,
       isPlaying,
       showPlayer,
