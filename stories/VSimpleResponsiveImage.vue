@@ -32,7 +32,7 @@
     </Image>
     <Teleport to="body">
       <ProgressSpinner 
-        v-show="loadingEnlargedImage" 
+        v-if="loadingEnlargedImage" 
         style="z-index: 1100; position: fixed; top: 0; bottom: 0; left: 0; right: 0; margin: auto;"
         stroke-width="6"
       />
@@ -235,7 +235,7 @@ export default {
       const img = document.getElementsByClassName('p-image-preview')
       const sizeList = this.srcset.split(',');
       const lastSize = sizeList[sizeList.length - 1]
-      const biggestSize = lastSize.slice(0, -2);
+      const biggestSize = lastSize.slice(0, -3);
       img[0].setAttribute('src', biggestSize)
     },
     closeEnlarge() {
