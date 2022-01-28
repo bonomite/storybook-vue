@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="simple-responsive-image-holder">
     <div v-if="isVertical" class="bg">
       <img
         :src="computedSrcBg"
@@ -9,9 +9,10 @@
         loading="lazy"
       />
     </div>
-    <img
+    <Image
       class="image"
       :class="isVertical ? 'is-vertical' : ''"
+      image-style="width: 100%; height: auto;"
       :srcset="srcset"
       :src="computedSrc"
       :width="computedWidth"
@@ -19,16 +20,35 @@
       :style="isVertical ? `width:${computedWidth}px;` : ''"
       :alt="alt"
       loading="lazy"
+      :preview="allowPreview"
+      @show="enlarge"
+      @hide="closeEnlarge"
       @click="$emit('click', $event.target.value)"
       @keypress="$emit('keypress', $event.target.value)"
-    />
+    >
+        <template #indicator>        
+            <span>Enlarge Content</span>
+        </template>
+    </Image>
+    <Teleport to="body">
+      <ProgressSpinner 
+        v-show="loadingEnlargedImage" 
+        style="z-index: 1100; position: fixed; top: 0; bottom: 0; left: 0; right: 0; margin: auto;"
+        stroke-width="6"
+      />
+    </Teleport>
   </div>
 </template>
 <script>
+import Image from "primevue/image"
+import ProgressSpinner from 'primevue/progressspinner';
 /**
  * Responsive image component, generates a srcset with multiple image sizes for different display densities.
  */
 export default {
+  components: {
+    Image, ProgressSpinner
+  },
   props: {
     /* alt text prop */
     alt: {
@@ -114,9 +134,16 @@ export default {
       default: 80,
     },
     /**
-     * allow the verticall effect to happen
+     * allow the vertical effect to happen
      */
     allowVerticalEffect: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * allow the user to click on the image to open a lightbox
+     */
+    allowPreview: {
       type: Boolean,
       default: false,
     },
@@ -128,6 +155,7 @@ export default {
         default: false,
         type: Boolean,
       },
+      loadingEnlargedImage: false,
     }
   },
   computed: {
@@ -202,41 +230,70 @@ export default {
     calcQuality(quality, size) {
       return size >= 2 ? quality - Math.round(size * 5) : quality
     },
+    enlarge() {
+      this.loadingEnlargedImage = true
+      const img = document.getElementsByClassName('p-image-preview')
+      const sizeList = this.srcset.split(',');
+      const lastSize = sizeList[sizeList.length - 1]
+      const biggestSize = lastSize.slice(0, -2);
+      img[0].setAttribute('src', biggestSize)
+    },
+    closeEnlarge() {
+      this.loadingEnlargedImage = false
+    },
   },
 }
 </script>
-<style lang="scss" scoped>
-.image {
+<style lang="scss">
+.simple-responsive-image-holder{
   position: relative;
-  width: 100%;
-  height: auto;
-  &.is-vertical {
-    margin: auto;
+  .image {
+    position: relative;
+    width: 100%;
+    height: auto;
+    &.is-vertical {
+      margin: auto;
+      display: block;
+    }
   }
-}
-.bg {
-  pointer-events: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  &:after {
-    content: '';
-    background-color: RGB(var(--surface-900));
+
+  .bg {
+    pointer-events: none;
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0.7;
+    overflow: hidden;
+    &:after {
+      content: '';
+      background-color: RGB(var(--surface-900));
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0.7;
+    }
+    img {
+      width: 100%;
+      filter: blur(3px) grayscale(100%);
+      object-fit: cover;
+      height: inherit;
+    }
   }
-  img {
-    width: 100%;
-    filter: blur(3px) grayscale(100%);
-    object-fit: cover;
-    height: inherit;
+
+}
+.p-component-overlay {
+  --maskbg: rgba(0,0,0,0)
+  background: -moz-radial-gradient(center, ellipse cover,  rgba(125,185,232,0) 0%, rgba(8,45,89,1) 82%);
+  background: -webkit-radial-gradient(center, ellipse cover,  rgba(125,185,232,0) 0%,rgba(8,45,89,1) 82%);
+  background: radial-gradient(ellipse at center,  rgba(125,185,232,0) 0%,rgba(8,45,89,1) 82%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8', endColorstr='#082d59',GradientType=1 );
+
+  .p-image-toolbar {
+    z-index: 1;
   }
 }
+
 </style>

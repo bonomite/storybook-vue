@@ -42,5 +42,27 @@ Default.args = {
     src: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 600,
     height: 400,
-    isVertical: false,
+    allowVerticalEffect: false,
+}
+
+export const Preview = Template.bind({})
+Preview.args = {
+    alt: 'Fallback alt text here',
+    src: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    width: 600,
+    height: 400,
+    allowVerticalEffect: false,
+    allowPreview: true,
+}
+
+
+export const Vertical = Template.bind({})
+Vertical.args = {
+    alt: 'Fallback alt text here',
+    src: 'https://cms.demo.nypr.digital/images/212136/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    width: 600,
+    height: 400,
+    maxWidth: 616,
+    maxHeight: 952,
+    allowVerticalEffect: true,
 }
