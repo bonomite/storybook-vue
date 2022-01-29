@@ -285,12 +285,8 @@ export default {
 
 }
 .p-component-overlay {
-  --maskbg: rgba(0,0,0,0)
-  background: -moz-radial-gradient(center, ellipse cover,  rgba(125,185,232,0) 0%, rgba(8,45,89,1) 82%);
-  background: -webkit-radial-gradient(center, ellipse cover,  rgba(125,185,232,0) 0%,rgba(8,45,89,1) 82%);
-  background: radial-gradient(ellipse at center,  rgba(125,185,232,0) 0%,rgba(8,45,89,1) 82%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8', endColorstr='#082d59',GradientType=1 );
-
+  
+  background: radial-gradient(ellipse at center,  var(--surface-800) 0%, var(--maskbg) 82%);
   .p-image-toolbar {
     z-index: 1;
   }
