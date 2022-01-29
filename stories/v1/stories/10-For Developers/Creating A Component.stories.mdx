@@ -1,0 +1,327 @@
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title='For Developers/Creating a Component' />
+
+# Creating a Component
+
+This document lays out step by step guidelines and best practices for creating Radial Vue components. Taking a consistent approach to components will makes the design system easier to learn and use.
+
+## Naming Components
+
+Radial component names follow the Vue Styleguide [https://vuejs.org/v2/style-guide/](https://vuejs.org/v2/style-guide/). Component names should always be PascalCase and multi-word (this prevents conflicts with existing and future HTML elements, since all HTML elements are a single word).
+
+- Base components or those with single word names should be prefixed with a V (e.g., VButton).
+- Components that should only ever have a single active instance should begin with the The prefix, to denote that there can be only one per page (e.g., TheFooter).
+- Child components that are tightly coupled with their parent should include the parent component name as a prefix (e.g., SegmentList and SegmentListItem).
+
+| Filename        | Component Syntax        |
+| --------------- | ----------------------- |
+| VButton         | `<v-button />`          |
+| TheFooter       | `<the-footer />`        |
+| SegmentList     | `<segment-list />`      |
+| SegmentListItem | `<segment-list-item />` |
+
+Lazy loading components in Nuxt:
+
+| Filename | Component Syntax     |
+| -------- | -------------------- |
+| FileName | `<lazy-file-name />` |
+
+## Creating the component skeleton
+
+If you're starting from scratch, you want to create a basic component skeleton. If you're refactoring an existing component you can skip this step and work with a copy of that component instead.
+
+Here is a basic skeleton for a Vue single file component:
+
+```
+<template>
+    <div>Your markup goes here!</div>
+</template>
+
+<script>
+export default {
+  name: 'Component Name'
+}
+</script>
+
+<style lang="scss">
+// add some styles here!
+</style>
+```
+
+## Create stories in Storybook
+
+Storybook allows you to prototype and build out your component with multiple variations visible while you work.
+
+Stories are living examples that demonstrate the different variations of a component. Use design comps as a guide to which stories to include. For example, consider these button designs:
+
+<img alt='List' src='./images/button-design-example.png' width='200' />
+
+Based on these designs you could write stories for the different button types (primary, primary with icon, secondary, icon, and flat) and include variations for the three different sizes within each story.
+
+Stories are written in blocks of code that go directly into your MDX documentation.
+
+```
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import VCounter from '../../../src/components/VCounter'
+
+<Canvas>
+    <Story name="Photos">
+        {{
+            components: { VCounter },
+            template: `<v-counter icon="gallery" text="Photos" value="40" href="http://www.google.com"/>`
+        }}
+    </Story>
+</Canvas>
+```
+
+Don't worry if your component code is still only a skeleton, write your stories with the properties and classes you would expect the component to have to show these variations. You can always go back and change it later if your component development takes a different direction.
+
+```
+<v-button icon="audio" alt="Play" class="mod-large"/>
+```
+
+For example, even if you don't know if the finished component will end up having a property called `alt`, you can make a guess and you can always change it later.
+
+If you need to mock larger data structures in your stories you can use a data object. When a Vue instance is created, it adds all the properties found in its data object to Vue’s reactivity system. When the values of those properties change, the view will “react”, updating to match the new values.
+
+```
+<Canvas>
+    <Story name="All">
+        {{
+            components: { ArticleMetadata, VCounter, VByline },
+            data () {
+                return {
+                    authors: [
+                        {
+                            firstName: 'Jen',
+                            lastName: 'Chung',
+                            organization: 'Gothamist',
+                            organizationUrl: 'http://www.gothamist.com'
+                        },
+                        {
+                            firstName: 'Brian',
+                            lastName: 'Lehrer',
+                            url: 'http://www.google.com',
+                        }
+                        ,
+                        {
+                            firstName: 'Shumita',
+                            lastName: 'Basu',
+                            url: 'http://www.google.com',
+                            organization: 'WNYC',
+                            organizationUrl: 'http://www.wnyc.org'
+                        }
+                    ]
+                }
+            },
+            template: `
+                        <article-metadata
+                            publish-date="Jan 1, 2020 1:25PM"
+                            updated-date="Mar 2, 2020 10:08AM"
+                        >
+                            <template v-slot:authors><v-byline :authors="authors" /></template>
+                            <template v-slot:comments><v-counter icon="comment" text="Comments" value="40" href="http://www.google.com"/></template>
+                            <template v-slot:photos><v-counter icon="gallery" text="Photos" value="40" href="http://www.google.com"/></template>
+                        </article-metadata>
+                      `
+        }}
+    </Story>
+</Canvas>
+```
+
+Further Reading:
+
+- [Writing MDX stories in Storybook](https://storybook.js.org/docs/react/writing-docs/mdx)
+
+# Writing your component code
+
+We use Single File Components (SFCs) in our design system. SFCs like the skeleton example above are components that are self-contained in their own files.
+
+[Learn more about Vue Single File Comoponents](https://vuejs.org/v2/guide/single-file-components.html)
+
+## Starting your local development servers
+
+Start Storybook:
+
+```
+npm run storybook
+```
+
+Go to Storybook in your browser and navigate to the stories you created. Now you can go back to your component file in your editor of choice. As you update your component's code, its stories will update live in Storybook.
+
+## Styles
+
+Each component's styles should live within its component file. For example, button styles should be defined in the style block of the VButton.vue file.
+
+Every element should have a class. This allows for easier targeting, not just in your stylesheets and themes, but also in automated testing and analytics tools. Use the [Trello styleguide's convention](https://github.com/trello/trellisheets/blob/master/styleguide.md#2-components), `.component-descendant-descendant`, for naming your classes.
+
+```
+<template>
+  <a
+    class="button"
+  >
+    <slot />
+    <span
+      v-if="label"
+      class="button-label"
+    >
+      {{ label }}
+    </span>
+  </a>
+</template>
+```
+
+Provide modifier classes for alternate styling when possible. Again, use the [Trello styleguide's naming convention](https://github.com/trello/trellisheets/blob/master/styleguide.md#modifiers), `.component-descendant.mod-modifier`.
+
+## Tokens
+
+Use _tokens_ to define style values where possible. Cross-reference the design comps with the [token list](/docs/for-developers-token-reference--page), and consult with a designer if necessary to help find the appropriate token values.
+
+```
+.button {}
+  padding: var(--space-1) var(--space-4);
+  color: rgb(var(--color-button-text));
+  background-color: rgb(var(--color-button));
+  // ... and so on
+}
+```
+
+## Optional properties
+
+Sometimes a component has properties that are optional, such as an icon or secondary title. Use v-if to hide the elements that display these properties when they don't exist.
+
+```
+<div
+  v-if="details"
+  class="card-details"
+>
+    {{details}}
+</div>
+```
+
+## States
+
+Certain states on a component might affect how it's displayed, for example to show the "playing" or "active" state on our stream switcher card. Use code to conditionally provide CSS classes that indicates these states as hooks for styling.
+
+```
+<div
+    class="stream-switcher-card"
+    :class="{'is-active':active, 'is-playing':playing}"
+>
+```
+
+## Events
+
+We can use the v-on directive to listen to DOM events and run some JavaScript when they’re triggered.
+
+For example, the VAccordion component runs the open() method when you click on the accordion header:
+
+```
+<div
+  :id="id"
+  class="accordion-header"
+  :class="{'accordion-header-active': visible}"
+  role="button"
+  tabindex="0"
+  @click="open"
+  @keypress.enter.space.prevent="open"
+>
+```
+
+Here is the corresponding open() method:
+
+```
+methods: {
+    open () {
+      this.active = !this.visible
+    }
+}
+```
+
+## Style documentation
+
+Add documentation for your modifier classes and state based classes to your component's mdx story page
+
+```
+## Modifier Classes
+
+| Class | Usage |
+|---|---|
+| `.mod-secondary` | Style this button as a secondary button. |
+| `.mod-flat` | Style this button as a flat button. |
+| `.mod-small` | Use the small variant for this button. Does not apply to flat buttons. |
+| `.mod-large` | Use the large variant for this button. Does not apply to flat buttons. |
+
+## State Classes
+
+| Class | State |
+|---|---|
+| `.is-icon-only` | Applied automatically to a buttons with an icon but no label. |
+```
+
+# Testing your Component
+
+Don't forget to write unit tests for your component. View https://next.vue-test-utils.vuejs.org/guide/ for more information on testing with Vue and Jest.
+
+## Testing component props and basic accessibility
+
+You should test any props your component uses to make sure they are passing through correctly, and you should always include a basic accessibility test:
+
+```js
+import { mount, shallowMount } from '@vue/test-utils'
+import { describe, test, expect } from '@jest/globals'
+import VTag from '../components/VTag'
+import { toHaveNoViolations } from 'jest-axe'
+import axe from './axe-helper'
+
+expect.extend(toHaveNoViolations)
+
+describe('VTag', () => {
+  const text = 'news'
+  const href = 'http://www.foo.com'
+  test('text prop works: null', () => {
+    const wrapper = shallowMount(VTag, {
+      propsData: {
+        text: text
+      }
+    })
+    // check if prop works
+    expect(wrapper.text()).toBe(text)
+  })
+
+  test('link attribute works', () => {
+    const wrapper = shallowMount(VTag, {
+      attrs: {
+        href: href
+      }
+    })
+    // check if prop works and rendered correctly
+    expect(wrapper.attributes().href).toBe(href)
+  })
+
+  test('it passes basic accessibility tests', async () => {
+    const wrapper = mount(VTag)
+    const results = await axe(wrapper.element)
+    expect(results).toHaveNoViolations()
+  })
+})
+```
+
+## Testing component events
+
+You should also test any events you pass out of your component to make sure they are firing correctly. The following example test that the Persistent Player's mute button works correctly:
+
+```js
+test('mute button works', () => {
+  const wrapper = mount(PersistentPlayer)
+  const div = wrapper.get('.volume-control-icon')
+  div.trigger('click')
+
+  const emitted = wrapper.emitted()
+  expect(emitted['volume-toggle-mute']).toBeDefined()
+  expect(emitted['volume-toggle-mute'].length).toBe(1)
+})
+```
+
+You _don't_ need to test all the style based variations, like the large button and small button classes.

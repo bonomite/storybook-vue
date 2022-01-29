@@ -6,6 +6,7 @@ module.exports = {
   core: {
     builder: "webpack5"
   },
+  staticDirs: ['../stories/assets-shared'],
   webpackFinal: async (config, { configType }) => {
 
     config.module.rules.push({
@@ -17,7 +18,7 @@ module.exports = {
         {
           loader: 'sass-loader',
           options: {
-            additionalData: '@import "primevue/resources/themes/lara-light-blue/theme.css"; @import "primevue/resources/primevue.css"; @import "primeicons/primeicons.css"; @import "primeflex/primeflex.scss"; @import "~/stories/assets-shared/scss/variables.module.scss";',
+            additionalData: '@import "primevue/resources/themes/lara-light-blue/theme.css"; @import "primevue/resources/primevue.css"; @import "primeicons/primeicons.css"; @import "primeflex/primeflex.scss"; @import "~/stories/assets-shared/scss/variables.module.scss"; @import "~/stories/assets-shared/scss/main.scss";',
             // additionalData: '@import "./assets/scss/main.scss";',
           },
         },

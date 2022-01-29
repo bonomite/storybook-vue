@@ -1,0 +1,493 @@
+import { Meta, Canvas, Story, Subtitle, ArgsTable } from '@storybook/addon-docs';
+import VPerson from '../../../src/components/VPerson';
+const component = VPerson;
+
+<Meta title="Components/Molecules/Person" component={component} />
+
+# Person
+
+Our person component displays a visual depiction of an author or host along with fields for name, role, bio, social links and a promo video. 
+
+## Use Cases
+
+-   Displaying the author or producer of a written or produced piece of content
+
+-   Displaying the host and/or guest of a radio show or podcast
+
+
+## What’s Inside
+
+<Canvas>
+    <Story name="Person">
+        {{
+            components: { VPerson },
+            template: `
+SCROLL DOWN TO SEE COMPONENT
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<v-person
+    orientation="responsive"
+    image="https://c.tenor.com/l6wUDFLSnfQAAAAC/square-animation.gif"
+    video="https://www.youtube.com/watch?v=LOS5WB75gkY"
+    img-scale="40"
+    circle
+    animate
+    full-name="Jen Chung"
+    name-link="https://gothamist.com/staff/jen-chung"
+    role="Executive Editor and Co-founder"
+    organization="Gothamist"
+    organization-link="https://gothamist.com/"
+    blurb="Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order."
+    truncate="2"
+    website-url='https://www.google.com'
+    website-label='Website'
+    email='jchung@nypr.com'
+    :phone-numbers="[{phoneNumber:'1-973-615-6339'},{phoneNumber:'1-973-123-1234'}]"
+    :social="[
+        {
+            service: 'facebook',
+            profileUrl: 'https://www.facebook.com/WNYC',
+        },
+        {
+            service: 'twitter',
+            profileUrl: 'https://twitter.com/WNYC'
+        },
+        {
+            service: 'instagram',
+            profileUrl: 'https://www.instagram.com/WNYC/'
+        },
+        {
+            service: 'linkedin',
+            profileUrl: 'https://www.linkedin.com/company/wnyc-radio/'
+        },
+        {
+            service: 'youtube',
+            profileUrl: 'https://www.youtube.com/channel/UCbysmY4hyViQAAYEzOR-uCQ'
+        }
+    ]"
+/>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+`
+        }}
+    </Story>
+</Canvas>
+
+
+**Image** - An image of the person, or a placeholder image if none is provided. Can be made a clickable link out to a relevant page (eg. author page, twitter profile, bio ). a circle mask can be applied by using the "circle" prop. An animated GIF can be used, but will stop animating after 10 seconds. Size can be altered in the vertical orientation only using "img-scale" prop. This value is a percentage of the wisth of the available area.
+
+**Video** - An optional promotional video can be triggered to play with a PLAY button placed over the image.
+
+**Name** - Name of person, required for this component. Can be made a clickable link out to a relevant page (eg. author page, twitter profile, bio ).
+
+**Role** - Role or subtitle, optional. In the case of Gothamist’s “Contributing Organization” authors, the organization can be listed here concluding or replacing the role. ex: Jess Fisher, Writer (NYT) or  Jess Fisher, NYT
+
+**Organization** - When provided, it will be added after the Role in parentheses. If the "organization-link" is provided, it will be a clickable link to the organization. 
+
+**Blurb** - A paragraph or so about the author, their credentials, and other information they wish to share with readers, optional. This blurb can be optionally truncated to a certain number of lines with the "truncate" prop.
+
+**[Social](https://storybook.nypr.digital/latest/index.html?path=/docs/components-molecules-social-follow--horizontal)** - Social media links to the persons social accounts.
+
+
+
+## Image Cropping
+
+It is recommended that square profile pictures are used, with the subject centered. Using landscape or portrait orientated photos might result in unwanted cropping.
+<img alt="text" src="./images/Molecule-Person-Cropping.png" width="700" />
+
+
+## Variants
+
+### **WNYC**
+<img alt="text" src="./images/Molecules-Person-WNYC.png" width="300" />
+
+The WNYC variant is used to display show hosts and guests using our WNYC theme fonts and colors.
+
+### **Gothamist**
+<img alt="text" src="./images/Molecules-Person-Gothamist.png" width="531" />
+
+The Gothamist variant is used to display authors, reporters, and staff, optionally including their bio and social media links.
+
+
+## Configurations
+The person component can be arranged horizontally(default) or vertically. Horizontal is the preferred and default configuration, but vertical is useful on mobile or when listing many people. A responsive configuration is also available. This will make it start horizontal and change to vertical at the SMALL break point or lower.
+
+## Accessibility
+- Text, icons, and background color must meet WCAG 2.0 [minimum contrast](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) requirement.
+
+- Always include an alt attribute describing the information that is visually displayed in the image.
+
+
+## Testing and Iterations
+In the future when the person component gets integrated with Gothamist, the component will have to be updated to support Contrubuting Organization metadata. This metadata will be appended to the Role text and wrapped in parentheses.
+
+## Component Properties
+
+<ArgsTable of={component} />
+
+## Stories
+
+### Person Image only
+<Canvas>
+    <Story name="Person image only">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    image="./images/default-user.jpg"
+/>
+`
+        }}
+    </Story>
+</Canvas>
+
+### Person Image only with link
+<Canvas>
+    <Story name="Person image only with link">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    image="./images/default-user.jpg"
+    name-link="https://gothamist.com/staff/jen-chung"
+/>
+`
+        }}
+    </Story>
+</Canvas>
+
+### Person details
+
+<Canvas>
+    <Story name="Person details">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    image="./images/default-user.jpg"
+    full-name="Jen Chung"
+    name-link="https://gothamist.com/staff/jen-chung"
+    role="Executive Editor and Co-founder"
+    blurb="Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. "
+    
+/>
+`
+        }}
+    </Story>
+</Canvas>
+
+### Person details with organization
+
+<Canvas>
+    <Story name="Person details with organization">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    image="./images/default-user.jpg"
+    full-name="Jen Chung"
+    name-link="https://gothamist.com/staff/jen-chung"
+    role="Executive Editor and Co-founder"
+    organization="Gothamist"
+    organization-link="https://gothamist.com/"
+    blurb="Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. "
+    
+/>
+`
+        }}
+    </Story>
+</Canvas>
+
+
+### Person details circle image
+
+<Canvas>
+    <Story name="Person details circle image">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    image="./images/default-user.jpg"
+    circle
+    full-name="Jen Chung"
+    name-link="https://gothamist.com/staff/jen-chung"
+    role="Executive Editor and Co-founder"
+    blurb="Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. "
+    
+/>
+`
+        }}
+    </Story>
+</Canvas>
+
+### Person details with no image
+
+<Canvas>
+    <Story name="Person details no image">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    full-name="Jen Chung"
+    name-link="https://gothamist.com/staff/jen-chung"
+    role="Executive Editor and Co-founder"
+    blurb="Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. "
+    
+/>
+`
+        }}
+    </Story>
+</Canvas>
+
+
+### Person details vertical
+
+<Canvas>
+    <Story name="Person vertical">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    orientation="vertical"
+    image="./images/default-user.jpg"
+    full-name="Jen Chung"
+    name-link="https://gothamist.com/staff/jen-chung"
+    role="Executive Editor and Co-founder"
+    blurb="Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. "
+    
+/>
+`
+        }}
+    </Story>
+</Canvas>
+
+### Person details vertical with image size percentage
+
+<Canvas>
+    <Story name="Person vertical with image size percentage">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    orientation="vertical"
+    img-scale="40"
+    image="./images/default-user.jpg"
+    full-name="Jen Chung"
+    name-link="https://gothamist.com/staff/jen-chung"
+    role="Executive Editor and Co-founder"
+    blurb="Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. "
+    
+/>
+`
+        }}
+    </Story>
+</Canvas>
+
+### Person details responsive
+
+<Canvas>
+    <Story name="Person responsive">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    orientation="responsive"
+    img-scale="40"
+    image="./images/default-user.jpg"
+    full-name="Jen Chung"
+    name-link="https://gothamist.com/staff/jen-chung"
+    role="Executive Editor and Co-founder"
+    blurb="Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. "
+/>
+`
+        }}
+    </Story>
+</Canvas>
+
+
+
+
+### Person truncated blurb 
+
+<Canvas>
+    <Story name="Person truncated blurb">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    style="margin:200px 0 600px 0;"
+    image="./images/default-user.jpg"
+    full-name="Jen Chung"
+    name-link="https://gothamist.com/staff/jen-chung"
+    role="Executive Editor and Co-founder"
+    blurb="Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order.Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order.Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order.Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order.Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order.Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order.Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order.Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order.Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order.Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order.Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order.Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order. "
+    truncate="2"
+/>
+`
+        }}
+    </Story>
+</Canvas>
+
+
+### Person animated 
+
+<Canvas>
+    <Story name="Person animated">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    image="./images/default-user.jpg"
+    full-name="Jen Chung"
+    name-link="https://gothamist.com/staff/jen-chung"
+    role="Executive Editor and Co-founder"
+    blurb="Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order."
+    animate
+/>
+`
+        }}
+    </Story>
+</Canvas>
+
+### Person GIF image and promo video button
+
+<Canvas>
+    <Story name="Person GIF image and promo video button">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    image="https://c.tenor.com/l6wUDFLSnfQAAAAC/square-animation.gif"
+    video="https://www.youtube.com/watch?v=LOS5WB75gkY"
+    full-name="Jen Chung"
+    circle
+    name-link="https://gothamist.com/staff/jen-chung"
+    role="Executive Editor and Co-founder"
+    blurb="Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order."
+/>
+`
+        }}
+    </Story>
+</Canvas>
+
+
+### Existing on the authors page, Image and name links disabled
+
+<Canvas>
+    <Story name="Existing on the authors page, Image and name links disabled">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    image="https://c.tenor.com/l6wUDFLSnfQAAAAC/square-animation.gif"
+    video="https://www.youtube.com/watch?v=LOS5WB75gkY"
+    full-name="Jen Chung"
+    circle
+    name-link="https://gothamist.com/staff/jen-chung"
+    role="Executive Editor and Co-founder"
+    blurb="Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order."
+    on-author-page
+/>
+`
+        }}
+    </Story>
+</Canvas>
+
+
+### Person with social links & responsive
+
+<Canvas>
+    <Story name="Person with social links and responsive">
+        {{
+            components: { VPerson },
+            template: `
+<v-person
+    orientation="responsive"
+    image="./images/default-user.jpg"
+    img-scale="40"
+    full-name="Jen Chung"
+    name-link="https://gothamist.com/staff/jen-chung"
+    role="Executive Editor and Co-founder"
+    blurb="Jen grew up in New Jersey and co-founded Gothamist in 2003 as a way to learn more about New York City beyond Law & Order."
+    website-url='https://www.google.com'
+    website-label='Website'
+    email='jchung@nypr.com'
+    :phone-numbers="[{phoneNumber:'1-973-615-6339'},{phoneNumber:'1-973-123-1234'}]"
+    :social="[
+        {
+            service: 'facebook',
+            profileUrl: 'https://www.facebook.com/WNYC',
+        },
+        {
+            service: 'twitter',
+            profileUrl: 'https://twitter.com/WNYC'
+        },
+        {
+            service: 'instagram',
+            profileUrl: 'https://www.instagram.com/WNYC/'
+        },
+        {
+            service: 'linkedin',
+            profileUrl: 'https://www.linkedin.com/company/wnyc-radio/'
+        },
+        {
+            service: 'youtube',
+            profileUrl: 'https://www.youtube.com/channel/UCbysmY4hyViQAAYEzOR-uCQ'
+        }
+    ]"
+/>
+`
+        }}
+    </Story>
+</Canvas>
+

@@ -1,0 +1,342 @@
+/*------------------------------------*\
+    $FORMS
+\*------------------------------------*/
+
+form ol,
+form ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+label,
+legend {
+  @include typeface(body, 5);
+  margin-bottom: 6px;
+  font-weight: 600;
+  display: block;
+}
+
+label input,
+label textarea {
+  margin-top: var(--space-1);
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: solid 1px RGB(var(--color-text-muted));
+  border-radius: 2px !important;
+  appearance: none;
+
+  &::placeholder {
+    color: RGB(var(--color-text-muted));
+    opacity: 1;
+  }
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=search],
+input[type=tel],
+textarea,
+select {
+  @include typeface(small, 6);
+  line-height: 28px;
+  padding: var(--space-2);
+  box-shadow: none;
+  border-radius: 0;
+}
+
+input[type=radio],
+input[type=checkbox] {
+  outline: none;
+  margin: 0 var(--space-3) 0 0;
+  height: 24px;
+  width: 24px;
+  line-height: 24px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  display: block;
+  float: left;
+  padding: 0;
+  user-select: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid RGB(var(--color-border-standard));
+
+  &:focus {
+    border: 1px solid RGB(var(--color-primary-1));
+  }
+}
+
+fieldset label,
+input[type=radio] + label,
+input[type=checkbox] + label {
+  font-weight: normal;
+  line-height: 24px;
+  display: inline-block;
+  top: -2px;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 0;
+}
+
+input[type=radio]:checked,
+input[type=checkbox]:checked {
+  background-color: RGB(var(--color-primary-1));
+  border: 2px solid RGB(var(--color-primary-1));
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath d='M26.08,3.56l-2,1.95L10.61,19l-5-4L3.47,13.29,0,17.62l2.17,1.73L9.1,24.9,11,26.44l1.77-1.76L28.05,9.43,30,7.48Z' fill='%23ffffff'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 14px;
+}
+
+input[type=radio] {
+  border-radius: 50px;
+}
+
+/* clears the 'X' from Internet Explorer */
+input[type=search]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+input[type=search]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* clears the 'X' from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+/* removes the blue background on Chrome's autocomplete */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+select {
+  appearance: none;
+  cursor: pointer;
+  text-indent: 0.01px;
+  text-overflow: "";
+  background-image: url("data:image/svg+xml,%3Csvg class='o-icon o-simple-arrow-down-icon' viewBox='1 1 20 20' width='40' height='40' preserveAspectRatio='xMidYMid meet' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ctitle%3Earrow down%3C/title%3E%3Cpath opacity='0.6' fill-rule='evenodd' clip-rule='evenodd' d='M1.77754 6.72492C2.30036 6.21885 2.75785 6.72492 2.75785 6.72492L11.729 15.3985L20.275 6.69305C20.275 6.69305 20.8108 6.26335 21.2878 6.72492C21.7652 7.1861 21.2878 7.83036 21.2878 7.83036L11.7129 17.5L1.6308 7.75204C1.6308 7.75204 1.25492 7.23022 1.77754 6.72492Z' fill='black'/%3E%3C/svg%3E%0A");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  background-size: 24px;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+::placeholder {
+  @include typeface(small, 6);
+  letter-spacing: normal;
+  color: (var(--color-text-muted));
+}
+
+
+/* don't apply hover effects to form buttons*/
+form .o-button:before {
+  display: none;
+}
+
+form .o-button:hover {
+  transform: none;
+}
+
+// input range base styles
+
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  background: transparent; /* Otherwise white in Chrome */
+  width: 100%; /* Chrome needs this */
+  margin-right: 1.5rem;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  // Hides the slider so custom styles can be added
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+// input range thumb
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: RGB(var(--color-text));
+  cursor: pointer;
+  margin-top: -6px; /* (thumb height/2 + track height/2) You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+}
+
+input[type=range]::-moz-range-thumb {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: RGB(var(--color-text));
+  cursor: pointer;
+}
+
+input[type=range]::-ms-thumb {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: RGB(var(--color-text));
+  cursor: pointer;
+}
+
+// input range track
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  background: RGB(var(--color-text));
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: RGB(var(--color-text));
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  background: RGB(var(--color-text));
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+
+input[type=range]::-ms-fill-lower {
+  background: RGB(var(--color-text));
+}
+
+input[type=range]:focus::-ms-fill-lower {
+  background: RGB(var(--color-text));
+}
+
+input[type=range]::-ms-fill-upper {
+  background: RGB(var(--color-text));
+}
+
+input[type=range]:focus::-ms-fill-upper {
+  background: RGB(var(--color-text));
+}
+
+// required styles
+
+label.required {
+  &::before {
+    content: '*';
+    margin-right: var(--space-1);
+    color: RGB(var(--color-text-error));
+  }
+}
+
+// error styles
+
+label.error {
+  input,
+  select,
+  textarea {
+    border: solid 1px RGB(var(--color-text-error));
+  }
+
+  input[type=radio],
+  input[type=checkbox] {
+    border: 1px solid RGB(var(--color-text-error));
+  }
+}
+
+label p {
+  @include typeface(body, 2);
+  margin-top: var(--space-1);
+
+  &.error {
+    color: RGB(var(--color-text-error));
+  }
+}
+
+// disabled styles
+
+label.disabled {
+  color: RGB(var(--color-gray));
+
+  input,
+  select,
+  textarea {
+    background-color: RGB(var(--color-background-muted));
+  }
+
+  input[type=checkbox] {
+    background-color: RGB(var(--color-background-muted));
+    border: 1px solid RGB(var(--color-gray));
+  }
+}
+
+// inline button style
+.inline-button {
+  display: flex;
+}
+
+.inline-button .button {
+  padding: 0 var(--space-3);
+}
+
+// text area styles
+textarea ~ p {
+  @include typeface(body, 2);
+  color: RGB(var(--color-text-muted));
+  margin-top: var(--space-1);
+  text-align: right;
+}

@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="For Developers/Setup" />
+
+# Setting Up your Environment For Local Development
+
+### Clone the repo
+
+```
+git clone git@github.com:nypublicradio/nypr-design-system-vue.git
+cd nypr-design-system-vue
+```
+
+### Install dependencies
+
+If vue isn’t installed, run
+```
+npm install -g @vue/cli
+```
+
+Then
+```
+npm install
+```
+
+#### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+#### Compiles and minifies for production
+```
+npm run build
+```
+
+#### Launches Storybook
+```
+npm run storybook
+```
+
+#### Builds Storybook
+```
+npm run build-storybook
+```
+See Storybook at [https://storybook.nypr.digital](https://storybook.nypr.digital)
+
+Pushing to main will trigger a [Storybook deployment on CircleCi](https://app.circleci.com/pipelines/github/nypublicradio/nypr-design-system-vue)
+
+#### Runs unit tests
+```
+npm run test
+```
+
+#### Lints and fixes files
+```
+npm run lint
+```
+
+See the Vue CLI [Configuration Reference](https://cli.vuejs.org/config/) for more!
