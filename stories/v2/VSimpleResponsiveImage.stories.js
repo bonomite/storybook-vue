@@ -1,7 +1,7 @@
 import VSimpleResponsiveImage from './VSimpleResponsiveImage.vue'
 
 export default {
-    title: 'Components/VSimpleResponsiveImage',
+    title: 'Components-V2/VSimpleResponsiveImage',
     component: VSimpleResponsiveImage,
     argTypes: {
         // alt: {

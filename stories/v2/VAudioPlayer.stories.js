@@ -1,7 +1,7 @@
 import VAudioPlayerSystem from './VAudioPlayerSystem.vue'
 
 export default {
-  title: 'Components/VAudioPlayerSystem',
+  title: 'Components-V2/VAudioPlayerSystem',
   component: VAudioPlayerSystem,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
