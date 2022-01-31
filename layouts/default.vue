@@ -9,7 +9,7 @@
         <nuxt-link to="/other">Other</nuxt-link>
       </li>
     </ul>
-    <v-audio-player-system persistent always />
+    <!-- <v-audio-player-system persistent always /> -->
     <main>
       <slot> </slot>
     </main>
@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import VAudioPlayerSystem from '~/stories/VAudioPlayerSystem'
+// import VAudioPlayerSystem from '~/stories/VAudioPlayerSystem'
 
 export default {
   name: 'HomePage',
   components: {
-    VAudioPlayerSystem,
+    // VAudioPlayerSystem,
   },
   mixins: [],
   data() {

@@ -149,11 +149,6 @@ export default {
 </script>
 
 <style lang="scss">
-body {
-  max-width: $md;
-  margin: 0 auto;
-  padding: $spacing * 3;
-}
 .audioPlayer {
   background: var(--gray-300);
   border-radius: var(--border-radius);

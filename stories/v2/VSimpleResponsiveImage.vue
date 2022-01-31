@@ -26,28 +26,39 @@
       @click="$emit('click', $event.target.value)"
       @keypress="$emit('keypress', $event.target.value)"
     >
-        <template #indicator>        
-            <span>Enlarge Content</span>
-        </template>
+      <template #indicator>
+        <span>Enlarge Content</span>
+      </template>
     </Image>
-    <Teleport to="body">
-      <ProgressSpinner 
-        v-if="loadingEnlargedImage" 
-        style="z-index: 1100; position: fixed; top: 0; bottom: 0; left: 0; right: 0; margin: auto;"
-        stroke-width="6"
-      />
-    </Teleport>
+    <span v-if="loadingEnlargedImage">
+      <Teleport to=".p-component-overlay">
+        <ProgressSpinner
+          v-if="loadingEnlargedImage"
+          style="
+            z-index: -1;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+          "
+          stroke-width="6"
+        />
+      </Teleport>
+    </span>
   </div>
 </template>
 <script>
-import Image from "primevue/image"
-import ProgressSpinner from 'primevue/progressspinner';
+import Image from 'primevue/image'
+import ProgressSpinner from 'primevue/progressspinner'
 /**
  * Responsive image component, generates a srcset with multiple image sizes for different display densities.
  */
 export default {
   components: {
-    Image, ProgressSpinner
+    Image,
+    ProgressSpinner,
   },
   props: {
     /* alt text prop */
@@ -233,9 +244,9 @@ export default {
     enlarge() {
       this.loadingEnlargedImage = true
       const img = document.getElementsByClassName('p-image-preview')
-      const sizeList = this.srcset.split(',');
+      const sizeList = this.srcset.split(',')
       const lastSize = sizeList[sizeList.length - 1]
-      const biggestSize = lastSize.slice(0, -3);
+      const biggestSize = lastSize.slice(0, -3)
       img[0].setAttribute('src', biggestSize)
     },
     closeEnlarge() {
@@ -245,7 +256,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.simple-responsive-image-holder{
+.simple-responsive-image-holder {
   position: relative;
   .image {
     position: relative;
@@ -282,14 +293,10 @@ export default {
       height: inherit;
     }
   }
-
 }
 .p-component-overlay {
-  
-  background: radial-gradient(ellipse at center,  var(--surface-800) 0%, var(--maskbg) 82%);
   .p-image-toolbar {
     z-index: 1;
   }
 }
-
 </style>

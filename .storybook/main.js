@@ -1,7 +1,7 @@
 const path = require('path')
 module.exports = {
   "stories": ["../stories/**/*.stories.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
-  "addons": ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/preset-scss"],
+  "addons": ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-docs", "@storybook/preset-scss"],
   "framework": "@storybook/vue3",
   core: {
     builder: "webpack5"

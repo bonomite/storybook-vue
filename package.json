@@ -12,12 +12,12 @@
   "devDependencies": {
     "@babel/core": "^7.16.12",
     "@nuxtjs/storybook": "^4.2.0",
-    "@storybook/addon-actions": "^6.4.14",
-    "@storybook/addon-essentials": "^6.4.14",
-    "@storybook/addon-links": "^6.4.14",
-    "@storybook/builder-webpack5": "^6.4.14",
-    "@storybook/manager-webpack5": "^6.4.14",
-    "@storybook/vue3": "^6.4.14",
+    "@storybook/addon-actions": "^6.4.17",
+    "@storybook/addon-essentials": "^6.4.17",
+    "@storybook/addon-links": "^6.4.17",
+    "@storybook/builder-webpack5": "^6.4.17",
+    "@storybook/manager-webpack5": "^6.4.17",
+    "@storybook/vue3": "^6.4.17",
     "babel-loader": "^8.2.3",
     "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
@@ -29,6 +29,7 @@
     "vue-loader": "^16.8.3"
   },
   "dependencies": {
+    "@storybook/addon-docs": "^6.4.17",
     "@storybook/preset-scss": "^1.0.3",
     "@vueblocks/vue-use-vuex": "^0.2.11",
     "css-loader": "^6.5.1",

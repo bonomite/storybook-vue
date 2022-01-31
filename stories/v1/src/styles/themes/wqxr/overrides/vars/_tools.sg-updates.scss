@@ -1,4 +1,4 @@
-@use 'sass:math';
+@use "sass:math";
 /*------------------------------------*\
     $VARIABLES
 \*------------------------------------*/
@@ -85,16 +85,15 @@ $c-sponsor-color: $c-purple;
 /**
  * Typography
  */
-$ff-font: 'Open Sans', Helvetica, 'Arial', sans-serif;
+$ff-font: "Open Sans", Helvetica, "Arial", sans-serif;
 $ff-font--sans: $ff-font;
-$ff-font--serif: 'Times New Roman', serif;
-$ff-font--monospace: 'B612 Mono', Menlo, Monaco, 'Courier New', 'Courier',
-  monospace;
+$ff-font--serif: "Times New Roman", serif;
+$ff-font--monospace: "B612 Mono", Menlo, Monaco, "Courier New", "Courier", monospace;
 
 // Theme typefaces
-$ff-font--primary: 'Pragati Narrow', Helvetica, sans-serif;
+$ff-font--primary: "Pragati Narrow", Helvetica, sans-serif;
 $ff-font--secondary: $ff-font--monospace;
-$ff-font--tertiary: 'Barlow', Helvetica, sans-serif;
+$ff-font--tertiary: "Barlow", Helvetica, sans-serif;
 
 // Type sizing
 $font-size-xxs: 10px;
@@ -127,23 +126,23 @@ $xxlarge: 1200px;
 $xxxlarge: 1500px;
 
 $breakpoints: (
-  'xsmall': $xsmall,
-  'small': $small,
-  'medium': $medium,
-  'large': $large,
-  'xlarge': $xlarge,
-  'xxlarge': $xxlarge,
-  'xxxlarge': $xxxlarge,
+  "xsmall": $xsmall,
+  "small": $small,
+  "medium": $medium,
+  "large": $large,
+  "xlarge": $xlarge,
+  "xxlarge": $xxlarge,
+  "xxxlarge": $xxxlarge,
 );
 
 $media-expressions: (
-  'screen': 'screen',
-  'print': 'print',
-  'handheld': 'handheld',
-  'landscape': '(orientation: landscape)',
-  'portrait': '(orientation: portrait)',
-  'retina2x': '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)',
-  'retina3x': '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi)',
+  "screen": "screen",
+  "print": "print",
+  "handheld": "handheld",
+  "landscape": "(orientation: landscape)",
+  "portrait": "(orientation: portrait)",
+  "retina2x": "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)",
+  "retina3x": "(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi)",
 );
 
 /**
@@ -166,13 +165,13 @@ $border-style-thick: 3px solid $c-border-color;
  * Maintain a spacing system divisible by 8
  */
 $space: 16px;
-$space-quarter: $space/4; // 4
-$space-half: $space/2; // 8
-$space-and-half: $space * 1.5; // 24
-$space-double: $space * 2; // 32
-$space-double-half: $space * 2.5; // 40
-$space-triple: $space * 3; // 48
-$space-quad: $space * 4; // 64
+$space-quarter: calc($space / 4); // 4
+$space-half: calc($space / 2); // 8
+$space-and-half: calc($space * 1.5); // 24
+$space-double: calc($space * 2); // 32
+$space-double-half: calc($space * 2.5); // 40
+$space-triple: calc($space * 3); // 48
+$space-quad: calc($space * 4); // 64
 
 ///
 
@@ -180,17 +179,17 @@ $space-quad: $space * 4; // 64
   display: flex;
 
   &__item {
-    padding: $space / 2;
+    padding: calc($space / 2);
     border: 1px solid gray;
     margin-right: $space;
   }
 
   &__swatch {
-    content: '';
+    content: "";
     display: block;
     width: 150px;
     height: 150px;
-    margin-bottom: $space / 2;
+    margin-bottom: calc($space / 2);
   }
 }
 
@@ -213,7 +212,7 @@ $space-quad: $space * 4; // 64
 }
 
 .sg-header {
-  background-image: url('./images/NYPR-logo--white.png');
+  background-image: url("./images/NYPR-logo--white.png");
   background-position: 4px 4px;
   background-repeat: no-repeat;
   background-size: 58px 25px;
@@ -335,7 +334,7 @@ $space-quad: $space * 4; // 64
   }
   .about-us-div,
   a {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     text-transform: none;
   }
 }
