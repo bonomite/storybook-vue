@@ -15,7 +15,6 @@ export default defineNuxtConfig({
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-  components: true,
   buildModules: [],
   css: [
 
@@ -30,4 +29,8 @@ export default defineNuxtConfig({
       },
     },
   },
+  //components: true,
+  // components: [
+  //   { path: '~/stories/', extensions: ['vue'] }
+  // ],
 })

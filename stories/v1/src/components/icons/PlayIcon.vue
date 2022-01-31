@@ -201,7 +201,7 @@ export default {
     display: block;
     position: absolute;
     top: #{$top};
-    left: #{$left - ($innerWidth/2)};
+    left: #{calc($left - ($innerWidth / 2))};
     right: #{$right};
     bottom: #{$bottom};
     margin: auto;

@@ -7,8 +7,6 @@
     <div>Other Page</div>
     <div>Other Page</div>
     <div>Other Page</div>
-    <div>Inject</div>
-    <div class="inline"></div>
     <div>Other Page</div>
     <div>Other Page</div>
     <div>Other Page</div>

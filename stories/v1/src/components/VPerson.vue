@@ -1,13 +1,14 @@
 <template>
-  <div
-    ref="thisPerson"
-    class="person override"
-    :style="cssVars"
-  >
+  <div ref="thisPerson" class="person override" :style="cssVars">
     <div
       v-resize="onResize"
       class="person-inner"
-      :class="[hasDetails ? 'has-details' : '', image ? '' : 'no-image', orientation === 'vertical' ? 'vertical' : '', orientation === 'responsive' ? 'responsive' : '']"
+      :class="[
+        hasDetails ? 'has-details' : '',
+        image ? '' : 'no-image',
+        orientation === 'vertical' ? 'vertical' : '',
+        orientation === 'responsive' ? 'responsive' : '',
+      ]"
     >
       <!-- Image section -->
       <a
@@ -26,10 +27,7 @@
             class="u-image__1x1 visual"
             :class="[circle ? 'circle' : '']"
           >
-            <canvas
-              ref="canvas"
-              class="person-image"
-            />
+            <canvas ref="canvas" class="person-image" />
             <img
               ref="img"
               class="person-image person-image-img"
@@ -38,7 +36,7 @@
               role="presentation"
               loading="lazy"
               decoding="async"
-            >
+            />
           </span>
           <div
             v-if="video"
@@ -48,23 +46,19 @@
           >
             <play-icon-simple
               :class="showVideo ? 'is-playing' : ''"
-              :title="(showVideo ? 'Close ' : 'Play ')+ fullName +`'s introduction video`"
+              :title="
+                (showVideo ? 'Close ' : 'Play ') +
+                fullName +
+                `'s introduction video`
+              "
             />
           </div>
         </div>
       </a>
 
       <!-- Detail section -->
-      <div
-        v-if="hasDetails"
-        ref="detailsRef"
-        class="person-details"
-      >
-        <div
-          v-if="fullName"
-          role="heading"
-          aria-level="3"
-        >
+      <div v-if="hasDetails" ref="detailsRef" class="person-details">
+        <div v-if="fullName" role="heading" aria-level="3">
           <a
             class="person-name-link"
             :class="!nameLink || onAuthorPage ? 'disabled' : ''"
@@ -73,10 +67,7 @@
             <span v-html="fullName" />
           </a>
         </div>
-        <span
-          v-if="role"
-          class="person-role"
-        >
+        <span v-if="role" class="person-role">
           <span v-html="role" />
           <a
             v-if="organization"
@@ -88,10 +79,7 @@
             v-html="organizationComputed"
           />
         </span>
-        <div
-          ref="blurbHolderRef"
-          class="blurbHolder"
-        >
+        <div ref="blurbHolderRef" class="blurbHolder">
           <div
             v-if="blurb"
             ref="blurbRef"
@@ -109,10 +97,7 @@
           {{ readMore ? 'read less' : 'read more' }}
         </a>
 
-        <share-tools
-          v-if="socialArrayData.length > 0"
-          class="social"
-        >
+        <share-tools v-if="socialArrayData.length > 0" class="social">
           <share-tools-item
             v-for="(item, index) in socialArrayData"
             :key="index"
@@ -135,14 +120,15 @@
           ref="youtubeRef"
           class="iframeHolder"
           type="text/html"
-          :src="'https://www.youtube.com/embed/'+getYoutubeId(video)+'?autoplay=1'"
+          :src="
+            'https://www.youtube.com/embed/' +
+            getYoutubeId(video) +
+            '?autoplay=1'
+          "
           frameborder="0"
           allowfullscreen
         />
-        <div
-          class="closer"
-          @click="handleVideoClick($event)"
-        >
+        <div class="closer" @click="handleVideoClick($event)">
           <close-icon />
         </div>
       </div>
@@ -158,7 +144,7 @@ import CloseIcon from './icons/CloseIcon'
 import ShareTools from './ShareTools'
 import ShareToolsItem from './ShareToolsItem'
 
-function initResizeListener (binding) {
+function initResizeListener(binding) {
   const onResizeCallback = binding.value
   window.addEventListener('resize', () => {
     const width = document.documentElement.clientWidth
@@ -176,19 +162,19 @@ export default {
     ShareTools,
     ShareToolsItem,
     PlayIconSimple,
-    CloseIcon
+    CloseIcon,
   },
   directives: {
     resize: {
       // vue3 support
-      mounted (el, binding) {
+      mounted(el, binding) {
         initResizeListener(binding)
       },
       // vue 2 supoort
-      inserted (el, binding) {
+      inserted(el, binding) {
         initResizeListener(binding)
-      }
-    }
+      },
+    },
   },
   props: {
     /**
@@ -196,175 +182,175 @@ export default {
      */
     image: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      *  image scale in its container in vertical orientation only
      */
     imgScale: {
       type: String,
-      default: '100'
+      default: '100',
     },
     /**
      *  adds a circle mask around the image.
      */
     circle: {
       type: Boolean,
-      default: false
+      default: false,
     },
     /**
      *  adds a basic animation to the component when it enters the viewport once. If an image and details are present, it will animate them individually. If either is missing, it will animate the entire component.
      */
     animate: {
       type: Boolean,
-      default: false
+      default: false,
     },
     /**
      *  youtube link to promo video
      */
     video: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      *  Full name of the person.
      */
     fullName: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      *  A URL pointing to the person's bio page or anywhere else they want to link to.
      */
     nameLink: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      *  Organization this person is from.
      */
     organization: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      *  link to the organization.
      */
     organizationLink: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      *  The person's role or job. e.g. Host, Guest, Author, etc.
      */
     role: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      *  Information about the author. e.g. "Jen is a blah blah..." etc.
      */
     blurb: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      *  maxium lines of text to show when truncarted
      */
     truncate: {
       type: [Boolean, String],
-      default: false
+      default: false,
     },
     /**
      *  persons website url
      */
     websiteUrl: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      *  persons website label
      */
     websiteLabel: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      *  persons email address
      */
     email: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      *  persons phone number
      */
     phoneNumbers: {
       type: Array,
-      default: null
+      default: null,
     },
     /**
      *  social account array
      */
     social: {
       type: Array,
-      default: null
+      default: null,
     },
     /**
      *  horizontal(default), vertical, responsive (changes to vertical at the small break point)
      */
     orientation: {
       type: String,
-      default: 'horizontal'
+      default: 'horizontal',
     },
     /**
      *  If component is on the Author page, disables image and name links
      */
     onAuthorPage: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  data () {
+  data() {
     return {
       readMore: false,
       showVideo: false,
       inViewPort: false,
       windowSize: {},
       socialArrayData: [],
-      initTruncHeight: 0
+      initTruncHeight: 0,
     }
   },
   computed: {
-    cssVars () {
+    cssVars() {
       return {
         '--img-scale': this.imgScale ? this.imgScale + '%' : '100%',
-        '--trunc-lines': this.truncate ? this.truncate : 'unset'
+        '--trunc-lines': this.truncate ? this.truncate : 'unset',
       }
     },
-    hasDetails () {
+    hasDetails() {
       return !!this.role || !!this.blurb || !!this.social || !!this.fullName
     },
-    organizationComputed () {
+    organizationComputed() {
       return ' (' + this.organization + ')'
-    }
+    },
   },
   watch: {
-    windowSize () {
+    windowSize() {
       this.runHandleOnResizeDebounce()
-    }
+    },
   },
-  beforeMount () {
+  beforeMount() {
     this.socialArrayData = this.socialArray()
   },
-  mounted () {
+  mounted() {
     const { thisPerson, blurbHolderRef, blurbRef } = this.$refs
 
     if (this.truncate) {
       // set initial height of element so gsap can animate it
       this.initTruncHeight = blurbRef.offsetHeight + 5
       gsap.set(blurbHolderRef, {
-        height: this.initTruncHeight
+        height: this.initTruncHeight,
       })
 
       // initial call of handleResize
@@ -400,35 +386,39 @@ export default {
     }, 500)
   },
   methods: {
-    getOffsetTop (el) {
+    getOffsetTop(el) {
       const rect = el.getBoundingClientRect()
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-      return (rect.top + scrollTop) - 160 // 160 is the ~ height of the header buffer
+      return rect.top + scrollTop - 160 // 160 is the ~ height of the header buffer
     },
-    handleBlurb () {
+    handleBlurb() {
       this.readMore = !this.readMore
       const { blurbRef, blurbHolderRef, imgRef, thisPerson } = this.$refs
-      if (this.readMore) { blurbRef.classList.toggle('expanded') }
+      if (this.readMore) {
+        blurbRef.classList.toggle('expanded')
+      }
       // animate height of blurb container (vue/nuxt3 w/ gsap)
       gsap.to(blurbHolderRef, {
         duration: this.readMore ? 0.5 : this.isInViewport(imgRef) ? 0.15 : 0.5,
         height: this.readMore ? 'auto' : this.initTruncHeight,
         overwrite: true,
         onComplete: () => {
-          if (!this.readMore) { blurbRef.classList.toggle('expanded') }
+          if (!this.readMore) {
+            blurbRef.classList.toggle('expanded')
+          }
           this.handleResize()
-        }
+        },
       })
 
       // when closeing the expanded blurb, if the image is not in the viewport, animate it into view
       if (!this.readMore && !this.isInViewport(imgRef)) {
         window.scrollTo({
           top: this.getOffsetTop(thisPerson),
-          behavior: 'smooth'
+          behavior: 'smooth',
         })
       }
     },
-    debounce (fn, delay) {
+    debounce(fn, delay) {
       let timeoutID = null
       return function () {
         clearTimeout(timeoutID)
@@ -439,17 +429,17 @@ export default {
         }, delay)
       }
     },
-    onResize (size) {
+    onResize(size) {
       this.windowSize = size
     },
-    handleResize () {
+    handleResize() {
       if (!this.readMore && this.truncate) {
         const { blurbRef, readMoreRef } = this.$refs
         const clamped = blurbRef.scrollHeight > blurbRef.clientHeight
         readMoreRef.classList.toggle('show-me', clamped)
       }
     },
-    handleVideoClick (event) {
+    handleVideoClick(event) {
       event.preventDefault()
       event.stopPropagation()
       this.$emit(' componentEvent', 'playing promo video')
@@ -460,12 +450,12 @@ export default {
         if (this.showVideo && !this.isInViewport(videoHolderRef)) {
           window.scrollTo({
             top: this.getOffsetTop(thisPerson) + blurbRef.clientHeight,
-            behavior: 'smooth'
+            behavior: 'smooth',
           })
         }
       }, 100)
     },
-    handleGifInViewPort (inViewPort) {
+    handleGifInViewPort(inViewPort) {
       /* wait 10 seconds then swap out GIF with canvas render */
       this.inViewPort = inViewPort
       const { canvas, img } = this.$refs
@@ -479,29 +469,30 @@ export default {
         canvas.classList.add('show')
       }, 10000)
     },
-    isGIF (imageURL) {
+    isGIF(imageURL) {
       return imageURL.match(/(http(s?):)([/|.|\w|\s|-])*\.(?:gif)/g)
     },
-    getYoutubeId (url) {
-      const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
+    getYoutubeId(url) {
+      const regExp =
+        /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
       const match = url.match(regExp)
       return match && match[7].length === 11 ? match[7] : false
     },
-    socialArray () {
+    socialArray() {
       // Website, Email, Phone array
       const wepArray = this.social ? this.social : []
 
       if (this.email) {
         wepArray.push({
           service: 'email',
-          username: this.email
+          username: this.email,
         })
       }
       if (this.phoneNumbers) {
         this.phoneNumbers.forEach((phone) => {
           wepArray.push({
             service: 'phone',
-            username: phone.phoneNumber
+            username: phone.phoneNumber,
           })
         })
       }
@@ -509,14 +500,14 @@ export default {
         wepArray.push({
           service: 'site',
           profileUrl: this.websiteUrl,
-          label: this.websiteLabel ? this.websiteLabel : 'Website'
+          label: this.websiteLabel ? this.websiteLabel : 'Website',
         })
       }
       return wepArray
     },
     // imported global helpers
-    isInViewport
-  }
+    isInViewport,
+  },
 }
 </script>
 
@@ -538,9 +529,9 @@ export default {
   position: relative;
   &:before {
     display: block;
-    content: "";
+    content: '';
     width: 100%;
-    padding-top: ($height / $width) * 100%;
+    padding-top: calc(($height / $width) * 100%);
   }
   > .iframeHolder {
     position: absolute !important;
@@ -574,7 +565,7 @@ export default {
       grid-template-columns: 1fr;
     }
     &.responsive {
-      @include media("<small") {
+      @include media('<small') {
         @include person-vertical-styles;
         .person-details {
           padding: 0 var(--space-1);
@@ -584,8 +575,8 @@ export default {
     &.vertical {
       @include person-vertical-styles;
       .person-details {
-          padding: 0 var(--space-1);
-        }
+        padding: 0 var(--space-1);
+      }
     }
     .person-image-link {
       position: relative;
@@ -625,7 +616,7 @@ export default {
       display: grid;
       bottom: 5px;
       left: 5px;
-      @include media("<small") {
+      @include media('<small') {
         top: 5px;
         bottom: unset;
         &.circle {
@@ -639,7 +630,7 @@ export default {
         max-height: 40px;
         align-self: start;
         justify-self: center;
-        @include media("<small") {
+        @include media('<small') {
           align-self: end;
         }
         height: auto;
