@@ -207,7 +207,7 @@ export default {
 
 .image-with-caption .image-with-caption-caption {
   position: absolute;
-  color: white;
+  color: $white;
   bottom: 0;
   right: 0;
   left: 0;
@@ -218,7 +218,7 @@ export default {
   transition: var(--animation-duration-standard);
 
   &.visible {
-    background: rgba(var(--color-dark-gray), 0.7);
+    background: rgba(var(--gray-700), 0.7);
   }
 }
 
