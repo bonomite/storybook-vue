@@ -24,18 +24,6 @@ const Template = (args) => ({
     template: '<v-simple-responsive-image v-bind="args" />',
 })
 
-//     < simple - responsive - image
-//          v -if= "image"
-//         class="card-image"
-//         : src = "image"
-//         : width = "imageWidth"
-//         : height = "imageHeight"
-//         : max - width="imageMaxWidth || Infinity"
-//         : max - height="imageMaxHeight || Infinity"
-// alt = ""
-// role = "presentation"
-//     />
-
 export const Default = Template.bind({})
 Default.args = {
     alt: 'Fallback alt text here',
@@ -54,7 +42,6 @@ Preview.args = {
     allowVerticalEffect: false,
     allowPreview: true,
 }
-
 
 export const Vertical = Template.bind({})
 Vertical.args = {

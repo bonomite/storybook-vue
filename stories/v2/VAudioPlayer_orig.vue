@@ -33,7 +33,7 @@ import { gsap } from 'gsap'
 import Button from 'primevue/button'
 // import scssVars from './assets/scss/exports.module.scss'
 // use esm versions of gsap plugins
-import { ScrollTrigger } from '../assets-shared/gsap/ScrollTrigger.js'
+import { ScrollTrigger } from 'gsap/ScrollTrigger.js'
 gsap.registerPlugin(ScrollTrigger)
 
 export default {

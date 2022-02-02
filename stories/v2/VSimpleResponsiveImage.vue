@@ -19,15 +19,15 @@
       :height="height"
       :style="isVertical ? `width:${computedWidth}px;` : ''"
       :alt="alt"
-      loading="lazy"
       :preview="allowPreview"
+      loading="lazy"
       @show="enlarge"
       @hide="closeEnlarge"
       @click="$emit('click', $event.target.value)"
       @keypress="$emit('keypress', $event.target.value)"
     >
       <template #indicator>
-        <span>Enlarge Content</span>
+        <span>Enlarge Image</span>
       </template>
     </Image>
     <span v-if="loadingEnlargedImage">
