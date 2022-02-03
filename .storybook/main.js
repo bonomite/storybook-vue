@@ -18,9 +18,12 @@ module.exports = {
         {
           loader: 'sass-loader',
           options: {
-            additionalData: '@import "primevue/resources/themes/lara-light-blue/theme.css"; @import "primevue/resources/primevue.css"; @import "primeicons/primeicons.css"; @import "~/stories/assets-shared/scss/variables.module.scss"; @import "~/stories/assets-shared/scss/main.scss";',
+            additionalData: '@import "~/src/assets/themes/white-paper/theme.scss"; @import "primevue/resources/primevue.min.css"; @import "primeicons/primeicons.css"; ',
             // additionalData: '@import "./assets/scss/main.scss";',
             //@import "primeflex/primeflex.scss";
+            //@import "primevue/resources/themes/lara-light-blue/theme.css";
+            // @import "~/stories/assets-shared/scss/main.scss";
+            // @import "~/stories/assets-shared/scss/variables.module.scss";
           },
         },
       ],

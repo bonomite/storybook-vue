@@ -192,133 +192,133 @@ export default {
 </script>
 
 <style lang="scss">
-.image-with-caption {
-  width: 100%;
-}
+// .image-with-caption {
+//   width: 100%;
+// }
 
-.image-with-caption .image-with-caption-image,
-.image-with-caption .image-with-caption-wrapper {
-  position: relative;
-}
+// .image-with-caption .image-with-caption-image,
+// .image-with-caption .image-with-caption-wrapper {
+//   position: relative;
+// }
 
-.image-with-caption .image-with-caption-image-link.disabled {
-  pointer-events: none;
-}
+// .image-with-caption .image-with-caption-image-link.disabled {
+//   pointer-events: none;
+// }
 
-.image-with-caption .image-with-caption-caption {
-  position: absolute;
-  color: $white;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: var(--space-3);
-  transition: var(--animation-duration-standard);
+// .image-with-caption .image-with-caption-caption {
+//   position: absolute;
+//   color: #ffffff;
+//   bottom: 0;
+//   right: 0;
+//   left: 0;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: flex-end;
+//   padding: var(--space-3);
+//   transition: var(--animation-duration-standard);
 
-  &.visible {
-    background: rgba(var(--gray-700), 0.7);
-  }
-}
+//   &.visible {
+//     background: rgba(var(--color-dark-gray), 0.7);
+//   }
+// }
 
-.image-with-caption .image-with-caption-credit,
-.image-with-caption .image-with-caption-caption p {
-  @include typeface(body, 3);
-  margin-right: var(--space-3);
-}
+// .image-with-caption .image-with-caption-credit,
+// .image-with-caption .image-with-caption-caption p {
+//   @include typeface(body, 3);
+//   margin-right: var(--space-3);
+// }
 
-.image-with-caption .image-with-caption-credit {
-  margin-left: var(--space-3);
-  @media all and (min-width: $medium) {
-    margin-left: 0;
-  }
-  margin-top: var(--space-1);
-  text-align: right;
-}
+// .image-with-caption .image-with-caption-credit {
+//   margin-left: var(--space-3);
+//   @media all and (min-width: $medium) {
+//     margin-left: 0;
+//   }
+//   margin-top: var(--space-1);
+//   text-align: right;
+// }
 
-.image-with-caption.gothamist .image-with-caption-credit {
-  margin-top: var(--space-1);
-  text-align: left;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-}
+// .image-with-caption.gothamist .image-with-caption-credit {
+//   margin-top: var(--space-1);
+//   text-align: left;
+//   display: flex;
+//   flex-wrap: wrap;
+//   align-items: baseline;
+// }
 
-.image-with-caption.gothamist .image-with-caption-credit-link {
-  text-transform: uppercase;
-  line-height: 20px;
+// .image-with-caption.gothamist .image-with-caption-credit-link {
+//   text-transform: uppercase;
+//   line-height: 20px;
 
-  &:hover {
-    background-color: RGB(var(--color-reddish-orange));
-    color: RGB(var(--color-white));
-  }
-}
+//   &:hover {
+//     background-color: RGB(var(--color-reddish-orange));
+//     color: RGB(var(--color-white));
+//   }
+// }
 
-.image-with-caption.gothamist .image-with-caption-credit span {
-  @include typeface(small, 1);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
+// .image-with-caption.gothamist .image-with-caption-credit span {
+//   @include typeface(small, 1);
+//   letter-spacing: 1px;
+//   text-transform: uppercase;
+// }
 
-.image-with-caption .image-with-caption-icons {
-  cursor: pointer;
-  margin: 0 0 0 auto;
-  position: absolute;
-  bottom: var(--space-2);
-  right: var(--space-2);
-  z-index: 999;
-}
+// .image-with-caption .image-with-caption-icons {
+//   cursor: pointer;
+//   margin: 0 0 0 auto;
+//   position: absolute;
+//   bottom: var(--space-2);
+//   right: var(--space-2);
+//   z-index: 999;
+// }
 
-.image-with-caption .info-icon,
-.image-with-caption .o-close-icon {
-  transition: var(--animation-duration-standard);
-  width: 28px;
-  height: 28px;
+// .image-with-caption .info-icon,
+// .image-with-caption .o-close-icon {
+//   transition: var(--animation-duration-standard);
+//   width: 28px;
+//   height: 28px;
 
-  &:hover {
-    opacity: var(--opacity-hover);
-  }
-}
+//   &:hover {
+//     opacity: var(--opacity-hover);
+//   }
+// }
 
-.image-with-caption .o-close-icon {
-  padding: 6px;
-}
+// .image-with-caption .o-close-icon {
+//   padding: 6px;
+// }
 
-.image-with-caption .o-close-icon path,
-.image-with-caption .info-icon-i {
-  fill: RGB(var(--color-white));
-}
+// .image-with-caption .o-close-icon path,
+// .image-with-caption .info-icon-i {
+//   fill: RGB(var(--color-white));
+// }
 
-.image-with-caption .info-icon-bg {
-  fill: RGB(var(--color-dark-gray));
-}
+// .image-with-caption .info-icon-bg {
+//   fill: RGB(var(--color-dark-gray));
+// }
 
-.image-with-caption .gothamist-caption {
-  display: flex;
-  align-items: center;
-  font-size: var(--font-size-4);
-  margin-right: var(--space-2);
-}
+// .image-with-caption .gothamist-caption {
+//   display: flex;
+//   align-items: center;
+//   font-size: var(--font-size-4);
+//   margin-right: var(--space-2);
+// }
 
-.image-with-caption .o-gothamist-arrow-icon {
-  width: 20px;
-  margin-top: -11px;
-  margin-right: var(--space-2);
-  float: left;
+// .image-with-caption .o-gothamist-arrow-icon {
+//   width: 20px;
+//   margin-top: -11px;
+//   margin-right: var(--space-2);
+//   float: left;
 
-  path {
-    fill: RGB(var(--color-reddish-orange));
-  }
-}
+//   path {
+//     fill: RGB(var(--color-reddish-orange));
+//   }
+// }
 
-.image-with-caption .image-with-caption-title {
-  @include typeface(header, 8);
-  margin: var(--space-2) 0;
-  clear: both;
-}
+// .image-with-caption .image-with-caption-title {
+//   @include typeface(header, 8);
+//   margin: var(--space-2) 0;
+//   clear: both;
+// }
 
-.image-with-caption .image-with-caption-description {
-  margin: var(--space-2) 0;
-}
+// .image-with-caption .image-with-caption-description {
+//   margin: var(--space-2) 0;
+// }
 </style>

@@ -61,6 +61,7 @@ export default {
 </script>
 
 <style lang="scss">
+$audioPlayerWidth: 375px;
 .audioPlayer {
   background: var(--gray-300);
   border-radius: var(--border-radius);
@@ -68,9 +69,9 @@ export default {
   display: grid;
   margin: 0 auto;
   grid-template-columns: 4fr 1fr;
-  row-gap: $spacing * 2;
+  row-gap: spacing(2);
   align-items: center;
-  padding: $spacing * 2;
+  padding: spacing(2);
   box-sizing: border-box;
   transition: width 0.5s, padding 0.5s;
   -webkit-transition: width 0.5s, padding 0.5s;
@@ -96,8 +97,8 @@ export default {
     display: grid;
     margin: 0 auto;
     grid-template-columns: 1fr;
-    column-gap: $spacing * 3;
-    row-gap: $spacing * 3;
+    column-gap: spacing(3);
+    row-gap: spacing(3);
     justify-items: end;
   }
 }

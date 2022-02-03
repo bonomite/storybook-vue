@@ -1,9 +1,6 @@
 // import any mixins or variables the vue components use first
 @import "~/stories/v1/src/styles/_library/_base.media.scss";
 @import "~/stories/v1/src/styles/_library/_base.mixins.scss";
-@import "~/stories/v1/src/styles/_library/_tools.include-media.scss";
-@import "~/stories/v1/src/styles/_library/_settings.z-index.scss";
-
 // //import the theme
 @import "~/stories/v1/src/styles/gothamist.scss";
 // @import "~/stories/v1/src/styles/white-label.scss";
