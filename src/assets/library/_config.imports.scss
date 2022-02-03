@@ -15,16 +15,15 @@
 /*------------------------------------*\
     $SETTINGS
 \*------------------------------------*/
-@import "settings.z-index";
+@import "_settings.z-index";
 
 /*------------------------------------*\
     $TOOLS
 \*------------------------------------*/
-@import "include-media";
+@import "_include-media";
 
 /*------------------------------------*\
     $BASE
 \*------------------------------------*/
-@import "mixins";
-@import "accessibility";
-
+@import "_mixins-functions";
+@import "_accessibility";

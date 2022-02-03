@@ -1,0 +1,22 @@
+//spacing
+$spacing-base: 8;
+@function spacing($y) {
+    @return calc($spacing-base * $y) + px;
+}
+@function spacingXY($x, $y) {
+    @return calc($spacing-base * $x) + px calc($spacing-base * $y) + px;
+}
+@function spacingTRBL($t, $r, $b, $l) {
+    @return calc($spacing-base * $t) + px calc($spacing-base * $r) + px calc($spacing-base * $b) + px
+        calc($spacing-base * $l) + px;
+}
+
+// v1 legacy support
+@mixin typeface($type, $size) {
+    font-family: var(--font-family-#{$type});
+    letter-spacing: var(--letter-spacing-#{$type});
+    font-weight: var(--font-weight-#{$type});
+
+    line-height: var(--line-height-#{$size});
+    font-size: var(--font-size-#{$size});
+}
