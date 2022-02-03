@@ -50,7 +50,7 @@ import CodeHighlight from './CodeHighlight'
 
 //if (import.meta.env.VITE_VUE_APP_EDITOR === 'code') {
 import('./assets/themes/white-paper/theme.scss')
-// }
+//}
 import 'primevue/resources/primevue.min.css'
 import 'primeflex/primeflex.css'
 import 'primeicons/primeicons.css'
