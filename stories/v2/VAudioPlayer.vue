@@ -62,6 +62,7 @@ export default {
 
 <style lang="scss">
 $audioPlayerWidth: 375px;
+
 .audioPlayer {
   background: var(--gray-300);
   border-radius: var(--border-radius);

@@ -43,21 +43,21 @@
 
 				<h5>Float Label</h5>
 				<span class="p-float-label">
-					<InputText id="username" type="text" v-model="floatValue"/>
+					<InputText id="username" v-model="floatValue" type="text"/>
 					<label for="username">Username</label>
 				</span>
 
 				<h5>Textarea</h5>
-				<Textarea placeholder="Your Message" :autoResize="true" rows="3" cols="30" />
+				<Textarea placeholder="Your Message" :auto-resize="true" rows="3" cols="30" />
 
 				<h5>AutoComplete</h5>
-				<AutoComplete placeholder="Search" id="dd" :dropdown="true" :multiple="true" v-model="selectedAutoValue" :suggestions="autoFilteredValue" @complete="searchCountry($event)" field="name"/>
+				<AutoComplete id="dd" v-model="selectedAutoValue" placeholder="Search" :dropdown="true" :multiple="true" :suggestions="autoFilteredValue" field="name" @complete="searchCountry($event)"/>
 
 				<h5>Calendar</h5>
-				<Calendar :showIcon="true" :showButtonBar="true" v-model="calendarValue"></Calendar>
+				<Calendar v-model="calendarValue" :show-icon="true" :show-button-bar="true"></Calendar>
 
 				<h5>Spinner</h5>
-				<InputNumber v-model="inputNumberValue" showButtons mode="decimal"></InputNumber>
+				<InputNumber v-model="inputNumberValue" show-buttons mode="decimal"></InputNumber>
 
 				<h5>Chips</h5>
 				<Chips v-model="chipsValue"/>
@@ -82,19 +82,19 @@
 				<div class="p-grid">
 					<div class="p-col-12 p-md-4">
 						<div class="p-field-radiobutton">
-							<RadioButton id="option1" name="option" value="Option 1" v-model="radioValue" />
+							<RadioButton id="option1" v-model="radioValue" name="option" value="Option 1" />
 							<label for="option1">Option 1</label>
 						</div>
 					</div>
 					<div class="p-col-12 p-md-4">
 						<div class="p-field-radiobutton">
-							<RadioButton id="option2" name="option" value="Option 2" v-model="radioValue" />
+							<RadioButton id="option2" v-model="radioValue" name="option" value="Option 2" />
 							<label for="option2">Option 2</label>
 						</div>
 					</div>
 					<div class="p-col-12 p-md-4">
 						<div class="p-field-radiobutton">
-							<RadioButton id="option3" name="option" value="Option 3" v-model="radioValue" />
+							<RadioButton id="option3" v-model="radioValue" name="option" value="Option 3" />
 							<label for="option3">Option 3</label>
 						</div>
 					</div>
@@ -104,19 +104,19 @@
 				<div class="p-grid">
 					<div class="p-col-12 p-md-4">
 						<div class="p-field-checkbox">
-							<Checkbox id="checkOption1" name="option" value="Option 1" v-model="checkboxValue" />
+							<Checkbox id="checkOption1" v-model="checkboxValue" name="option" value="Option 1" />
 							<label for="checkOption1">Option 1</label>
 						</div>
 					</div>
 					<div class="p-col-12 p-md-4">
 						<div class="p-field-checkbox">
-							<Checkbox id="checkOption2" name="option" value="Option 2" v-model="checkboxValue" />
+							<Checkbox id="checkOption2" v-model="checkboxValue" name="option" value="Option 2" />
 							<label for="checkOption2">Option 2</label>
 						</div>
 					</div>
 					<div class="p-col-12 p-md-4">
 						<div class="p-field-checkbox">
-							<Checkbox id="checkOption3" name="option" value="Option 3" v-model="checkboxValue" />
+							<Checkbox id="checkOption3" v-model="checkboxValue" name="option" value="Option 3" />
 							<label for="checkOption3">Option 3</label>
 						</div>
 					</div>
@@ -125,24 +125,24 @@
 
 			<div class="card p-fluid">
 				<h5>Listbox</h5>
-				<Listbox v-model="listboxValue" :options="listboxValues" optionLabel="name" :filter="true"/>
+				<Listbox v-model="listboxValue" :options="listboxValues" option-label="name" :filter="true"/>
 
 				<h5>Dropdown</h5>
-				<Dropdown v-model="dropdownValue" :options="dropdownValues" optionLabel="name" placeholder="Select" />
+				<Dropdown v-model="dropdownValue" :options="dropdownValues" option-label="name" placeholder="Select" />
 
 				<h5>MultiSelect</h5>
-				<MultiSelect v-model="multiselectValue" :options="multiselectValues" optionLabel="name" placeholder="Select Countries" :filter="true"></MultiSelect>
+				<MultiSelect v-model="multiselectValue" :options="multiselectValues" option-label="name" placeholder="Select Countries" :filter="true"></MultiSelect>
 			</div>
 
 			<div class="card p-fluid">
 				<h5>ToggleButton</h5>
-				<ToggleButton v-model="toggleValue" onLabel="Yes" offLabel="No"/>
+				<ToggleButton v-model="toggleValue" on-label="Yes" off-label="No"/>
 
 				<h5>SelectButton</h5>
-				<SelectButton v-model="selectButtonValue1" :options="selectButtonValues1" optionLabel="name" />
+				<SelectButton v-model="selectButtonValue1" :options="selectButtonValues1" option-label="name" />
 
 				<h5>SelectButton - Multiple</h5>
-				<SelectButton v-model="selectButtonValue2" :options="selectButtonValues2" optionLabel="name" :multiple="true"/>
+				<SelectButton v-model="selectButtonValue2" :options="selectButtonValues2" option-label="name" :multiple="true"/>
 			</div>
 		</div>
 
@@ -152,7 +152,7 @@
                 <Button label="Submit" class="p-mr-2 p-mb-2" />
                 <Button icon="pi pi-check" class="p-mr-2 p-mb-2" />
                 <Button label="Submit" icon="pi pi-check" class="p-mr-2 p-mb-2" />
-                <Button label="Submit" icon="pi pi-check" iconPos="right" class="p-mr-2 p-mb-2" />
+                <Button label="Submit" icon="pi pi-check" icon-pos="right" class="p-mr-2 p-mb-2" />
                 <Button label="Disabled" disabled="disabled" class="p-mr-2 p-mb-2" />
             
                 <h5>Severities</h5>
@@ -241,7 +241,7 @@
 
                 <h5>Badges</h5>
                 <Button type="button" label="Emails" badge="8" class="p-mr-2 p-mb-2" />
-                <Button type="button" label="Messages" icon="pi pi-users" class="p-button-warning p-mb-2" badge="8" badgeClass="p-badge-danger" />
+                <Button type="button" label="Messages" icon="pi pi-users" class="p-button-warning p-mb-2" badge="8" badge-class="p-badge-danger" />
 
                 <h5>Button Set</h5>
                 <span class="p-buttonset">
@@ -254,11 +254,12 @@
 
         <div class="p-col-12">
             <div class="card">
-                <DataTable :value="customers" :paginator="true" :rows="10"
-                    dataKey="id" :rowHover="true" v-model:selection="selectedCustomers" v-model:filters="filters" filterDisplay="menu"
-                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[10,25,50]"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    :globalFilterFields="['name','country.name','representative.name','status']" responsiveLayout="scroll">
+                <DataTable
+v-model:selection="selectedCustomers" v-model:filters="filters" :value="customers"
+                    :paginator="true" :rows="10" data-key="id" :row-hover="true" filter-display="menu"
+                    paginator-template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rows-per-page-options="[10,25,50]"
+                    current-page-report-template="Showing {first} to {last} of {totalRecords} entries"
+                    :global-filter-fields="['name','country.name','representative.name','status']" responsive-layout="scroll">
                     <template #header>
                          <div class="p-d-flex p-jc-between p-ai-center">
                             <h5 class="p-m-0">Customers</h5>
@@ -271,32 +272,32 @@
                     <template #empty>
                         No customers found.
                     </template>
-                    <Column selectionMode="multiple" style="min-width: 3rem"></Column>
+                    <Column selection-mode="multiple" style="min-width: 3rem"></Column>
                     <Column field="name" header="Name" sortable style="min-width: 14rem">
                         <template #body="{data}">
                             {{data.name}}
                         </template>
                         <template #filter="{filterModel}">
-                            <InputText type="text" v-model="filterModel.value" class="p-column-filter" placeholder="Search by name"/>
+                            <InputText v-model="filterModel.value" type="text" class="p-column-filter" placeholder="Search by name"/>
                         </template>
                     </Column>
-                    <Column field="country.name" header="Country" sortable filterMatchMode="contains" style="min-width: 14rem">
+                    <Column field="country.name" header="Country" sortable filter-match-mode="contains" style="min-width: 14rem">
                         <template #body="{data}">
                             <img src="../assets/images/flag_placeholder.png" :class="'flag flag-' + data.country.code" width="30" />
                             <span class="image-text">{{data.country.name}}</span>
                         </template>
                         <template #filter="{filterModel}">
-                            <InputText type="text" v-model="filterModel.value" class="p-column-filter" placeholder="Search by country"/>
+                            <InputText v-model="filterModel.value" type="text" class="p-column-filter" placeholder="Search by country"/>
                         </template>
                     </Column>
-                    <Column header="Agent" sortable filterField="representative" sortField="representative.name" :showFilterMatchModes="false" :filterMenuStyle="{'width':'14rem'}" style="min-width: 14rem">
+                    <Column header="Agent" sortable filter-field="representative" sort-field="representative.name" :show-filter-match-modes="false" :filter-menu-style="{'width':'14rem'}" style="min-width: 14rem">
                          <template #body="{data}">
                             <img :alt="data.representative.name" :src="'demo/images/avatar/' + data.representative.image" width="32" style="vertical-align: middle" />
                             <span class="image-text">{{data.representative.name}}</span>
                         </template>
                         <template #filter="{filterModel}">
                             <div class="p-mb-3 p-text-bold">Agent Picker</div>
-                            <MultiSelect v-model="filterModel.value" :options="representatives" optionLabel="name" placeholder="Any" class="p-column-filter">
+                            <MultiSelect v-model="filterModel.value" :options="representatives" option-label="name" placeholder="Any" class="p-column-filter">
                                 <template #option="slotProps">
                                     <div class="p-multiselect-representative-option">
                                         <img :alt="slotProps.option.name" :src="'demo/images/avatar/' + slotProps.option.image" width="32" style="vertical-align: middle" />
@@ -306,15 +307,15 @@
                             </MultiSelect>
                         </template>
                     </Column>
-                    <Column field="date" header="Date" sortable dataType="date" style="min-width: 8rem">
+                    <Column field="date" header="Date" sortable data-type="date" style="min-width: 8rem">
                         <template #body="{data}">
                             {{formatDate(data.date)}}
                         </template>
                         <template #filter="{filterModel}">
-                            <Calendar v-model="filterModel.value" dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" />
+                            <Calendar v-model="filterModel.value" date-format="mm/dd/yy" placeholder="mm/dd/yyyy" />
                         </template>
                     </Column>
-                    <Column field="balance" header="Balance" sortable dataType="numeric" style="min-width: 8rem">
+                    <Column field="balance" header="Balance" sortable data-type="numeric" style="min-width: 8rem">
                         <template #body="{data}">
                             {{formatCurrency(data.balance)}}
                         </template>
@@ -322,12 +323,12 @@
                             <InputNumber v-model="filterModel.value" mode="currency" currency="USD" locale="en-US" />
                         </template>
                     </Column>
-                    <Column field="status" header="Status" sortable :filterMenuStyle="{'width':'14rem'}" style="min-width: 10rem">
+                    <Column field="status" header="Status" sortable :filter-menu-style="{'width':'14rem'}" style="min-width: 10rem">
                         <template #body="{data}">
                             <span :class="'customer-badge status-' + data.status">{{data.status}}</span>
                         </template>
                         <template #filter="{filterModel}">
-                            <Dropdown v-model="filterModel.value" :options="statuses" placeholder="Any" class="p-column-filter" :showClear="true">
+                            <Dropdown v-model="filterModel.value" :options="statuses" placeholder="Any" class="p-column-filter" :show-clear="true">
                                 <template #value="slotProps">
                                     <span :class="'customer-badge status-' + slotProps.value">{{slotProps.value}}</span>
                                 </template>
@@ -337,9 +338,9 @@
                             </Dropdown>
                         </template>
                     </Column>
-                    <Column field="activity" header="Activity" sortable :showFilterMatchModes="false" style="min-width: 10rem">
+                    <Column field="activity" header="Activity" sortable :show-filter-match-modes="false" style="min-width: 10rem">
                         <template #body="{data}">
-                            <ProgressBar :value="data.activity" :showValue="false" />
+                            <ProgressBar :value="data.activity" :show-value="false" />
                         </template>
                         <template #filter="{filterModel}">
                             <Slider v-model="filterModel.value" range class="p-m-3"></Slider>
@@ -349,7 +350,7 @@
                             </div>
                         </template>
                     </Column>
-                    <Column headerStyle="min-width: 4rem; text-align: center" bodyStyle="text-align: center; overflow: visible">
+                    <Column header-style="min-width: 4rem; text-align: center" body-style="text-align: center; overflow: visible">
                         <template #body>
                             <Button type="button" icon="pi pi-cog"></Button>
                         </template>
@@ -360,7 +361,7 @@
         <div class="p-col-12 p-md-6">
             <div class="card">
 				<h5>AccordionPanel</h5>
-				<Accordion :multiple="true" :activeIndex="[0]">
+				<Accordion :multiple="true" :active-index="[0]">
 					<AccordionTab header="Header I">
 						<p style="margin:0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -427,9 +428,9 @@
         <div class="p-col-12 p-md-3">
             <div class="card p-fluid">
 				<h5>Overlay Panel</h5>
-				<Button type="button" label="Choose" @click="toggle" icon="pi pi-search" />
-                <OverlayPanel ref="op" appendTo="body" :showCloseIcon="true" style="width: 450px">
-                    <DataTable :value="products" v-model:selection="selectedProduct" selectionMode="single" :paginator="true" :rows="5" @row-select="onProductSelect">
+				<Button type="button" label="Choose" icon="pi pi-search" @click="toggle" />
+                <OverlayPanel ref="op" append-to="body" :show-close-icon="true" style="width: 450px">
+                    <DataTable v-model:selection="selectedProduct" :value="products" selection-mode="single" :paginator="true" :rows="5" @row-select="onProductSelect">
                         <Column field="name" header="Name" sortable></Column>
                         <Column header="Image">
                             <template #body="slotProps">
@@ -448,7 +449,7 @@
         <div class="p-col-12 p-md-3">
             <div class="card p-fluid">
 				<h5>Dialog</h5>
-				<Dialog header="Dialog" v-model:visible="display" :style="{width: '30vw'}" :modal="true">
+				<Dialog v-model:visible="display" header="Dialog" :style="{width: '30vw'}" :modal="true">
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
@@ -456,23 +457,23 @@
 						Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 					</p>
 					<template #footer>
-						<Button label="Dismiss" @click="close" icon="pi pi-check" class="p-button-text"/>
+						<Button label="Dismiss" icon="pi pi-check" class="p-button-text" @click="close"/>
 					</template>
 				</Dialog>
-				<Button label="Show" icon="pi pi-external-link" @click="open" class="p-button-secondary"/>
+				<Button label="Show" icon="pi pi-external-link" class="p-button-secondary" @click="open"/>
 			</div>
         </div>
         <div class="p-col-12 p-md-3">
             <div class="card p-fluid">
 				<h5>Confirm Popup</h5>
-				<Button type="button" label="Confirm" @click="confirmWithPopup" class="p-button-success" icon="pi pi-check" />
+				<Button type="button" label="Confirm" class="p-button-success" icon="pi pi-check" @click="confirmWithPopup" />
                 <ConfirmPopup group="popup"></ConfirmPopup>
 			</div>
         </div>
         <div class="p-col-12 p-md-3">
             <div class="card p-fluid">
 				<h5>Confirm Dialog</h5>
-				<Button type="button" label="Confirm" @click="confirmWithDialog" class="p-button-help" icon="pi pi-check" />
+				<Button type="button" label="Confirm" class="p-button-help" icon="pi pi-check" @click="confirmWithDialog" />
                 <ConfirmDialog group="dialog">></ConfirmDialog>
 			</div>
         </div>
@@ -508,7 +509,7 @@
 				<h5>Overlay Menu</h5>
 
 				<Menu ref="menu" :model="menuitems" :popup="true" />
-				<Button type="button" label="Options" icon="pi pi-angle-down" @click="toggleMenu" style="width: auto"/>
+				<Button type="button" label="Options" icon="pi pi-angle-down" style="width: auto" @click="toggleMenu"/>
 			</div>
 
 			<div class="card" @contextmenu="onContextRightClick">
@@ -533,10 +534,10 @@
 				<h5>Toast</h5>
 
 				<Toast />
-				<Button @click="showToast('info')" label="Info" class="p-button-info p-mr-2 p-mb-2" />
-                <Button @click="showToast('success')" label="Success" class="p-button-success p-mr-2 p-mb-2" />
-				<Button @click="showToast('warn')" label="Warn" class="p-button-warning p-mr-2 p-mb-2" />
-				<Button @click="showToast('error')" label="Error" class="p-button-danger p-mb-2" />
+				<Button label="Info" class="p-button-info p-mr-2 p-mb-2" @click="showToast('info')" />
+                <Button label="Success" class="p-button-success p-mr-2 p-mb-2" @click="showToast('success')" />
+				<Button label="Warn" class="p-button-warning p-mr-2 p-mb-2" @click="showToast('warn')" />
+				<Button label="Error" class="p-button-danger p-mb-2" @click="showToast('error')" />
 			</div>
 
             <div class="card">
@@ -801,6 +802,14 @@ export default {
         }
     },
     countryService: null,
+    computed: {
+        containerClass() {
+            return ['p-grid', {
+                    'p-input-filled': this.$appState.inputStyle === 'filled',
+                }
+            ];
+        }
+    },
     created() {
         this.countryService = new CountryService();
         this.customerService = new CustomerService();
@@ -890,25 +899,12 @@ export default {
         formatCurrency(value) {
             return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
         }
-    },
-    computed: {
-        containerClass() {
-            return ['p-grid', {
-                    'p-input-filled': this.$appState.inputStyle === 'filled',
-                }
-            ];
-        }
     }
 }
 </script>
 
 <style scoped lang="scss">
-
-#sample {
-    margin: spacingTRBL(4,2,6,1);
-    color: var(--primary-color);
-}
-
+@import '../assets/themes/white-paper/theme.scss';
 .image-text {
     vertical-align: middle;
 }

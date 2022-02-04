@@ -1,3 +1,12 @@
+// v1 legacy support
+@mixin typeface($type, $size) {
+    font-family: var(--font-family-#{$type});
+    letter-spacing: var(--letter-spacing-#{$type});
+    font-weight: var(--font-weight-#{$type});
+
+    line-height: var(--line-height-#{$size});
+    font-size: var(--font-size-#{$size});
+}
 //spacing
 $spacing-base: 8;
 @function spacing($y) {
@@ -11,12 +20,7 @@ $spacing-base: 8;
         calc($spacing-base * $l) + px;
 }
 
-// v1 legacy support
-@mixin typeface($type, $size) {
-    font-family: var(--font-family-#{$type});
-    letter-spacing: var(--letter-spacing-#{$type});
-    font-weight: var(--font-weight-#{$type});
-
-    line-height: var(--line-height-#{$size});
-    font-size: var(--font-size-#{$size});
+// hex to rgb
+@function hex2rgb($hexColor) {
+    @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
 }

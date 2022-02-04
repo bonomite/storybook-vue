@@ -27,9 +27,8 @@ module.exports = {
           },
         },
       ],
-      include: path.resolve(__dirname, '../'),
+      // include: path.resolve(__dirname, '../'),
     })
-
     return config
   },
 }

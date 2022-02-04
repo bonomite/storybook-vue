@@ -192,53 +192,53 @@ export default {
 </script>
 
 <style lang="scss">
-// .image-with-caption {
-//   width: 100%;
-// }
+.image-with-caption {
+  width: 100%;
+}
 
-// .image-with-caption .image-with-caption-image,
-// .image-with-caption .image-with-caption-wrapper {
-//   position: relative;
-// }
+.image-with-caption .image-with-caption-image,
+.image-with-caption .image-with-caption-wrapper {
+  position: relative;
+}
 
-// .image-with-caption .image-with-caption-image-link.disabled {
-//   pointer-events: none;
-// }
+.image-with-caption .image-with-caption-image-link.disabled {
+  pointer-events: none;
+}
 
-// .image-with-caption .image-with-caption-caption {
-//   position: absolute;
-//   color: #ffffff;
-//   bottom: 0;
-//   right: 0;
-//   left: 0;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: flex-end;
-//   padding: var(--space-3);
-//   transition: var(--animation-duration-standard);
+.image-with-caption .image-with-caption-caption {
+  position: absolute;
+  color: $white;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: spacing(2);
+  transition: $transitionDuration;
 
-//   &.visible {
-//     background: rgba(var(--color-dark-gray), 0.7);
-//   }
-// }
+  &.visible {
+    background: rgba($gray-600, 0.7);
+  }
+}
 
-// .image-with-caption .image-with-caption-credit,
-// .image-with-caption .image-with-caption-caption p {
-//   @include typeface(body, 3);
-//   margin-right: var(--space-3);
-// }
+.image-with-caption .image-with-caption-credit,
+.image-with-caption .image-with-caption-caption p {
+  @include typeface(body, 3);
+  margin-right: spacing(2);
+}
 
-// .image-with-caption .image-with-caption-credit {
-//   margin-left: var(--space-3);
-//   @media all and (min-width: $medium) {
-//     margin-left: 0;
-//   }
-//   margin-top: var(--space-1);
-//   text-align: right;
-// }
+.image-with-caption .image-with-caption-credit {
+  margin-left: spacing(2);
+  @media all and (min-width: $medium) {
+    margin-left: 0;
+  }
+  margin-top: spacing(1);
+  text-align: right;
+}
 
 // .image-with-caption.gothamist .image-with-caption-credit {
-//   margin-top: var(--space-1);
+//   margin-top: spacing(1);
 //   text-align: left;
 //   display: flex;
 //   flex-wrap: wrap;
@@ -261,50 +261,50 @@ export default {
 //   text-transform: uppercase;
 // }
 
-// .image-with-caption .image-with-caption-icons {
-//   cursor: pointer;
-//   margin: 0 0 0 auto;
-//   position: absolute;
-//   bottom: var(--space-2);
-//   right: var(--space-2);
-//   z-index: 999;
-// }
+.image-with-caption .image-with-caption-icons {
+  cursor: pointer;
+  margin: 0 0 0 auto;
+  position: absolute;
+  bottom: spacing(2);
+  right: spacing(2);
+  z-index: 999;
+}
 
-// .image-with-caption .info-icon,
-// .image-with-caption .o-close-icon {
-//   transition: var(--animation-duration-standard);
-//   width: 28px;
-//   height: 28px;
+.image-with-caption .info-icon,
+.image-with-caption .o-close-icon {
+  transition: $transitionDuration;
+  width: 28px;
+  height: 28px;
 
-//   &:hover {
-//     opacity: var(--opacity-hover);
-//   }
-// }
+  &:hover {
+    opacity: var(--opacity-hover);
+  }
+}
 
-// .image-with-caption .o-close-icon {
-//   padding: 6px;
-// }
+.image-with-caption .o-close-icon {
+  padding: 6px;
+}
 
-// .image-with-caption .o-close-icon path,
-// .image-with-caption .info-icon-i {
-//   fill: RGB(var(--color-white));
-// }
+.image-with-caption .o-close-icon path,
+.image-with-caption .info-icon-i {
+  fill: $white;
+}
 
-// .image-with-caption .info-icon-bg {
-//   fill: RGB(var(--color-dark-gray));
-// }
+.image-with-caption .info-icon-bg {
+  fill: $gray-800;
+}
 
 // .image-with-caption .gothamist-caption {
 //   display: flex;
 //   align-items: center;
 //   font-size: var(--font-size-4);
-//   margin-right: var(--space-2);
+//   margin-right: spacing(2);
 // }
 
 // .image-with-caption .o-gothamist-arrow-icon {
 //   width: 20px;
 //   margin-top: -11px;
-//   margin-right: var(--space-2);
+//   margin-right: spacing(2);
 //   float: left;
 
 //   path {
@@ -312,13 +312,13 @@ export default {
 //   }
 // }
 
-// .image-with-caption .image-with-caption-title {
-//   @include typeface(header, 8);
-//   margin: var(--space-2) 0;
-//   clear: both;
-// }
+.image-with-caption .image-with-caption-title {
+  @include typeface(header, 8);
+  margin: spacing(1) 0;
+  clear: both;
+}
 
-// .image-with-caption .image-with-caption-description {
-//   margin: var(--space-2) 0;
-// }
+.image-with-caption .image-with-caption-description {
+  margin: spacing(1) 0;
+}
 </style>

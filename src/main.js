@@ -46,16 +46,18 @@ import Timeline from 'primevue/timeline'
 import ToggleButton from 'primevue/togglebutton'
 import Tooltip from 'primevue/tooltip'
 import InlineMessage from 'primevue/inlinemessage'
-import CodeHighlight from './CodeHighlight'
+// import CodeHighlight from './CodeHighlight'
 
+// also imported in Home.vue styles area because @functions were not compiling for some reason.
 //if (import.meta.env.VITE_VUE_APP_EDITOR === 'code') {
-import('./assets/themes/white-paper/theme.scss')
+import './assets/themes/white-paper/theme.scss'
 //}
 import 'primevue/resources/primevue.min.css'
 import 'primeflex/primeflex.css'
 import 'primeicons/primeicons.css'
-import 'prismjs/themes/prism-coy.css'
+// import 'prismjs/themes/prism-coy.css'
 import './assets/styles/flags.css'
+
 
 router.beforeEach(function (to, from, next) {
     window.scrollTo(0, 0)
@@ -64,7 +66,8 @@ router.beforeEach(function (to, from, next) {
 
 const app = createApp(App)
 
-app.config.globalProperties.$allowDownload = (import.meta.NODE_ENV === 'development')
+// app.config.globalProperties.$allowDownload = (import.meta.NODE_ENV === 'development')
+app.config.globalProperties.$allowDownload = true
 app.config.globalProperties.$appState = reactive({ inputStyle: 'outlined' })
 
 app.use(PrimeVue, { ripple: true })
@@ -112,7 +115,7 @@ app.component('ToggleButton', ToggleButton)
 app.component('Timeline', Timeline)
 app.component('InlineMessage', InlineMessage)
 app.directive('tooltip', Tooltip)
-app.directive('code', CodeHighlight)
+// app.directive('code', CodeHighlight)
 app.directive('ripple', Ripple)
 
 app.mount('#app')
