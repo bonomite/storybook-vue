@@ -1,26 +1,49 @@
+@use "sass:map";
 // v1 legacy support
 @mixin typeface($type, $size) {
-    font-family: var(--font-family-#{$type});
-    letter-spacing: var(--letter-spacing-#{$type});
-    font-weight: var(--font-weight-#{$type});
+  font-family: var(--font-family-#{$type});
+  letter-spacing: var(--letter-spacing-#{$type});
+  font-weight: var(--font-weight-#{$type});
 
-    line-height: var(--line-height-#{$size});
-    font-size: var(--font-size-#{$size});
+  line-height: var(--line-height-#{$size});
+  font-size: var(--font-size-#{$size});
 }
+// font and line height values
+@mixin font-config($config-map) {
+  @each $breakpoint, $values in $config-map {
+    @debug "breakpoint = #{$breakpoint}";
+    @if $breakpoint == "default" {
+      font-family: map.get($values, "values", "font");
+      font-size: map.get($values, "values", "size");
+      line-height: map.get($values, "values", "line-height");
+      font-weight: map.get($values, "values", "weight");
+      color: map.get($values, "values", "color");
+    } @else {
+      @media screen and (min-width: $breakpoint) {
+        font-family: map.get($values, "values", "font");
+        font-size: map.get($values, "values", "size");
+        line-height: map.get($values, "values", "line-height");
+        font-weight: map.get($values, "values", "weight");
+        color: map.get($values, "values", "color");
+      }
+    }
+  }
+}
+
 //spacing
 $spacing-base: 8;
 @function spacing($y) {
-    @return calc($spacing-base * $y) + px;
+  @return calc($spacing-base * $y) + px;
 }
 @function spacingXY($x, $y) {
-    @return calc($spacing-base * $x) + px calc($spacing-base * $y) + px;
+  @return calc($spacing-base * $x) + px calc($spacing-base * $y) + px;
 }
 @function spacingTRBL($t, $r, $b, $l) {
-    @return calc($spacing-base * $t) + px calc($spacing-base * $r) + px calc($spacing-base * $b) + px
-        calc($spacing-base * $l) + px;
+  @return calc($spacing-base * $t) + px calc($spacing-base * $r) + px calc($spacing-base * $b) + px
+    calc($spacing-base * $l) + px;
 }
 
 // hex to rgb
 @function hex2rgb($hexColor) {
-    @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
+  @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
 }

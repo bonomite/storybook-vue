@@ -218,7 +218,7 @@ export default {
   transition: $transitionDuration;
 
   &.visible {
-    background: rgba($gray-600, 0.7);
+    background: rgba($black, 0.7);
   }
 }
 
@@ -291,7 +291,7 @@ export default {
 }
 
 .image-with-caption .info-icon-bg {
-  fill: $gray-800;
+  fill: rgba($black, 0.7);
 }
 
 // .image-with-caption .gothamist-caption {
