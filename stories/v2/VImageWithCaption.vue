@@ -37,11 +37,6 @@
         class="image-with-caption-icons"
         @click="toggleCaption"
       >
-        <!-- <info-icon
-          v-show="!captionVisible"
-          class="image-with-caption-icons-info"
-        /> -->
-
         <Button
           v-show="captionVisible"
           icon="pi pi-times p-button-icon"
@@ -57,27 +52,27 @@
     <figcaption v-if="credit || (caption && gothamistVariation)">
       <gothamist-arrow v-if="caption && gothamistVariation" />
       <div class="image-with-caption-credit">
-        <div v-if="caption && gothamistVariation" class="gothamist-caption">
+        <p v-if="caption && gothamistVariation" class="gothamist-caption">
           {{ caption }}
-        </div>
-        <a
-          v-if="creditUrl"
-          :href="creditUrl"
-          rel="noopener"
-          class="image-with-caption-credit-link"
-        >
-          {{ credit }}
-        </a>
-        <span v-else>
-          {{ credit }}
-        </span>
+        </p>
       </div>
-      <div v-if="title" class="image-with-caption-title">
+      <h4 v-if="title" class="image-with-caption-title">
         {{ title }}
-      </div>
-      <div v-if="description" class="image-with-caption-description">
+      </h4>
+      <p v-if="description" class="footer image-with-caption-description m-4">
         {{ description }}
-      </div>
+      </p>
+      <a
+        v-if="creditUrl"
+        :href="creditUrl"
+        rel="noopener"
+        class="image-with-caption-credit-link"
+      >
+        <p class="footer">{{ credit }}</p>
+      </a>
+      <span v-else>
+        <p class="footer">{{ credit }}</p>
+      </span>
     </figcaption>
   </figure>
 </template>
@@ -245,8 +240,12 @@ export default {
   @media all and (min-width: $medium) {
     margin-left: 0;
   }
-  margin-top: spacing(1);
+
   text-align: right;
+}
+
+.image-with-caption .image-with-caption-credit-link p {
+  color: $gray-200;
 }
 
 // .image-with-caption.gothamist .image-with-caption-credit {
@@ -333,12 +332,11 @@ export default {
 // }
 
 .image-with-caption .image-with-caption-title {
-  @include typeface(header, 8);
-  margin: spacing(1) 0;
-  clear: both;
+  //margin: spacing(1) 0;
+  //clear: both;
 }
 
 .image-with-caption .image-with-caption-description {
-  margin: spacing(1) 0;
+  margin: 0 0 spacing(2) 0;
 }
 </style>
