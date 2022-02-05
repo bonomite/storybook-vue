@@ -21,31 +21,37 @@
             :allow-preview="allowPreview"
           />
         </a>
-        <transition name="fade">
-          <div
-            v-if="caption"
-            class="image-with-caption-caption"
-            :class="{ visible: captionVisible }"
-          >
-            <p>
-              {{ caption }}
-            </p>
-          </div>
-        </transition>
+
+        <div
+          v-if="caption"
+          class="image-with-caption-caption"
+          :class="{ visible: captionVisible }"
+        >
+          <p>
+            {{ caption }}
+          </p>
+        </div>
       </div>
       <div
         v-if="caption && !gothamistVariation"
         class="image-with-caption-icons"
         @click="toggleCaption"
       >
-        <info-icon
+        <!-- <info-icon
           v-show="!captionVisible"
           class="image-with-caption-icons-info"
-        />
-        <close-icon
+        /> -->
+
+        <Button
           v-show="captionVisible"
-          class="image-with-caption-icons-close"
-        />
+          icon="pi pi-times p-button-icon"
+          class="p-button-sm p-button-secondary p-button-text image-with-caption-icons-close"
+        ></Button>
+        <Button
+          v-show="!captionVisible"
+          icon="pi pi-info"
+          class="p-button-sm image-with-caption-icons-info"
+        ></Button>
       </div>
     </div>
     <figcaption v-if="credit || (caption && gothamistVariation)">
@@ -77,18 +83,16 @@
 </template>
 
 <script>
-import CloseIcon from '../assets-shared/icons/CloseIcon'
-import InfoIcon from '../assets-shared/icons/InfoIcon'
 import GothamistArrow from '../assets-shared/icons/gothamist/GothamistArrow'
 import VSimpleResponsiveImage from './VSimpleResponsiveImage'
+import Button from 'primevue/button'
 
 export default {
   name: 'VImageWithCaption',
   components: {
-    CloseIcon,
-    InfoIcon,
     GothamistArrow,
     VSimpleResponsiveImage,
+    Button,
   },
   props: {
     altText: {
@@ -207,7 +211,6 @@ export default {
 
 .image-with-caption .image-with-caption-caption {
   position: absolute;
-  color: $white;
   bottom: 0;
   right: 0;
   left: 0;
@@ -219,7 +222,7 @@ export default {
   overflow-y: auto;
   display: block;
   max-height: 100%;
-  background: rgba($black, 0.7);
+  background: rgba($primaryDarkerColor, 0.7);
   opacity: 0;
   pointer-events: none;
   p {
@@ -277,6 +280,14 @@ export default {
   bottom: spacing(2);
   right: spacing(2);
   z-index: 999;
+}
+
+// keep X white on rollover
+.image-with-caption
+  .image-with-caption-icons
+  .image-with-caption-icons-close
+  .pi {
+  color: $white;
 }
 
 .image-with-caption .info-icon,

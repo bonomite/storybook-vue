@@ -30,6 +30,11 @@
         <span>Enlarge Image</span>
       </template>
     </Image>
+    <Button
+      v-show="allowPreview"
+      icon="pi pi-arrows-v"
+      class="p-button-sm enlarge-button"
+    ></Button>
     <span v-if="loadingEnlargedImage">
       <Teleport to=".p-component-overlay">
         <ProgressSpinner
@@ -52,6 +57,7 @@
 <script>
 import Image from 'primevue/image'
 import ProgressSpinner from 'primevue/progressspinner'
+import Button from 'primevue/button'
 /**
  * Responsive image component, generates a srcset with multiple image sizes for different display densities.
  */
@@ -59,6 +65,7 @@ export default {
   components: {
     Image,
     ProgressSpinner,
+    Button,
   },
   props: {
     /* alt text prop */
@@ -267,7 +274,15 @@ export default {
       display: block;
     }
   }
-
+  .enlarge-button {
+    pointer-events: none;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    .pi {
+      transform: rotate(45deg);
+    }
+  }
   .bg {
     pointer-events: none;
     width: 100%;
