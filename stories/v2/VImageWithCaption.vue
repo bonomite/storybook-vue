@@ -21,24 +21,23 @@
             :allow-preview="allowPreview"
           />
         </a>
-        <div
-          v-if="caption"
-          class="image-with-caption-caption"
-          :class="{ visible: captionVisible }"
-        >
-          <transition name="fade">
-            <p v-show="captionVisible">
+        <transition name="fade">
+          <div
+            v-if="caption"
+            class="image-with-caption-caption"
+            :class="{ visible: captionVisible }"
+          >
+            <p>
               {{ caption }}
             </p>
-          </transition>
-        </div>
+          </div>
+        </transition>
       </div>
       <div
         v-if="caption && !gothamistVariation"
         class="image-with-caption-icons"
         @click="toggleCaption"
       >
-        <i class="pi pi-times"></i>
         <info-icon
           v-show="!captionVisible"
           class="image-with-caption-icons-info"
@@ -47,10 +46,6 @@
           v-show="captionVisible"
           class="image-with-caption-icons-close"
         />
-        <i
-          v-show="captionVisible"
-          class="pi pi-times image-with-caption-icons-close"
-        ></i>
       </div>
     </div>
     <figcaption v-if="credit || (caption && gothamistVariation)">
@@ -224,12 +219,16 @@ export default {
   overflow-y: auto;
   display: block;
   max-height: 100%;
+  background: rgba($black, 0.7);
+  opacity: 0;
+  pointer-events: none;
   p {
     color: $white;
   }
 
   &.visible {
-    background: rgba($black, 0.7);
+    pointer-events: auto;
+    opacity: 1;
   }
 }
 
