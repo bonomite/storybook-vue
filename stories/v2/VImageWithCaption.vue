@@ -38,6 +38,7 @@
         class="image-with-caption-icons"
         @click="toggleCaption"
       >
+        <i class="pi pi-times"></i>
         <info-icon
           v-show="!captionVisible"
           class="image-with-caption-icons-info"
@@ -46,6 +47,10 @@
           v-show="captionVisible"
           class="image-with-caption-icons-close"
         />
+        <i
+          v-show="captionVisible"
+          class="pi pi-times image-with-caption-icons-close"
+        ></i>
       </div>
     </div>
     <figcaption v-if="credit || (caption && gothamistVariation)">
@@ -216,6 +221,12 @@ export default {
   align-items: flex-end;
   padding: spacing(2);
   transition: $transitionDuration;
+  overflow-y: auto;
+  display: block;
+  max-height: 100%;
+  p {
+    color: $white;
+  }
 
   &.visible {
     background: rgba($black, 0.7);
@@ -224,8 +235,7 @@ export default {
 
 .image-with-caption .image-with-caption-credit,
 .image-with-caption .image-with-caption-caption p {
-  @include typeface(body, 3);
-  margin-right: spacing(2);
+  margin-right: spacing(3.5);
 }
 
 .image-with-caption .image-with-caption-credit {
