@@ -983,21 +983,21 @@
         </Menubar>
       </div>
     </div>
-    <div class="col-12 md:p-4 md:col-6">
+    <div class="col-12 md:col-6">
       <div class="card">
         <h5>Tiered Menu</h5>
         <TieredMenu :model="tieredMenuItems" />
       </div>
     </div>
 
-    <div class="col-12 md:p-4 md:col-6">
+    <div class="col-12 md:col-6">
       <div class="card">
         <h5>Plain Menu</h5>
         <Menu :model="menuitems" />
       </div>
     </div>
 
-    <div class="col-12 md:p-4 md:col-6">
+    <div class="col-12 md:col-6">
       <div class="card">
         <h5>Overlay Menu</h5>
 
@@ -1010,9 +1010,10 @@
           @click="toggleMenu"
         />
       </div>
-
+    </div>
+    <div class="col-12 md:col-6">
       <div class="card" @contextmenu="onContextRightClick">
-        <h5>ContextMenu</h5>
+        <h5>Context Menu</h5>
         Right click to display.
         <ContextMenu ref="contextMenu" :model="contextMenuItems" />
       </div>
@@ -1065,7 +1066,7 @@
       </div>
     </div>
 
-    <div class="col-12 md:col-6">
+    <div class="col-12 md:col-8">
       <div class="card">
         <h5>Inline Message</h5>
         <div class="p-formgroup-inline" style="margin-bottom: 0.5rem">
@@ -1086,7 +1087,7 @@
       </div>
     </div>
 
-    <div class="col-12 md:col-6">
+    <div class="col-12 md:col-4">
       <div class="card">
         <h5>Helper Text</h5>
         <div class="p-field p-fluid">
