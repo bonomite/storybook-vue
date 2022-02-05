@@ -36,6 +36,6 @@ Default.args = {
     description: 'Description Text Here',
     width: 600,
     height: 400,
-    // allowPreview: true,
+    allowPreview: true,
     // imageUrl: 'https://www.google.com',
 }

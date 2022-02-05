@@ -70,7 +70,7 @@
       >
         <p class="footer">{{ credit }}</p>
       </a>
-      <span v-else>
+      <span v-else class="image-with-caption-credit-link">
         <p class="footer">{{ credit }}</p>
       </span>
     </figcaption>
@@ -212,7 +212,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: spacing(2);
+  padding: spacingXY(3, 2);
   transition: $transitionDuration;
   overflow-y: auto;
   display: block;
@@ -331,12 +331,7 @@ export default {
 //   }
 // }
 
-.image-with-caption .image-with-caption-title {
-  //margin: spacing(1) 0;
-  //clear: both;
-}
-
 .image-with-caption .image-with-caption-description {
-  margin: 0 0 spacing(2) 0;
+  margin: 0 0 spacing(1.5) 0;
 }
 </style>

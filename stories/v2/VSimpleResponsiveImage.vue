@@ -31,7 +31,7 @@
       </template>
     </Image>
     <Button
-      v-show="allowPreview"
+      v-if="allowPreview"
       icon="pi pi-arrows-v"
       class="p-button-sm enlarge-button"
     ></Button>
