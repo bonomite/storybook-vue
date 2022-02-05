@@ -13,17 +13,17 @@
  */
 
 /*------------------------------------*\
-    $BASE
-\*------------------------------------*/
-@import "_mixins-functions";
-/*------------------------------------*\
     $SETTINGS
 \*------------------------------------*/
-@import "_settings.z-index";
+@import "settings.z-index";
 
 /*------------------------------------*\
     $TOOLS
 \*------------------------------------*/
-@import "_include-media";
+@import "include-media";
 
-@import "_accessibility";
+/*------------------------------------*\
+    $BASE
+\*------------------------------------*/
+@import "mixins-functions";
+@import "accessibility";

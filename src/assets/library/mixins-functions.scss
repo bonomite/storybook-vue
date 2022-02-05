@@ -1,4 +1,5 @@
 @use "sass:map";
+
 // v1 legacy support
 @mixin typeface($type, $size) {
   font-family: var(--font-family-#{$type});
@@ -8,23 +9,21 @@
   line-height: var(--line-height-#{$size});
   font-size: var(--font-size-#{$size});
 }
-// font and line height values
+// v1 legacy support
+
+// font config
 @mixin font-config($config-map) {
   @each $breakpoint, $values in $config-map {
-    @debug "breakpoint = #{$breakpoint}";
+    // @debug "breakpoint = #{$breakpoint}";
     @if $breakpoint == "default" {
-      font-family: map.get($values, "values", "font");
-      font-size: map.get($values, "values", "size");
-      line-height: map.get($values, "values", "line-height");
-      font-weight: map.get($values, "values", "weight");
-      color: map.get($values, "values", "color");
+      @each $key, $value in map.get($values, "values") {
+        #{$key}: #{$value};
+      }
     } @else {
       @media screen and (min-width: $breakpoint) {
-        font-family: map.get($values, "values", "font");
-        font-size: map.get($values, "values", "size");
-        line-height: map.get($values, "values", "line-height");
-        font-weight: map.get($values, "values", "weight");
-        color: map.get($values, "values", "color");
+        @each $key, $value in map.get($values, "values") {
+          #{$key}: #{$value};
+        }
       }
     }
   }

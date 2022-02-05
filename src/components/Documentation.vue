@@ -94,7 +94,7 @@ VITE_VUE_APP_EDITOR=code
         </p>
 
         <h5>Full List of SASS Variables</h5>
-        <p class="p-mb-3">
+        <p class="mb:p-3">
           A wide range of variables are available to customize different aspects
           of the components such as colors, margins and paddings. Refer to the
           <a href="https://www.primefaces.org/designer/api/primevue/3.10.0"

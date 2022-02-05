@@ -93,7 +93,7 @@
         :key="category.label"
         class="editor-category"
       >
-        <h6 class="p-mt-4 p-mb-2">{{ category.label }}</h6>
+        <h6 class="p-mt-4 mb:p-2">{{ category.label }}</h6>
         <div
           v-for="option of category.options"
           :key="option.name"
@@ -126,7 +126,7 @@
       :modal="true"
     >
       <div class="confirmation-content">
-        <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
         <span>Are you sure you want to discard your changes?</span>
       </div>
       <template #footer>
@@ -152,7 +152,7 @@
       :modal="true"
     >
       <div class="confirmation-content">
-        <i class="pi pi-exclamation-circle p-mr-3" style="font-size: 2rem" />
+        <i class="pi pi-exclamation-circle mr-3" style="font-size: 2rem" />
         <span>A designer license is required to download this theme.</span>
       </div>
       <template #footer>
