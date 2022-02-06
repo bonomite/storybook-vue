@@ -21,11 +21,22 @@ const Template = (args) => ({
     setup() {
         return { args }
     },
-    template: '<v-tag v-bind="args" /> <v-tag v-bind="args" /> <v-tag name="no link" />',
+    template: '<v-tag v-bind="args" />',
 })
 
 export const Default = Template.bind({})
 Default.args = {
     name: 'news',
     slug: 'news',
+}
+
+export const NoLink = Template.bind({})
+NoLink.args = {
+    name: 'news',
+}
+
+export const CustomRadius = Template.bind({})
+CustomRadius.args = {
+    name: 'news',
+    radius: 0,
 }

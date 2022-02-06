@@ -10,7 +10,7 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  borderRadius: {
+  radius: {
     type: Number,
     default: null,
   },
@@ -23,7 +23,7 @@ const props = defineProps({
       <Button
         :class="name"
         :label="name"
-        :style="borderRadius ? `border-radius: ${borderRadius}px;` : ''"
+        :style="radius !== null ? `border-radius: ${radius}px;` : ''"
       ></Button>
     </nuxt-link>
   </span>
