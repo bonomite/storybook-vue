@@ -1,67 +1,9 @@
-<template>
-  <div class="simple-responsive-image-holder">
-    <div v-if="isVertical" class="bg">
-      <img
-        :src="computedSrcBg"
-        :width="width"
-        :height="height"
-        :alt="alt"
-        loading="lazy"
-      />
-    </div>
-    <Image
-      class="image"
-      :class="isVertical ? 'is-vertical' : ''"
-      image-style="width: 100%; height: auto;"
-      :srcset="srcset"
-      :src="computedSrc"
-      :width="computedWidth"
-      :height="height"
-      :style="isVertical ? `width:${computedWidth}px;` : ''"
-      :alt="alt"
-      :preview="allowPreview"
-      loading="lazy"
-      @show="enlarge"
-      @hide="closeEnlarge"
-      @click="$emit('click', $event.target.value)"
-      @keypress="$emit('keypress', $event.target.value)"
-    >
-      <template #indicator>
-        <span>Enlarge Image</span>
-      </template>
-    </Image>
-    <Button
-      v-if="allowPreview"
-      icon="pi pi-arrows-v"
-      class="p-button-sm enlarge-button"
-    ></Button>
-    <span v-if="loadingEnlargedImage">
-      <Teleport to=".p-component-overlay">
-        <ProgressSpinner
-          v-if="loadingEnlargedImage"
-          style="
-            z-index: -1;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-          "
-          stroke-width="6"
-        />
-      </Teleport>
-    </span>
-  </div>
-</template>
 <script setup>
 import { ref, computed, onBeforeMount } from 'vue'
 import Image from 'primevue/image'
 import ProgressSpinner from 'primevue/progressspinner'
 import Button from 'primevue/button'
-/**
- * Responsive image component, generates a srcset with multiple image sizes for different display densities.
- */
+/** * Responsive image component, generates a srcset with multiple image sizes for different display densities. */
 
 const props = defineProps({
   /* alt text prop */
@@ -69,94 +11,72 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  /**
-   * An image url template string with tokens to replace for width and height
-   * e.g. "https://source.unsplash.com/random/%width%x%height%"
+  /** * An image url template string with tokens to replace for width and height
+   * * e.g. "https://source.unsplash.com/random/%width%x%height%"
    * A plain image url here will also 'work' but you won't get additional sizes
    */
   src: {
     type: String,
     default: null,
   },
-  /**
-   * The desired width for the 1x sized image.
-   * this will also be added as an attribute to the image tag
+  /** * The desired width for the 1x sized image.
+   * * this will also be added as an attribute to the image tag
    */
   width: {
     type: Number,
     default: null,
   },
-  /**
-   * The desired height for the 1x sized image.
-   * this will also be added as an attribute to the image tag
+  /** * The desired height for the 1x sized image. * this will also be added as an attribute to the image tag
    */
   height: {
     type: Number,
     default: null,
   },
-  /**
-   * Maximum width for the image. Generated sizes will be clipped to fit the max dimensions.
-   * If you know the width of the original, full-sized image, use it here.
+  /** * Maximum width for the image. Generated sizes will be clipped to fit the max dimensions. * If you know the width of the original, full-sized image, use it here.
    */
   maxWidth: {
     type: Number,
     default: Infinity,
   },
-  /**
-   * Maximum height for the image. Generated sizes will be clipped to fit the max dimensions.
-   * If you know the height of the original, full-sized image, use it here.
+  /** * Maximum height for the image. Generated sizes will be clipped to fit the max dimensions. * If you know the height of the original, full-sized image, use it here.
    */
   maxHeight: {
     type: Number,
     default: Infinity,
   },
-  /**
-   * Substring or regex within the urlto be replaced with width values.
-   */
+  /** * Substring or regex within the urlto be replaced with width values. */
   widthToken: {
     type: [String, RegExp],
     default: '%width%',
   },
-  /**
-   * Substring or regex within the url to be replaced with height values.
-   */
+  /** * Substring or regex within the url to be replaced with height values. */
   heightToken: {
     type: [String, RegExp],
     default: '%height%',
   },
-  /**
-   * Substring or regex within the url to control jpg compression quality.
-   */
+  /** * Substring or regex within the url to control jpg compression quality. */
   qualityToken: {
     type: [String, RegExp],
     default: '%quality%',
   },
-  /**
-   * List of display densities to generate sizes for in the srcset
-   */
+  /** * List of display densities to generate sizes for in the srcset */
   sizes: {
     type: Array,
     default() {
       return [2, 3, 3.5, 4]
     },
   },
-  /**
-   * jpg compression quality
-   */
+  /** * jpg compression quality */
   quality: {
     type: Number,
     default: 80,
   },
-  /**
-   * allow the vertical effect to happen
-   */
+  /** * allow the vertical effect to happen */
   allowVerticalEffect: {
     type: Boolean,
     default: false,
   },
-  /**
-   * allow the user to click on the image to open a lightbox
-   */
+  /** * allow the user to click on the image to open a lightbox */
   allowPreview: {
     type: Boolean,
     default: false,
@@ -255,6 +175,64 @@ const closeEnlarge = () => {
   loadingEnlargedImage.value = false
 }
 </script>
+
+<template>
+  <div class="simple-responsive-image-holder">
+    <div v-if="isVertical" class="bg">
+      <img
+        :src="computedSrcBg"
+        :width="width"
+        :height="height"
+        :alt="alt"
+        loading="lazy"
+      />
+    </div>
+    <Image
+      class="image"
+      :class="isVertical ? 'is-vertical' : ''"
+      image-style="width: 100%; height: auto;"
+      :srcset="srcset"
+      :src="computedSrc"
+      :width="computedWidth"
+      :height="height"
+      :style="isVertical ? `width:${computedWidth}px;` : ''"
+      :alt="alt"
+      :preview="allowPreview"
+      loading="lazy"
+      @show="enlarge"
+      @hide="closeEnlarge"
+      @click="$emit('click', $event.target.value)"
+      @keypress="$emit('keypress', $event.target.value)"
+    >
+      <template #indicator>
+        <span>Enlarge Image</span>
+      </template>
+    </Image>
+    <Button
+      v-if="allowPreview"
+      icon="pi pi-arrows-v"
+      class="p-button-sm enlarge-button"
+    ></Button>
+    <span v-if="loadingEnlargedImage">
+      <Teleport to=".p-component-overlay">
+        <ProgressSpinner
+          v-if="loadingEnlargedImage"
+          style="
+            z-index: -1;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+          "
+          stroke-width="6"
+        />
+      </Teleport>
+    </span>
+  </div>
+</template>
+
 <style lang="scss">
 .simple-responsive-image-holder {
   position: relative;
