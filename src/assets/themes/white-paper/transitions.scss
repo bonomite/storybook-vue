@@ -1,13 +1,24 @@
 //fade
 .fade-enter-active {
-    transition: all $transitionDuration ease-out;
+    transition: opacity $transitionDuration ease-out;
 }
-
 .fade-leave-active {
-    transition: all $transitionDuration ease-in;
+    transition: opacity $transitionDuration ease-in;
 }
-
 .fade-enter-from,
 .fade-leave-to {
+    opacity: 0;
+}
+
+//zoom
+.zoom-enter-active {
+    transition: opacity $transitionDuration, transform $transitionDuration;
+}
+.zoom-leave-active {
+    transition: opacity $transitionDuration, transform $transitionDuration;
+}
+.zoom-enter-from,
+.zoom-leave-to {
+    transform: scale(0.7);
     opacity: 0;
 }

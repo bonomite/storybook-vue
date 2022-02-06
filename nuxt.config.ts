@@ -19,17 +19,17 @@ export default defineNuxtConfig({
   css: [
 
   ],
-  ssr: true,
+  ssr: false,
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "primevue/resources/themes/lara-light-blue/theme.css"; @import "primevue/resources/primevue.css"; @import "primeicons/primeicons.css"; @import "primeflex/primeflex.scss"; @import "~/stories/assets-shared/scss/variables.module.scss"; @import "~/stories/assets-shared/scss/main.scss";`,
+          additionalData: `@import "~/src/assets/themes/white-paper/_theme.scss"; @import "primevue/resources/primevue.min.css"; @import "primeicons/primeicons.css";`,
         },
       },
     },
   },
-  //components: true,
+  // components: true,
   // components: [
   //   { path: '~/stories/', extensions: ['vue'] }
   // ],

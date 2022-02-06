@@ -21,16 +21,16 @@
             :allow-preview="allowPreview"
           />
         </a>
-
-        <div
-          v-if="caption"
-          class="image-with-caption-caption"
-          :class="{ visible: captionVisible }"
-        >
-          <p>
-            {{ caption }}
-          </p>
-        </div>
+        <transition name="fade">
+          <div
+            v-if="caption && captionVisible"
+            class="image-with-caption-caption"
+          >
+            <p>
+              {{ caption }}
+            </p>
+          </div>
+        </transition>
       </div>
       <div
         v-if="caption && !gothamistVariation"
@@ -38,12 +38,12 @@
         @click="toggleCaption"
       >
         <Button
-          v-show="captionVisible"
+          v-if="captionVisible"
           icon="pi pi-times p-button-icon"
           class="p-button-sm p-button-secondary p-button-text image-with-caption-icons-close"
         ></Button>
         <Button
-          v-show="!captionVisible"
+          v-else
           icon="pi pi-info"
           class="p-button-sm image-with-caption-icons-info"
         ></Button>
@@ -213,20 +213,13 @@ export default {
   justify-content: space-between;
   align-items: flex-end;
   padding: spacingXY(3, 2);
-  transition: $transitionDuration;
   overflow-y: auto;
   display: block;
   max-height: 100%;
   background: rgba($primaryDarkerColor, 0.7);
-  opacity: 0;
   pointer-events: none;
   p {
     color: $white;
-  }
-
-  &.visible {
-    pointer-events: auto;
-    opacity: 1;
   }
 }
 
