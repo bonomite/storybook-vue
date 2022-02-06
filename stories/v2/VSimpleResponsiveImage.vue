@@ -54,212 +54,205 @@
     </span>
   </div>
 </template>
-<script>
+<script setup>
+import { ref, computed, onBeforeMount } from 'vue'
 import Image from 'primevue/image'
 import ProgressSpinner from 'primevue/progressspinner'
 import Button from 'primevue/button'
 /**
  * Responsive image component, generates a srcset with multiple image sizes for different display densities.
  */
-export default {
-  components: {
-    Image,
-    ProgressSpinner,
-    Button,
+
+const props = defineProps({
+  /* alt text prop */
+  alt: {
+    type: String,
+    default: null,
   },
-  props: {
-    /* alt text prop */
-    alt: {
-      type: String,
-      default: null,
-    },
-    /**
-     * An image url template string with tokens to replace for width and height
-     * e.g. "https://source.unsplash.com/random/%width%x%height%"
-     * A plain image url here will also 'work' but you won't get additional sizes
-     */
-    src: {
-      type: String,
-      default: null,
-    },
-    /**
-     * The desired width for the 1x sized image.
-     * this will also be added as an attribute to the image tag
-     */
-    width: {
-      type: Number,
-      default: null,
-    },
-    /**
-     * The desired height for the 1x sized image.
-     * this will also be added as an attribute to the image tag
-     */
-    height: {
-      type: Number,
-      default: null,
-    },
-    /**
-     * Maximum width for the image. Generated sizes will be clipped to fit the max dimensions.
-     * If you know the width of the original, full-sized image, use it here.
-     */
-    maxWidth: {
-      type: Number,
-      default: Infinity,
-    },
-    /**
-     * Maximum height for the image. Generated sizes will be clipped to fit the max dimensions.
-     * If you know the height of the original, full-sized image, use it here.
-     */
-    maxHeight: {
-      type: Number,
-      default: Infinity,
-    },
-    /**
-     * Substring or regex within the urlto be replaced with width values.
-     */
-    widthToken: {
-      type: [String, RegExp],
-      default: '%width%',
-    },
-    /**
-     * Substring or regex within the url to be replaced with height values.
-     */
-    heightToken: {
-      type: [String, RegExp],
-      default: '%height%',
-    },
-    /**
-     * Substring or regex within the url to control jpg compression quality.
-     */
-    qualityToken: {
-      type: [String, RegExp],
-      default: '%quality%',
-    },
-    /**
-     * List of display densities to generate sizes for in the srcset
-     */
-    sizes: {
-      type: Array,
-      default() {
-        return [2, 3, 3.5, 4]
-      },
-    },
-    /**
-     * jpg compression quality
-     */
-    quality: {
-      type: Number,
-      default: 80,
-    },
-    /**
-     * allow the vertical effect to happen
-     */
-    allowVerticalEffect: {
-      type: Boolean,
-      default: false,
-    },
-    /**
-     * allow the user to click on the image to open a lightbox
-     */
-    allowPreview: {
-      type: Boolean,
-      default: false,
+  /**
+   * An image url template string with tokens to replace for width and height
+   * e.g. "https://source.unsplash.com/random/%width%x%height%"
+   * A plain image url here will also 'work' but you won't get additional sizes
+   */
+  src: {
+    type: String,
+    default: null,
+  },
+  /**
+   * The desired width for the 1x sized image.
+   * this will also be added as an attribute to the image tag
+   */
+  width: {
+    type: Number,
+    default: null,
+  },
+  /**
+   * The desired height for the 1x sized image.
+   * this will also be added as an attribute to the image tag
+   */
+  height: {
+    type: Number,
+    default: null,
+  },
+  /**
+   * Maximum width for the image. Generated sizes will be clipped to fit the max dimensions.
+   * If you know the width of the original, full-sized image, use it here.
+   */
+  maxWidth: {
+    type: Number,
+    default: Infinity,
+  },
+  /**
+   * Maximum height for the image. Generated sizes will be clipped to fit the max dimensions.
+   * If you know the height of the original, full-sized image, use it here.
+   */
+  maxHeight: {
+    type: Number,
+    default: Infinity,
+  },
+  /**
+   * Substring or regex within the urlto be replaced with width values.
+   */
+  widthToken: {
+    type: [String, RegExp],
+    default: '%width%',
+  },
+  /**
+   * Substring or regex within the url to be replaced with height values.
+   */
+  heightToken: {
+    type: [String, RegExp],
+    default: '%height%',
+  },
+  /**
+   * Substring or regex within the url to control jpg compression quality.
+   */
+  qualityToken: {
+    type: [String, RegExp],
+    default: '%quality%',
+  },
+  /**
+   * List of display densities to generate sizes for in the srcset
+   */
+  sizes: {
+    type: Array,
+    default() {
+      return [2, 3, 3.5, 4]
     },
   },
-  emits: ['click', 'keypress'],
-  data() {
-    return {
-      isVertical: {
-        default: false,
-        type: Boolean,
-      },
-      loadingEnlargedImage: false,
+  /**
+   * jpg compression quality
+   */
+  quality: {
+    type: Number,
+    default: 80,
+  },
+  /**
+   * allow the vertical effect to happen
+   */
+  allowVerticalEffect: {
+    type: Boolean,
+    default: false,
+  },
+  /**
+   * allow the user to click on the image to open a lightbox
+   */
+  allowPreview: {
+    type: Boolean,
+    default: false,
+  },
+})
+const emit = defineEmits(['click', 'keypress'])
+
+let isVertical = ref(false)
+let loadingEnlargedImage = ref(false)
+
+const computedWidth = computed(() => {
+  return isVertical.value
+    ? Math.round(props.maxWidth / (props.maxHeight / props.height))
+    : props.width
+})
+
+const computedSrc = computed(() => {
+  const template = props.src
+  return template
+    ? template
+        .replace(props.widthToken, computedWidth.value)
+        .replace(props.heightToken, props.height)
+        .replace(props.qualityToken, props.quality)
+    : undefined
+})
+const computedSrcBg = computed(() => {
+  const template = props.src
+  return template
+    ? template
+        .replace(props.widthToken, props.width)
+        .replace(props.heightToken, props.height)
+        .replace(props.qualityToken, 15)
+    : undefined
+})
+
+const srcset = computed(() => {
+  const template = props.src
+  if (template) {
+    // If this is just a plain string with no tokens,
+    // we don't need to generate a srcset
+    if (
+      template ===
+      template.replace(props.widthToken, '').replace(props.heightToken, '')
+    ) {
+      return ''
     }
-  },
-  computed: {
-    computedWidth() {
-      return this.isVertical
-        ? Math.round(this.maxWidth / (this.maxHeight / this.height))
-        : this.width
-    },
-    computedSrc() {
-      const template = this.src
-      return template
-        ? template
-            .replace(this.widthToken, this.computedWidth)
-            .replace(this.heightToken, this.height)
-            .replace(this.qualityToken, this.quality)
-        : undefined
-    },
-    computedSrcBg() {
-      const template = this.src
-      return template
-        ? template
-            .replace(this.widthToken, this.width)
-            .replace(this.heightToken, this.height)
-            .replace(this.qualityToken, 15)
-        : undefined
-    },
-    srcset() {
-      const template = this.src
-      if (template) {
-        // If this is just a plain string with no tokens,
-        // we don't need to generate a srcset
-        if (
-          template ===
-          template.replace(this.widthToken, '').replace(this.heightToken, '')
-        ) {
-          return ''
-        }
-        let srcset = ''
-        let lastImage = false
-        for (const size of this.sizes) {
-          /* continue if it is NOT the lastImage and the image has more pixels than its rendered area */
-          if (!lastImage && this.maxWidth > this.computedWidth) {
-            let width = Math.round(this.computedWidth * size)
-            let height = Math.round(this.height * size)
+    let srcset = ''
+    let lastImage = false
+    for (const size of props.sizes) {
+      /* continue if it is NOT the lastImage and the image has more pixels than its rendered area */
+      if (!lastImage && props.maxWidth > computedWidth.value) {
+        let width = Math.round(computedWidth.value * size)
+        let height = Math.round(props.height * size)
 
-            /* the image no longer has enough resolution to support the next srcset, use its maximum size and make it the last on the srcset list */
-            if (width > this.maxWidth || height > this.maxHeight) {
-              height = Math.round((height / width) * this.maxWidth)
-              width = this.maxWidth
-              lastImage = true
-            }
-
-            const url = template
-              .replace(this.widthToken, width)
-              .replace(this.heightToken, height)
-              .replace(this.qualityToken, this.calcQuality(this.quality, size))
-            srcset += `${url} ${size}x${
-              size < this.sizes.length && !lastImage ? ',' : ''
-            } `
-          }
+        /* the image no longer has enough resolution to support the next srcset, use its maximum size and make it the last on the srcset list */
+        if (width > props.maxWidth || height > props.maxHeight) {
+          height = Math.round((height / width) * props.maxWidth)
+          width = props.maxWidth
+          lastImage = true
         }
-        return srcset
-      } else {
-        return undefined
+
+        const url = template
+          .replace(props.widthToken, width)
+          .replace(props.heightToken, height)
+          .replace(props.qualityToken, calcQuality(props.quality, size))
+        srcset += `${url} ${size}x${
+          size < props.sizes.length && !lastImage ? ',' : ''
+        } `
       }
-    },
-  },
-  created() {
-    this.isVertical = this.allowVerticalEffect && this.maxHeight > this.maxWidth
-  },
-  methods: {
-    calcQuality(quality, size) {
-      return size >= 2 ? quality - Math.round(size * 5) : quality
-    },
-    enlarge() {
-      this.loadingEnlargedImage = true
-      const img = document.getElementsByClassName('p-image-preview')
-      const sizeList = this.srcset.split(',')
-      const lastSize = sizeList[sizeList.length - 1]
-      const biggestSize = lastSize.slice(0, -3)
-      img[0].setAttribute('src', biggestSize)
-    },
-    closeEnlarge() {
-      this.loadingEnlargedImage = false
-    },
-  },
+    }
+    return srcset
+  } else {
+    return undefined
+  }
+})
+
+onBeforeMount(() => {
+  isVertical.value =
+    props.allowVerticalEffect && props.maxHeight > props.maxWidth
+})
+
+const calcQuality = (quality, size) => {
+  return size >= 2 ? quality - Math.round(size * 5) : quality
+}
+
+const enlarge = () => {
+  loadingEnlargedImage.value = true
+  const img = document.getElementsByClassName('p-image-preview')
+  const sizeList = srcset.value.split(',')
+  const lastSize = sizeList[sizeList.length - 1]
+  const biggestSize = lastSize.slice(0, -3)
+  img[0].setAttribute('src', biggestSize)
+}
+
+const closeEnlarge = () => {
+  loadingEnlargedImage.value = false
 }
 </script>
 <style lang="scss">
