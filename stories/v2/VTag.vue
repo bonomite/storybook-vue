@@ -1,55 +1,49 @@
-<template>
-  <div class="tag" :class="name">
-    <!-- eslint-disable-next-line -->
-    <nuxt-link v-if="slug" :to="slug">{{ name }}</nuxt-link>
-    <span v-else>{{ name }}</span>
-  </div>
-</template>
+<script setup>
+import Button from 'primevue/button'
 
-<script>
-export default {
-  name: 'VTag',
-  props: {
-    slug: {
-      type: String,
-      default: null,
-    },
-    name: {
-      type: String,
-      default: null,
-    },
+const props = defineProps({
+  slug: {
+    type: String,
+    default: null,
   },
-}
+  name: {
+    type: String,
+    default: null,
+  },
+  borderRadius: {
+    type: Number,
+    default: null,
+  },
+})
 </script>
 
+<template>
+  <span class="p-tag-holder">
+    <nuxt-link :to="slug" :class="slug ? '' : 'disabled'">
+      <Button
+        :class="name"
+        :label="name"
+        :style="borderRadius ? `border-radius: ${borderRadius}px;` : ''"
+      ></Button>
+    </nuxt-link>
+  </span>
+</template>
+
 <style lang="scss">
-.tag {
-  display: inline;
-  margin: 0 spacing(2) spacing(2) 0;
-  font-weight: bold;
-  color: RGB(var(--color-tag-text));
-  text-transform: uppercase;
-
-  a,
-  a:visited,
-  a:active {
-    color: RGB(var(--color-tag-text));
+.p-tag-holder {
+  a {
     text-decoration: none;
-    background: RGB(var(--color-tag-background));
-    padding: spacing(2);
-    transition: background var(--animation-duration-standard)
-      var(--animation-easing-standard);
-
-    &:hover {
-      background: RGB(var(--color-tag-background));
-      color: RGB(var(--color-tag-text));
-      text-decoration: none;
+    &.disabled {
+      pointer-events: none;
     }
-  }
-
-  span {
-    background: RGB(var(--color-tag-background));
-    padding: spacing(2);
+    .p-button {
+      padding: $tagPadding;
+      border: none;
+      .p-button-label {
+        font-weight: $badgeFontWeight;
+        font-size: $badgeFontSize;
+      }
+    }
   }
 }
 </style>

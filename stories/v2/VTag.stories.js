@@ -21,7 +21,7 @@ const Template = (args) => ({
     setup() {
         return { args }
     },
-    template: '<v-tag v-bind="args" /> <v-tag v-bind="args" /> <v-tag v-bind="args" />',
+    template: '<v-tag v-bind="args" /> <v-tag v-bind="args" /> <v-tag name="no link" />',
 })
 
 export const Default = Template.bind({})
