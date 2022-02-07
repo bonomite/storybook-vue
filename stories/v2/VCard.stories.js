@@ -21,7 +21,7 @@ const Template = (args) => ({
     setup() {
         return { args }
     },
-    template: '<v-card v-bind="args" />',
+    template: '<v-card v-bind="args"> slot content </v-card>',
 })
 
 export const Default = Template.bind({})
@@ -32,4 +32,6 @@ Default.args = {
     subtitle: 'Subtitle',
     imageWidth: 175,
     imageHeight: 175,
+    tags:[{'name': 'news','slug': 'news'},{'name': 'food','food': ''}],
+    sponsored:true
 }

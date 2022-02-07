@@ -22,37 +22,19 @@
         />
       </nuxt-link>
     </template>
-    <span v-else class="card-image-wrapper">
-      <v-simple-responsive-image
-        v-if="image"
-        class="card-image"
-        :src="image"
-        :width="imageWidth"
-        :height="imageHeight"
-        :max-width="imageMaxWidth || Infinity"
-        :max-height="imageMaxHeight || Infinity"
-        alt
-        role="presentation"
-      />
-    </span>
     <div v-if="hasDetails" class="card-details">
-      <div v-if="tags || sponsored" class="card-tag">
+      <div v-if="tags || sponsored" class="card-tags">
         <v-tag v-for="(tag, index) in tags" :key="index" :name="tag.name" :slug="tag.slug" />
         <v-tag v-if="sponsored" name="sponsored" />
       </div>
       <div v-if="title" class="card-title" role="heading" aria-level="3">
-        <nuxt-link v-if="titleLink" class="card-title-link" :to="titleLink">
+        <nuxt-link class="card-title-link" :class="{ 'disabled': !titleLink }" :to="titleLink">
           <!-- eslint-disable-next-line -->
-          <span v-html="title" />
+          <h4 v-html="title" />
           <gallery-icon v-if="showGalleryIcon" />
         </nuxt-link>
-        <template v-else>
-          <!-- eslint-disable-next-line -->
-          <span v-html="title" />
-          <gallery-icon v-if="showGalleryIcon" />
-        </template>
       </div>
-      <div v-if="subtitle" class="card-subtitle">{{ subtitle }}</div>
+      <p v-if="subtitle" class="card-subtitle">{{ subtitle }}</p>
       <div v-if="$slots.default" class="card-slot">
         <slot />
       </div>
@@ -144,6 +126,7 @@ export default {
   // --card-image-width: 193px;
   // --card-image-height: 170px;
   display: flex;
+  align-items: flex-start;
   background: $cardBackground;
   color: $textColor;
   box-shadow: $cardShadow;
@@ -158,12 +141,21 @@ export default {
       --card-image-height: 100px;
     }
   } */
+  a.disabled {
+    pointer-events: none;
+  }
   .card-image-link {
     img{
       cursor: pointer;
     }
-    &.disabled {
-      pointer-events: none;
+  }
+  .card-details {
+    .card-tags {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: spacing(2);
+      margin-bottom: spacing(2);
     }
   }
 }
@@ -188,6 +180,7 @@ export default {
 }
 
 .card-details {
+  align-self: center;
   flex: 1;
   padding: var(--space-3);
   overflow: hidden;
