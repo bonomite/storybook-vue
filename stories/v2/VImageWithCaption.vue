@@ -201,7 +201,7 @@ const toggleCaption = () => {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: spacingXY(3, 2);
+  padding: spacingXY(4, 2);
   overflow-y: auto;
   display: block;
   max-height: 100%;
