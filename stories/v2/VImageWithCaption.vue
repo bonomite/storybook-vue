@@ -151,7 +151,7 @@ const toggleCaption = () => {
         ></Button>
       </div>
     </div>
-    <figcaption v-if="credit || (caption && gothamistVariation)">
+    <figcaption v-if="credit || (caption && gothamistVariation)" class="mt-1">
       <gothamist-arrow v-if="caption && gothamistVariation" />
       <div class="image-with-caption-credit">
         <p v-if="caption && gothamistVariation" class="gothamist-caption">

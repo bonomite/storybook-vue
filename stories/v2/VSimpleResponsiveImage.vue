@@ -233,11 +233,13 @@ const closeEnlarge = () => {
 
 <style lang="scss">
 .simple-responsive-image-holder {
+  line-height: 0;
   position: relative;
   .image {
     position: relative;
     width: 100%;
     height: auto;
+
     &.is-vertical {
       margin: auto;
       display: block;

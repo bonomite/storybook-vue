@@ -39,6 +39,7 @@ const props = defineProps({
     .p-button {
       padding: $tagPadding;
       border: none;
+      vertical-align: middle;
       .p-button-label {
         font-weight: $badgeFontWeight;
         font-size: $badgeFontSize;

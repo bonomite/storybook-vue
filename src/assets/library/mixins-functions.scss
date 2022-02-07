@@ -30,16 +30,16 @@
 }
 
 //spacing
-$spacing-base: 8;
+$spacing-base: 0.25; //  matches prime-flex
 @function spacing($y) {
-  @return calc($spacing-base * $y) + px;
+  @return calc($spacing-base * $y) + rem;
 }
 @function spacingXY($x, $y) {
-  @return calc($spacing-base * $x) + px calc($spacing-base * $y) + px;
+  @return calc($spacing-base * $x) + rem calc($spacing-base * $y) + rem;
 }
 @function spacingTRBL($t, $r, $b, $l) {
-  @return calc($spacing-base * $t) + px calc($spacing-base * $r) + px calc($spacing-base * $b) + px
-    calc($spacing-base * $l) + px;
+  @return calc($spacing-base * $t) + rem calc($spacing-base * $r) + rem calc($spacing-base * $b) + rem
+    calc($spacing-base * $l) + rem;
 }
 
 // hex to rgb
