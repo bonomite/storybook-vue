@@ -22,3 +22,8 @@ body {
 figure {
     margin: 0;
 }
+
+a,
+a p {
+    transition: all $transitionDuration;
+}

@@ -205,14 +205,12 @@ const closeEnlarge = () => {
       @keypress="$emit('keypress', $event.target.value)"
     >
       <template #indicator>
-        <span>Enlarge Image</span>
+        <Button
+          icon="pi pi-arrows-v"
+          class="p-button-sm enlarge-button"
+        ></Button>
       </template>
     </Image>
-    <Button
-      v-if="allowPreview"
-      icon="pi pi-arrows-v"
-      class="p-button-sm enlarge-button"
-    ></Button>
     <span v-if="loadingEnlargedImage">
       <Teleport to=".p-component-overlay">
         <ProgressSpinner
@@ -244,9 +242,21 @@ const closeEnlarge = () => {
       margin: auto;
       display: block;
     }
+    .p-image-preview-indicator {
+      // remove the default indicator and just use the button
+      background-color: transparent !important;
+      opacity: 1;
+      width: 0;
+      height: 0;
+    }
+    img {
+      cursor: default;
+    }
   }
   .enlarge-button {
-    pointer-events: none;
+    background-color: $primaryColor + CC;
+    border-color: transparent;
+    // pointer-events: none;
     position: absolute;
     top: 8px;
     left: 8px;

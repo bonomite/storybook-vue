@@ -1,3 +1,105 @@
+<script setup>
+import { ref, computed } from 'vue'
+import GothamistArrow from '../assets-shared/icons/gothamist/GothamistArrow'
+import VSimpleResponsiveImage from './VSimpleResponsiveImage'
+import Button from 'primevue/button'
+
+const props = defineProps({
+  altText: {
+    default: null,
+    type: String,
+  },
+  caption: {
+    default: null,
+    type: String,
+  },
+  credit: {
+    default: null,
+    type: String,
+  },
+  creditUrl: {
+    default: null,
+    type: String,
+  },
+  description: {
+    default: null,
+    type: String,
+  },
+  height: {
+    default: null,
+    type: Number,
+  },
+  urlTemplate: {
+    default: null,
+    type: String,
+  },
+  variation: {
+    default: null,
+    type: String,
+  },
+  width: {
+    default: null,
+    type: Number,
+  },
+  widthInViewport: {
+    default: null,
+    type: Number,
+  },
+  widthInViewportTablet: {
+    default: null,
+    type: Number,
+  },
+  image: {
+    default: null,
+    type: String,
+  },
+  imageUrl: {
+    default: null,
+    type: String,
+  },
+  title: {
+    default: null,
+    type: String,
+  },
+  maxHeight: {
+    default: null,
+    type: Number,
+  },
+  maxWidth: {
+    default: null,
+    type: Number,
+  },
+  allowVerticalEffect: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * allow the user to click on the image to open a lightbox
+   */
+  allowPreview: {
+    type: Boolean,
+    default: false,
+  },
+})
+
+const emit = defineEmits(['componentEvent'])
+
+let captionVisible = ref(false)
+
+const gothamistVariation = computed(() => {
+  return props.variation === 'gothamist'
+})
+
+const toggleCaption = () => {
+  captionVisible.value = !captionVisible.value
+  if (captionVisible.value) {
+    emit('componentEvent', 'Expanded')
+  } else {
+    emit('componentEvent', 'Collapsed')
+  }
+}
+</script>
+
 <template>
   <figure class="image-with-caption" :class="variation">
     <div class="image-with-caption-wrapper">
@@ -59,7 +161,7 @@
       <h4 v-if="title" class="image-with-caption-title">
         {{ title }}
       </h4>
-      <p v-if="description" class="footer image-with-caption-description m-4">
+      <p v-if="description" class="footer image-with-caption-description">
         {{ description }}
       </p>
       <a
@@ -76,119 +178,6 @@
     </figcaption>
   </figure>
 </template>
-
-<script>
-import GothamistArrow from '../assets-shared/icons/gothamist/GothamistArrow'
-import VSimpleResponsiveImage from './VSimpleResponsiveImage'
-import Button from 'primevue/button'
-
-export default {
-  name: 'VImageWithCaption',
-  components: {
-    GothamistArrow,
-    VSimpleResponsiveImage,
-    Button,
-  },
-  props: {
-    altText: {
-      default: null,
-      type: String,
-    },
-    caption: {
-      default: null,
-      type: String,
-    },
-    credit: {
-      default: null,
-      type: String,
-    },
-    creditUrl: {
-      default: null,
-      type: String,
-    },
-    description: {
-      default: null,
-      type: String,
-    },
-    height: {
-      default: null,
-      type: Number,
-    },
-    urlTemplate: {
-      default: null,
-      type: String,
-    },
-    variation: {
-      default: null,
-      type: String,
-    },
-    width: {
-      default: null,
-      type: Number,
-    },
-    widthInViewport: {
-      default: null,
-      type: Number,
-    },
-    widthInViewportTablet: {
-      default: null,
-      type: Number,
-    },
-    image: {
-      default: null,
-      type: String,
-    },
-    imageUrl: {
-      default: null,
-      type: String,
-    },
-    title: {
-      default: null,
-      type: String,
-    },
-    maxHeight: {
-      default: null,
-      type: Number,
-    },
-    maxWidth: {
-      default: null,
-      type: Number,
-    },
-    allowVerticalEffect: {
-      default: false,
-      type: Boolean,
-    },
-    /**
-     * allow the user to click on the image to open a lightbox
-     */
-    allowPreview: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  emits: ['componentEvent'],
-  data() {
-    return {
-      captionVisible: false,
-    }
-  },
-  computed: {
-    gothamistVariation() {
-      return this.variation === 'gothamist'
-    },
-  },
-  methods: {
-    toggleCaption() {
-      this.captionVisible = !this.captionVisible
-      if (this.captionVisible) {
-        this.$emit('componentEvent', 'Expanded')
-      } else {
-        this.$emit('componentEvent', 'Collapsed')
-      }
-    },
-  },
-}
-</script>
 
 <style lang="scss">
 .image-with-caption {
@@ -237,8 +226,20 @@ export default {
   text-align: right;
 }
 
-.image-with-caption .image-with-caption-credit-link p {
-  color: $gray-200;
+.image-with-caption {
+  .image-with-caption-credit-link {
+    display: inline-block;
+    color: $gray-200;
+    &:hover {
+      color: $linkButtonColor;
+      p {
+        color: $linkButtonColor;
+      }
+    }
+    p {
+      color: $gray-200;
+    }
+  }
 }
 
 // .image-with-caption.gothamist .image-with-caption-credit {
@@ -272,6 +273,10 @@ export default {
   bottom: spacing(2);
   right: spacing(2);
   z-index: 999;
+  .p-button {
+    background-color: $primaryColor + CC;
+    border-color: transparent;
+  }
 }
 
 // keep X white on rollover
@@ -325,6 +330,6 @@ export default {
 // }
 
 .image-with-caption .image-with-caption-description {
-  margin: 0 0 spacing(1.5) 0;
+  margin: 0 0 spacing(1) 0;
 }
 </style>
