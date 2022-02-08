@@ -18,7 +18,7 @@ module.exports = {
         {
           loader: 'sass-loader',
           options: {
-            additionalData: '@import "primeflex/primeflex.scss"; @import "~/src/assets/themes/white-paper/_theme.scss"; @import "primevue/resources/primevue.min.css"; @import "primeicons/primeicons.css"; ',
+            additionalData: '@import "~/src/assets/library/primeflex.min.css"; @import "~/src/assets/themes/white-paper/_theme.scss"; @import "primevue/resources/primevue.min.css"; @import "primeicons/primeicons.css"; ',
             // additionalData: '@import "./assets/scss/main.scss";',
             //@import "primeflex/primeflex.scss";
             //@import "primevue/resources/themes/lara-light-blue/theme.css";

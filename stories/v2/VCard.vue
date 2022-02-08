@@ -2,7 +2,7 @@
   <div class="card">
     <template v-if="image">
       <nuxt-link
-        class="card-image-link card-image-wrapper"
+        class="card-image-link card-image-wrapper w-full sm:w-max"
         :class="{ 'disabled': !titleLink }"
         :to="titleLink"
         aria-hidden="true"
@@ -10,8 +10,21 @@
         tabindex="-1"
         @click="$emit('componentEvent', titleLink)"
       >
+        <!-- mobile, uses window width to load the image size-->
         <v-simple-responsive-image
-          class="card-image"
+          class="card-image w-full sm:w-max sm:hidden"
+          :src="image"
+          :width="currentWidth"
+          :height="Math.round(currentWidth * 2/3)"
+          :max-width="imageMaxWidth || Infinity"
+          :max-height="imageMaxHeight || Infinity"
+          :alt="title"
+          :allow-vertical-effect="allowVerticalEffect"
+          role="presentation"
+        />
+        <!-- desktop, uses width and height props -->
+        <v-simple-responsive-image
+          class="card-image w-full sm:w-max hidden sm:block"
           :src="image"
           :width="imageWidth"
           :height="imageHeight"
@@ -30,7 +43,7 @@
       <div v-if="title" class="card-title" role="heading" aria-level="3">
         <nuxt-link class="card-title-link" :class="{ 'disabled': !titleLink }" :to="titleLink">
           <!-- eslint-disable-next-line -->
-          <h4 v-html="title" />
+          <h2 v-html="title" />
           <gallery-icon v-if="showGalleryIcon" />
         </nuxt-link>
       </div>
@@ -108,15 +121,32 @@ export default {
     /**
      * does not allow the vertical effect to happen
      */
-    verticalEffect: {
+    allowVerticalEffect: {
       type: Boolean,
       default: false,
     },
+    /**
+     * does not allow the vertical effect to happen
+     */
+    responsive: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  data() {
+    return {
+      currentWidth: null,
+    }
   },
   computed: {
     hasDetails() {
       return !!this.title || !!this.subtitle || !!this.$slots.default
     },
+  },
+  beforeMount() {
+    this.currentWidth = window.innerWidth
+  },
+  methods: {
   },
 }
 </script>
@@ -125,6 +155,12 @@ export default {
 .card {
   // --card-image-width: 193px;
   // --card-image-height: 170px;
+  /* &:not(.mod-vertical) {
+    @include media('<large') {
+      --card-image-width: 100px;
+      --card-image-height: 100px;
+    }
+  } */
   display: flex;
   align-items: flex-start;
   background: $cardBackground;
@@ -135,27 +171,31 @@ export default {
   overflow: hidden;
   width: 100%;
   max-width: 100%;
-  /* &:not(.mod-vertical) {
-    @include media('<large') {
-      --card-image-width: 100px;
-      --card-image-height: 100px;
-    }
-  } */
   a.disabled {
     pointer-events: none;
   }
   .card-image-link {
-    img{
+    img {
       cursor: pointer;
     }
   }
   .card-details {
+    align-self: center;
+    flex: 1;
+    padding: var(--space-3);
+    overflow: hidden;
     .card-tags {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       gap: spacing(2);
       margin-bottom: spacing(2);
+    }
+  }
+  @include media("<small") {
+    flex-direction: column;
+    .card-details {
+      align-self: flex-start;
     }
   }
 }
@@ -177,13 +217,6 @@ export default {
     // height: var(--card-image-height);
     height: inherit;
   }
-}
-
-.card-details {
-  align-self: center;
-  flex: 1;
-  padding: var(--space-3);
-  overflow: hidden;
 }
 
 .card-title {

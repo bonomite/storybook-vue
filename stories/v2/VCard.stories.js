@@ -26,12 +26,15 @@ const Template = (args) => ({
 
 export const Default = Template.bind({})
 Default.args = {
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/212136/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
     titleLink: 'https://www.google.com',
     subtitle: 'Subtitle',
     imageWidth: 175,
     imageHeight: 175,
-    tags:[{'name': 'news','slug': 'news'},{'name': 'food','food': ''}],
-    sponsored:true
+    imageMaxWidth: 616,
+    imageMaxHeight: 952,
+    tags: [{ 'name': 'news', 'slug': 'news' }, { 'name': 'food', 'food': '' }],
+    sponsored: true,
+    allowVerticalEffect: true
 }

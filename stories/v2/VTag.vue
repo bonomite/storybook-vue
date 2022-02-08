@@ -43,6 +43,7 @@ const props = defineProps({
       .p-button-label {
         font-weight: $badgeFontWeight;
         font-size: $badgeFontSize;
+        letter-spacing: $badgeLetterSpacing;
       }
     }
   }

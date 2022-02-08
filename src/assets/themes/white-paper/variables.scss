@@ -1,13 +1,16 @@
 // Common Breakpoints
 $xsmall: 375px;
-$small: 550px;
+$small: 576px;
 $medium: 768px;
-$large: 850px;
-$xlarge: 1024px;
+$large: 992px;
+$xlarge: 1200px;
 $xxlarge: 1366px;
 $xxxlarge: 1920px;
 
 $breakpoints: (
+    "phone": $xsmall,
+    "tablet": $medium,
+    "desktop": $xlarge,
     "xsmall": $xsmall,
     "small": $small,
     "medium": $medium,
@@ -759,7 +762,8 @@ $badgeTextColor: $primaryTextColor !default;
 $badgeMinWidth: 1.5rem !default;
 $badgeHeight: 1.5rem !default;
 $badgeFontWeight: 700 !default;
-$badgeFontSize: 0.75rem !default;
+$badgeFontSize: 0.633rem !default;
+$badgeLetterSpacing: 0.03rem !default;
 
 $tagPadding: 0.25rem 0.4rem !default;
 
