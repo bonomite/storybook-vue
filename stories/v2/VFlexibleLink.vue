@@ -26,12 +26,32 @@ const isExternal = computed(() => {
     :href="to"
     :target="target"
     rel="noopener noreferrer"
+    class="flexible-link"
   >
     <slot name="default"></slot>
   </a>
-  <nuxt-link v-else v-bind="{ ...$props, ...$attrs }">
+  <nuxt-link v-else class="flexible-link" v-bind="{ ...$props, ...$attrs }">
     <slot name="default"></slot>
   </nuxt-link>
 </template>
-
+<style lang="scss">
+.flexible-link {
+  color: $linkButtonColor;
+  transition: all $transitionDuration;
+  * {
+    transition: all $transitionDuration;
+  }
+  &:hover {
+    color: $linkButtonHoverColor !important;
+    text-decoration: $linkButtonTextHoverDecoration;
+    * {
+      color: $linkButtonHoverColor !important;
+      text-decoration: $linkButtonTextHoverDecoration;
+    }
+  }
+  &:focus {
+    @include focused();
+  }
+}
+</style>
 

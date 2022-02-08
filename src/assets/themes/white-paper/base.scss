@@ -22,15 +22,3 @@ body {
 figure {
     margin: 0;
 }
-a {
-    transition: all $transitionDuration;
-    * {
-        transition: all $transitionDuration;
-    }
-    &:hover {
-        color: $linkButtonColor !important;
-        * {
-            color: $linkButtonColor !important;
-        }
-    }
-}

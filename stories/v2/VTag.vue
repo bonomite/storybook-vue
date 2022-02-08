@@ -33,18 +33,26 @@ const props = defineProps({
 <style lang="scss">
 .p-tag-holder {
   a {
-    text-decoration: none;
+    text-decoration: none !important;
+    display: inline-flex;
     &.disabled {
       pointer-events: none;
     }
     .p-button {
       padding: $tagPadding;
       border: none;
+      text-decoration: none;
       vertical-align: middle;
       .p-button-label {
         font-weight: $badgeFontWeight;
         font-size: $badgeFontSize;
         letter-spacing: $badgeLetterSpacing;
+      }
+    }
+    &:hover {
+      .p-button-label {
+        text-decoration: none !important;
+        color: $primaryTextColor !important;
       }
     }
   }

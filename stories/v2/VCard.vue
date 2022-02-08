@@ -178,11 +178,8 @@ export default {
     },
     getRatio() {
       const verticalImage = this.imageMaxWidth < this.imageMaxHeight
-
       const hRatio = Number(this.ratio.charAt(0))
       const vRatio = Number(this.ratio.charAt(this.ratio.length - 1))
-      console.log('hRatio = ', hRatio)
-      console.log('vRatio = ', vRatio)
       return verticalImage ? vRatio / hRatio : hRatio / vRatio
     },
   },
