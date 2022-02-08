@@ -17,7 +17,7 @@
           :class="responsive ? `${bp}:hidden ${bp}:w-max` : 'hidden'"
           :src="image"
           :width="currentWidth"
-          :height="Math.round(currentWidth * 2 / 3)"
+          :height="Math.round(currentWidth * getRatio)"
           :max-width="imageMaxWidth || Infinity"
           :max-height="imageMaxHeight || Infinity"
           :alt="title"
@@ -38,11 +38,7 @@
         />
       </v-flexible-link>
     </template>
-    <div
-      v-if="hasDetails"
-      class="card-details"
-      :class="{ [`align-self-start ${bp}:align-self-center`]: responsive }"
-    >
+    <div v-if="hasDetails" class="card-details">
       <div v-if="tags || sponsored" class="card-tags">
         <v-tag v-for="(tag, index) in tags" :key="index" :name="tag.name" :slug="tag.slug" />
         <v-tag v-if="sponsored" name="sponsored" />
@@ -160,6 +156,13 @@ export default {
       type: String,
       default: 'sm',
     },
+    /**
+     * ratio (in landscape)
+     */
+    ratio: {
+      type: String,
+      default: '3:2',
+    },
   },
   data() {
     return {
@@ -172,6 +175,15 @@ export default {
     },
     getMobileImageScale() {
       return this.currentWidth < breakpoint.sm ? this.mobileImageScale : 1
+    },
+    getRatio() {
+      const verticalImage = this.imageMaxWidth < this.imageMaxHeight
+
+      const hRatio = Number(this.ratio.charAt(0))
+      const vRatio = Number(this.ratio.charAt(this.ratio.length - 1))
+      console.log('hRatio = ', hRatio)
+      console.log('vRatio = ', vRatio)
+      return verticalImage ? vRatio / hRatio : hRatio / vRatio
     },
   },
   beforeMount() {
@@ -203,7 +215,7 @@ export default {
     }
   }
   .card-details {
-    align-self: center;
+    align-self: flex-start;
     flex: 1;
     padding: var(--space-3);
     overflow: hidden;
