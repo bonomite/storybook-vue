@@ -33,8 +33,8 @@ Default.args = {
     allowVerticalEffect: false,
 }
 
-export const Preview = Template.bind({})
-Preview.args = {
+export const Enlarge = Template.bind({})
+Enlarge.args = {
     alt: 'Fallback alt text here',
     src: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 600,

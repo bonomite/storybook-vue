@@ -27,7 +27,7 @@ const Template = (args) => ({
 export const Default = Template.bind({})
 Default.args = {
     name: 'news',
-    slug: 'news',
+    slug: 'https://www.google.com',
 }
 
 export const NoLink = Template.bind({})

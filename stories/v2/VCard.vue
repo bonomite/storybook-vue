@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <template v-if="image">
-      <nuxt-link
+      <v-flexible-link
         class="card-image-link card-image-wrapper w-full sm:w-max"
         :class="{ 'disabled': !titleLink }"
         :to="titleLink"
@@ -15,7 +15,7 @@
           class="card-image w-full sm:w-max sm:hidden"
           :src="image"
           :width="currentWidth"
-          :height="Math.round(currentWidth * 2/3)"
+          :height="Math.round(currentWidth * 2 / 3)"
           :max-width="imageMaxWidth || Infinity"
           :max-height="imageMaxHeight || Infinity"
           :alt="title"
@@ -33,7 +33,7 @@
           :alt="title"
           role="presentation"
         />
-      </nuxt-link>
+      </v-flexible-link>
     </template>
     <div v-if="hasDetails" class="card-details">
       <div v-if="tags || sponsored" class="card-tags">
@@ -41,11 +41,15 @@
         <v-tag v-if="sponsored" name="sponsored" />
       </div>
       <div v-if="title" class="card-title" role="heading" aria-level="3">
-        <nuxt-link class="card-title-link" :class="{ 'disabled': !titleLink }" :to="titleLink">
+        <v-flexible-link
+          class="card-title-link"
+          :class="{ 'disabled': !titleLink }"
+          :to="titleLink"
+        >
           <!-- eslint-disable-next-line -->
           <h2 v-html="title" />
           <gallery-icon v-if="showGalleryIcon" />
-        </nuxt-link>
+        </v-flexible-link>
       </div>
       <p v-if="subtitle" class="card-subtitle">{{ subtitle }}</p>
       <div v-if="$slots.default" class="card-slot">
@@ -58,6 +62,7 @@
 <script>
 // import Card from 'primevue/card'
 import VTag from './VTag'
+import VFlexibleLink from './VFlexibleLink'
 import VSimpleResponsiveImage from './VSimpleResponsiveImage'
 import GalleryIcon from '../assets-shared/icons/GalleryIcon'
 
@@ -67,6 +72,7 @@ export default {
     GalleryIcon,
     VSimpleResponsiveImage,
     VTag,
+    VFlexibleLink,
     // Card,
   },
   props: {

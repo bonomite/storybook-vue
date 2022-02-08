@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import GothamistArrow from '../assets-shared/icons/gothamist/GothamistArrow'
 import VSimpleResponsiveImage from './VSimpleResponsiveImage'
+import VFlexibleLink from './VFlexibleLink'
 import Button from 'primevue/button'
 
 const props = defineProps({
@@ -104,10 +105,10 @@ const toggleCaption = () => {
   <figure class="image-with-caption" :class="variation">
     <div class="image-with-caption-wrapper">
       <div class="image-with-caption-image">
-        <a
+        <v-flexible-link
           class="image-with-caption-image-link"
           :class="!imageUrl && !allowPreview ? 'disabled' : ''"
-          :href="imageUrl && !allowPreview ? imageUrl : null"
+          :to="imageUrl && !allowPreview ? imageUrl : null"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -121,16 +122,12 @@ const toggleCaption = () => {
             :max-height="maxHeight || Infinity"
             :allow-vertical-effect="allowVerticalEffect"
             :allow-preview="allowPreview"
+            :class="imageUrl && !allowPreview ? 'addPointer' : ''"
           />
-        </a>
+        </v-flexible-link>
         <transition name="fade">
-          <div
-            v-if="caption && captionVisible"
-            class="image-with-caption-caption"
-          >
-            <p>
-              {{ caption }}
-            </p>
+          <div v-if="caption && captionVisible" class="image-with-caption-caption">
+            <p>{{ caption }}</p>
           </div>
         </transition>
       </div>
@@ -144,34 +141,24 @@ const toggleCaption = () => {
           icon="pi pi-times p-button-icon"
           class="p-button-sm p-button-secondary p-button-text image-with-caption-icons-close"
         ></Button>
-        <Button
-          v-else
-          icon="pi pi-info"
-          class="p-button-sm image-with-caption-icons-info"
-        ></Button>
+        <Button v-else icon="pi pi-info" class="p-button-sm image-with-caption-icons-info"></Button>
       </div>
     </div>
     <figcaption v-if="credit || (caption && gothamistVariation)" class="mt-1">
       <gothamist-arrow v-if="caption && gothamistVariation" />
       <div class="image-with-caption-credit">
-        <p v-if="caption && gothamistVariation" class="gothamist-caption">
-          {{ caption }}
-        </p>
+        <p v-if="caption && gothamistVariation" class="gothamist-caption">{{ caption }}</p>
       </div>
-      <h4 v-if="title" class="image-with-caption-title">
-        {{ title }}
-      </h4>
-      <p v-if="description" class="footer image-with-caption-description">
-        {{ description }}
-      </p>
-      <a
+      <h4 v-if="title" class="image-with-caption-title">{{ title }}</h4>
+      <p v-if="description" class="footer image-with-caption-description">{{ description }}</p>
+      <v-flexible-link
         v-if="creditUrl"
-        :href="creditUrl"
+        :to="creditUrl"
         rel="noopener"
         class="image-with-caption-credit-link"
       >
         <p class="footer">{{ credit }}</p>
-      </a>
+      </v-flexible-link>
       <span v-else class="image-with-caption-credit-link">
         <p class="footer">{{ credit }}</p>
       </span>
@@ -187,6 +174,12 @@ const toggleCaption = () => {
 .image-with-caption .image-with-caption-image,
 .image-with-caption .image-with-caption-wrapper {
   position: relative;
+}
+
+.image-with-caption .simple-responsive-image-holder.addPointer {
+  img {
+    cursor: pointer;
+  }
 }
 
 .image-with-caption .image-with-caption-image-link.disabled {

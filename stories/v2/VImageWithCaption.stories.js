@@ -31,11 +31,68 @@ Default.args = {
     image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+    width: 600,
+    height: 400,
+}
+
+export const Caption = Template.bind({})
+Caption.args = {
+    // variation: 'gothamist',
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
     caption: 'Caption Text Here',
     title: 'Title Text Here',
     description: 'Description Text Here',
     width: 600,
     height: 400,
+}
+
+export const Enlarge = Template.bind({})
+Enlarge.args = {
+    // variation: 'gothamist',
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+    width: 600,
+    height: 400,
     allowPreview: true,
-    // imageUrl: 'https://www.google.com',
+    //imageUrl: 'https://www.google.com',
+}
+
+export const ImageIsLink = Template.bind({})
+ImageIsLink.args = {
+    // variation: 'gothamist',
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+    width: 600,
+    height: 400,
+    allowPreview: false,
+    imageUrl: 'https://www.google.com',
+}
+
+export const CaptionAndEnlarge = Template.bind({})
+CaptionAndEnlarge.args = {
+    // variation: 'gothamist',
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+    caption: 'Caption Text Here',
+    width: 600,
+    height: 400,
+    allowPreview: true,
+    imageUrl: 'https://www.google.com',
 }

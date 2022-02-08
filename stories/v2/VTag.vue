@@ -1,5 +1,6 @@
 <script setup>
 import Button from 'primevue/button'
+import VFlexibleLink from './VFlexibleLink'
 
 const props = defineProps({
   slug: {
@@ -19,13 +20,13 @@ const props = defineProps({
 
 <template>
   <span class="p-tag-holder">
-    <nuxt-link :to="slug" :class="slug ? '' : 'disabled'">
+    <v-flexible-link :to="slug" :class="slug ? '' : 'disabled'">
       <Button
         :class="name"
         :label="name"
         :style="radius !== null ? `border-radius: ${radius}px;` : ''"
       ></Button>
-    </nuxt-link>
+    </v-flexible-link>
   </span>
 </template>
 
