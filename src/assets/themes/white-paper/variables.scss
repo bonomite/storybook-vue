@@ -1,4 +1,10 @@
 // Common Breakpoints
+// if you want to update these breakpoint, clone & setup  https://github.com/primefaces/primeflex
+// then update the _variables.scss file with the new breakpoints
+// then run "npm run build-lib"
+// a new "primeflex.min.css" file will be generated in the "dist" folder
+// copy and replace the new "primeflex.min.css" file in the "src/assets/library" folder
+//
 $xsmall: 375px;
 $small: 576px;
 $medium: 768px;

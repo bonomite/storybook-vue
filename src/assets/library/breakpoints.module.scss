@@ -1,0 +1,9 @@
+:export {
+    xs: strip-unit(map-get($breakpoints, "xsmall"));
+    sm: strip-unit(map-get($breakpoints, "small"));
+    md: strip-unit(map-get($breakpoints, "medium"));
+    lg: strip-unit(map-get($breakpoints, "large"));
+    xl: strip-unit(map-get($breakpoints, "xlarge"));
+    xxl: strip-unit(map-get($breakpoints, "xxlarge"));
+    xxxl: strip-unit(map-get($breakpoints, "xxlarge"));
+}

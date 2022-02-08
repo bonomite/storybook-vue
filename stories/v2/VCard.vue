@@ -1,9 +1,10 @@
 <template>
-  <div class="card">
+  <!-- :class="[responsive ? `flex-column ${bp}:flex-row` : '']" -->
+  <div class="card" :class="{ [`flex-column ${bp}:flex-row`]: responsive }">
     <template v-if="image">
       <v-flexible-link
-        class="card-image-link card-image-wrapper w-full sm:w-max"
-        :class="{ 'disabled': !titleLink }"
+        class="card-image-link card-image-wrapper"
+        :class="{ 'disabled': !titleLink, [`w-full ${bp}:w-max`]: responsive }"
         :to="titleLink"
         aria-hidden="true"
         role="presentation"
@@ -12,7 +13,8 @@
       >
         <!-- mobile, uses window width to load the image size-->
         <v-simple-responsive-image
-          class="card-image w-full sm:w-max sm:hidden"
+          class="card-image w-full"
+          :class="responsive ? `${bp}:hidden ${bp}:w-max` : 'hidden'"
           :src="image"
           :width="currentWidth"
           :height="Math.round(currentWidth * 2 / 3)"
@@ -24,10 +26,11 @@
         />
         <!-- desktop, uses width and height props -->
         <v-simple-responsive-image
-          class="card-image w-full sm:w-max hidden sm:block"
+          class="card-image w-full"
+          :class="{ [`hidden ${bp}:w-max ${bp}:block`]: responsive }"
           :src="image"
-          :width="imageWidth"
-          :height="imageHeight"
+          :width="Math.round(imageWidth * getMobileImageScale)"
+          :height="Math.round(imageHeight * getMobileImageScale)"
           :max-width="imageMaxWidth || Infinity"
           :max-height="imageMaxHeight || Infinity"
           :alt="title"
@@ -35,7 +38,11 @@
         />
       </v-flexible-link>
     </template>
-    <div v-if="hasDetails" class="card-details">
+    <div
+      v-if="hasDetails"
+      class="card-details"
+      :class="{ [`align-self-start ${bp}:align-self-center`]: responsive }"
+    >
       <div v-if="tags || sponsored" class="card-tags">
         <v-tag v-for="(tag, index) in tags" :key="index" :name="tag.name" :slug="tag.slug" />
         <v-tag v-if="sponsored" name="sponsored" />
@@ -61,6 +68,7 @@
 
 <script>
 // import Card from 'primevue/card'
+import breakpoint from '../../src/assets/library/breakpoints.module.scss'
 import VTag from './VTag'
 import VFlexibleLink from './VFlexibleLink'
 import VSimpleResponsiveImage from './VSimpleResponsiveImage'
@@ -132,11 +140,25 @@ export default {
       default: false,
     },
     /**
-     * does not allow the vertical effect to happen
+     * Switches to vertical layout on 'sm' mobile breakpoint
      */
     responsive: {
       type: Boolean,
-      default: true,
+      default: false,
+    },
+    /**
+     * will control the scale of the image on 'sm' mobile breakpoint
+     */
+    mobileImageScale: {
+      type: Number,
+      default: 1,
+    },
+    /**
+     * what breakpoint to be mobile breakpoint
+     */
+    bp: {
+      type: String,
+      default: 'sm',
     },
   },
   data() {
@@ -148,9 +170,12 @@ export default {
     hasDetails() {
       return !!this.title || !!this.subtitle || !!this.$slots.default
     },
+    getMobileImageScale() {
+      return this.currentWidth < breakpoint.sm ? this.mobileImageScale : 1
+    },
   },
   beforeMount() {
-    this.currentWidth = window.innerWidth
+    this.currentWidth = Math.round(window.innerWidth)
   },
   methods: {
   },
@@ -159,14 +184,6 @@ export default {
 
 <style lang="scss">
 .card {
-  // --card-image-width: 193px;
-  // --card-image-height: 170px;
-  /* &:not(.mod-vertical) {
-    @include media('<large') {
-      --card-image-width: 100px;
-      --card-image-height: 100px;
-    }
-  } */
   display: flex;
   align-items: flex-start;
   background: $cardBackground;
@@ -190,6 +207,7 @@ export default {
     flex: 1;
     padding: var(--space-3);
     overflow: hidden;
+
     .card-tags {
       display: flex;
       flex-direction: row;
@@ -197,105 +215,72 @@ export default {
       gap: spacing(2);
       margin-bottom: spacing(2);
     }
-  }
-  @include media("<small") {
-    flex-direction: column;
-    .card-details {
-      align-self: flex-start;
+    .card-title-link {
+      display: inline-block;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
   }
 }
 
-.card-image-wrapper {
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  max-width: var(--card-image-width);
-  height: var(--card-image-height);
-}
+// .card .o-gallery-icon {
+//   width: 20px;
+//   height: 25px;
+//   margin-left: var(--space-2);
+//   margin-bottom: 2px;
+// }
 
-.card-image {
-  height: inherit;
-  .image {
-    position: relative;
-    object-fit: cover;
-    width: var(--card-image-width);
-    // height: var(--card-image-height);
-    height: inherit;
-  }
-}
+// .card.mod-large .o-gallery-icon {
+//   width: 30px;
+//   height: 30px;
+//   margin-bottom: 3px;
+// }
 
-.card-title {
-  font-family: var(--font-family-header);
-  font-size: var(--font-size-7);
-  display: flex;
-  align-items: center;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
+// .card-title-link:hover {
+//   color: RGB(var(--color-text));
+//   opacity: var(--opacity-link-hover);
+//   text-decoration: none;
+// }
 
-.card .o-gallery-icon {
-  width: 20px;
-  height: 25px;
-  margin-left: var(--space-2);
-  margin-bottom: 2px;
-}
+// .card-subtitle {
+//   font-family: var(--font-family-subheader);
+//   font-size: var(--font-size-4);
+// }
 
-.card.mod-large .o-gallery-icon {
-  width: 30px;
-  height: 30px;
-  margin-bottom: 3px;
-}
+// .card.mod-vertical {
+//   flex-direction: column;
+//   --card-image-width: 300px;
+//   --card-image-height: 200px;
+//   max-width: var(--card-image-width);
+// }
 
-.card-title-link {
-  color: RGB(var(--color-text));
-  text-decoration: none;
-}
+// .card.mod-large {
+//   --card-image-width: 360px;
+//   --card-image-height: 306px;
+// }
 
-.card-title-link:hover {
-  color: RGB(var(--color-text));
-  opacity: var(--opacity-link-hover);
-  text-decoration: none;
-}
+// .card.mod-large .card-title {
+//   font-size: var(--font-size-10);
+// }
 
-.card-subtitle {
-  font-family: var(--font-family-subheader);
-  font-size: var(--font-size-4);
-}
+// .card.mod-large .card-subtitle {
+//   font-size: var(--font-size-7);
+// }
 
-.card.mod-vertical {
-  flex-direction: column;
-  --card-image-width: 300px;
-  --card-image-height: 200px;
-  max-width: var(--card-image-width);
-}
+// .card.mod-large:not(.mod-vertical) .card-image-wrapper,
+// .card.mod-large:not(.mod-vertical) .card-image .image {
+//   @include media("<medium") {
+//     min-width: 100px;
+//     width: 100px;
+//     height: 100px;
+//   }
+// }
 
-.card.mod-large {
-  --card-image-width: 360px;
-  --card-image-height: 306px;
-}
-
-.card.mod-large .card-title {
-  font-size: var(--font-size-10);
-}
-
-.card.mod-large .card-subtitle {
-  font-size: var(--font-size-7);
-}
-
-.card.mod-large:not(.mod-vertical) .card-image-wrapper,
-.card.mod-large:not(.mod-vertical) .card-image .image {
-  @include media("<medium") {
-    min-width: 100px;
-    width: 100px;
-    height: 100px;
-  }
-}
-
-.card.mod-vertical.card.mod-large {
-  --card-image-width: 640px;
-  --card-image-height: 426px;
-}
+// .card.mod-vertical.card.mod-large {
+//   --card-image-width: 640px;
+//   --card-image-height: 426px;
+// }
 
 .card .card-slot {
   margin-top: var(--space-2);

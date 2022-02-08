@@ -12,8 +12,8 @@ module.exports = {
     config.module.rules.push({
       test: /\.scss$/,
       use: [
-        'style-loader',
-        'css-loader',
+        // 'style-loader',
+        // 'css-loader',
         'sass-loader',
         {
           loader: 'sass-loader',
@@ -29,6 +29,16 @@ module.exports = {
       ],
       // include: path.resolve(__dirname, '../'),
     })
+    // config.module.rules.push({
+    //   test: /\.css$/,
+    //   use: [
+    //     'style-loader',
+    //     'css-loader',
+    //     {
+    //       loader: 'css-loader',
+    //     },
+    //   ],
+    // })
     return config
   },
 }

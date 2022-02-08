@@ -223,12 +223,7 @@ const toggleCaption = () => {
   .image-with-caption-credit-link {
     display: inline-block;
     color: $gray-200;
-    &:hover {
-      color: $linkButtonColor;
-      p {
-        color: $linkButtonColor;
-      }
-    }
+
     p {
       color: $gray-200;
     }
