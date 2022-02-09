@@ -45,6 +45,19 @@ Default.args = {
     imageMaxHeight: 2560,
 }
 
+export const GalleryIcon = Template.bind({})
+GalleryIcon.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    titleLink: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    imageWidth: 175,
+    imageHeight: 175,
+    imageMaxWidth: 1440,
+    imageMaxHeight: 2560,
+    showGalleryIcon: true,
+}
+
 export const SmallerImageOnPhone = Template.bind({})
 SmallerImageOnPhone.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
