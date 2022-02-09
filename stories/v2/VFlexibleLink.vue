@@ -1,10 +1,11 @@
 <script setup>
+import RouteLocationRaw from 'vue-router'
 import { computed } from 'vue'
 
 const props = defineProps({
   to: {
-    type: String,
-    default: null,
+    type: RouteLocationRaw,
+    default: '',
   },
   target: {
     type: String,
@@ -12,7 +13,7 @@ const props = defineProps({
   },
 })
 const isExternal = computed(() => {
-  if (/^http(s)+:/.test(props.to)) {
+  if (typeof props.to === 'string' && /^http(s)+:/.test(props.to)) {
     return true
   }
   return false
@@ -26,11 +27,11 @@ const isExternal = computed(() => {
     :href="to"
     :target="target"
     rel="noopener noreferrer"
-    class="flexible-link"
+    class="flexible-link external"
   >
     <slot name="default"></slot>
   </a>
-  <nuxt-link v-else class="flexible-link" v-bind="{ ...$props, ...$attrs }">
+  <nuxt-link v-else class="flexible-link external" v-bind="{ ...$props, ...$attrs }">
     <slot name="default"></slot>
   </nuxt-link>
 </template>

@@ -26,12 +26,12 @@ const Template = (args) => ({
 
 export const Default = Template.bind({})
 Default.args = {
-    to: 'https://www.nypr.org/',
+    to: 'https://www.google.com/',
 }
 
-export const DefaultSelf = Template.bind({})
-DefaultSelf.args = {
-    to: 'https://www.nypr.org/',
+export const DefaultCustomTarget = Template.bind({})
+DefaultCustomTarget.args = {
+    to: 'https://www.google.com/',
     target: '_self',
 }
 

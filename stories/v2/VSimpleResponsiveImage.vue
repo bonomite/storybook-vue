@@ -1,6 +1,7 @@
 <script setup>
-import { ref, computed, onBeforeMount } from 'vue'
+import { ref, computed, onMounted, onBeforeMount } from 'vue'
 import Image from 'primevue/image'
+import Skeleton from 'primevue/skeleton'
 import ProgressSpinner from 'primevue/progressspinner'
 import Button from 'primevue/button'
 /** * Responsive image component, generates a srcset with multiple image sizes for different display densities. */
@@ -85,7 +86,11 @@ const props = defineProps({
 const emit = defineEmits(['click', 'keypress'])
 
 let isVertical = ref(false)
+let isLoaded = ref(false)
 let loadingEnlargedImage = ref(false)
+let skeletonHeight = ref('0px')
+
+const refThisImg = ref(null)
 
 const computedWidth = computed(() => {
   return isVertical.value
@@ -97,20 +102,22 @@ const computedSrc = computed(() => {
   const template = props.src
   return template
     ? template
-        .replace(props.widthToken, computedWidth.value)
-        .replace(props.heightToken, props.height)
-        .replace(props.qualityToken, props.quality)
+      .replace(props.widthToken, computedWidth.value)
+      .replace(props.heightToken, props.height)
+      .replace(props.qualityToken, props.quality)
     : undefined
 })
 const computedSrcBg = computed(() => {
   const template = props.src
   return template
     ? template
-        .replace(props.widthToken, props.width)
-        .replace(props.heightToken, props.height)
-        .replace(props.qualityToken, 15)
+      .replace(props.widthToken, props.width)
+      .replace(props.heightToken, props.height)
+      .replace(props.qualityToken, 15)
     : undefined
 })
+
+
 
 const srcset = computed(() => {
   const template = props.src
@@ -142,9 +149,8 @@ const srcset = computed(() => {
           .replace(props.widthToken, width)
           .replace(props.heightToken, height)
           .replace(props.qualityToken, calcQuality(props.quality, size))
-        srcset += `${url} ${size}x${
-          size < props.sizes.length && !lastImage ? ',' : ''
-        } `
+        srcset += `${url} ${size}x${size < props.sizes.length && !lastImage ? ',' : ''
+          } `
       }
     }
     return srcset
@@ -156,6 +162,18 @@ const srcset = computed(() => {
 onBeforeMount(() => {
   isVertical.value =
     props.allowVerticalEffect && props.maxHeight > props.maxWidth
+})
+
+onMounted(() => {
+  //gets skeleton height of image based on widht and height ratio of the image
+  const thisWidth = refThisImg.value.offsetWidth
+  skeletonHeight.value = (props.height * thisWidth / props.width) + 'px'
+
+  const img = refThisImg.value.getElementsByClassName('prime-img-class')[0]
+  img.onload = () => {
+    isLoaded.value = true
+  }
+  img.src = computedSrc.value
 })
 
 const calcQuality = (quality, size) => {
@@ -176,26 +194,53 @@ const closeEnlarge = () => {
 }
 </script>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <template>
-  <div class="simple-responsive-image-holder">
+  <div ref="refThisImg" class="simple-responsive-image-holder">
     <div v-if="isVertical" class="bg">
-      <img
-        :src="computedSrcBg"
-        :width="width"
-        :height="height"
-        :alt="alt"
-        loading="lazy"
-      />
+      <img :src="computedSrcBg" :width="width" :height="height" :alt="alt" loading="lazy" />
     </div>
+    <Skeleton
+      v-if="!isLoaded"
+      shape="Rectangle"
+      border-radius="0px"
+      width="100%"
+      :height="skeletonHeight"
+    />
     <Image
       class="image"
       :class="isVertical ? 'is-vertical' : ''"
+      image-class="prime-img-class"
       image-style="width: 100%; height: auto;"
       :srcset="srcset"
-      :src="computedSrc"
+      src
       :width="computedWidth"
       :height="height"
-      :style="isVertical ? `width:${computedWidth}px;` : ''"
+      :style="[
+        isVertical ? `width:${computedWidth}px;` : '',
+        isLoaded ? 'visibility:visible; position:relative;' : 'visibility:hidden; position:absolute;',
+      ]"
       :alt="alt"
       :preview="allowPreview"
       loading="lazy"
@@ -205,10 +250,7 @@ const closeEnlarge = () => {
       @keypress="$emit('keypress', $event.target.value)"
     >
       <template #indicator>
-        <Button
-          icon="pi pi-arrows-v"
-          class="p-button-sm enlarge-button"
-        ></Button>
+        <Button icon="pi pi-arrows-v" class="p-button-sm enlarge-button"></Button>
       </template>
     </Image>
     <span v-if="loadingEnlargedImage">
@@ -231,6 +273,31 @@ const closeEnlarge = () => {
   </div>
 </template>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style lang="scss">
 .simple-responsive-image-holder {
   line-height: 0;
@@ -239,6 +306,7 @@ const closeEnlarge = () => {
     position: relative;
     width: 100%;
     height: auto;
+    top: 0;
 
     &.is-vertical {
       margin: auto;
@@ -275,7 +343,7 @@ const closeEnlarge = () => {
     left: 0;
     overflow: hidden;
     &:after {
-      content: '';
+      content: "";
       background-color: RGB(var(--surface-900));
       width: 100%;
       height: 100%;

@@ -5,6 +5,7 @@
 npm i
 
 ## Prime Theme View
+first, rename config file to "vite.config.js" 
 npm run prime-serve
 
 
@@ -12,5 +13,4 @@ npm run prime-serve
 npm run storybook
 
 ## Nuxt instance
-first, rename vite.config.js so it becomes ignored
 npm run dev
