@@ -249,7 +249,7 @@ const closeEnlarge = () => {
       @click="$emit('click', $event.target.value)"
       @keypress="$emit('keypress', $event.target.value)"
     >
-      <template #indicator>
+      <template v-if="allowPreview" #indicator>
         <Button icon="pi pi-arrows-v" class="p-button-sm enlarge-button"></Button>
       </template>
     </Image>
