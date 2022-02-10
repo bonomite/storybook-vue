@@ -249,9 +249,9 @@ const closeEnlarge = () => {
       @click="$emit('click', $event.target.value)"
       @keypress="$emit('keypress', $event.target.value)"
     >
-      <template v-if="allowPreview" #indicator>
+      <!-- <template v-if="allowPreview" #indicator>
         <Button icon="pi pi-arrows-v" class="p-button-sm enlarge-button"></Button>
-      </template>
+      </template>-->
     </Image>
     <span v-if="loadingEnlargedImage">
       <Teleport to=".p-component-overlay">
