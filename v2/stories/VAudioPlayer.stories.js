@@ -1,4 +1,4 @@
-import VAudioPlayerSystem from './VAudioPlayerSystem.vue'
+import VAudioPlayerSystem from '../src/components/VAudioPlayerSystem.vue'
 
 export default {
   title: 'Components-V2/VAudioPlayerSystem',

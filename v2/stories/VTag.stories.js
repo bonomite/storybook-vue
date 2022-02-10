@@ -1,4 +1,4 @@
-import VTag from './VTag.vue'
+import VTag from '../src/components/VTag.vue'
 
 export default {
     title: 'Components-V2/VTag',

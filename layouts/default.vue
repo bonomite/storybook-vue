@@ -8,17 +8,17 @@
       <li>
         <nuxt-link to="/other">Other</nuxt-link>
       </li>
-    </ul> -->
+    </ul>-->
     <!-- <v-audio-player-system persistent always /> -->
     <main>
-      <slot> </slot>
+      <slot></slot>
     </main>
     <div>footer</div>
   </div>
 </template>
 
 <script>
-// import VAudioPlayerSystem from '~/stories/VAudioPlayerSystem'
+// import VAudioPlayerSystem from '~/v1/src/components/VAudioPlayerSystem'
 
 export default {
   name: 'HomePage',
@@ -40,7 +40,7 @@ export default {
     this.handleNewPage()
   },
   methods: {
-    handleNewPage() {},
+    handleNewPage() { },
   },
 }
 </script>

@@ -14,13 +14,13 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import VSimpleResponsiveImage from '../stories/v2/VSimpleResponsiveImage.vue'
+import VSimpleResponsiveImage from '../v2/src/components/VSimpleResponsiveImage.vue'
 
-// import VAudioPlayerSystem from '~/stories/v2/VAudioPlayerSystem'
-// import VTag from '~/stories/v2/VTag'
-// import VSimpleResponsiveImage from '~/stories/v2/VSimpleResponsiveImage'
-// import VButton from '~/stories/v1/src/components/VButton'
-// import VPerson from '~/stories/v1/src/components/VPerson'
+// import VAudioPlayerSystem from '~/v2/src/components/VAudioPlayerSystem'
+// import VTag from '~/v2/src/components/VTag'
+// import VSimpleResponsiveImage from '~/v2/src/components/VSimpleResponsiveImage'
+// import VButton from '~/v1/src/components/src/components/VButton'
+// import VPerson from '~/v1/src/components/src/components/VPerson'
 
 const props = defineProps({})
 

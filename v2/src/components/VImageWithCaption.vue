@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed } from 'vue'
-import GothamistArrow from '../assets-shared/icons/gothamist/GothamistArrow'
+import { ref, computed, onBeforeMount, onMounted } from 'vue'
+import GothamistArrow from '../../../assets-shared/icons/gothamist/GothamistArrow'
 import VSimpleResponsiveImage from './VSimpleResponsiveImage'
 import VFlexibleLink from './VFlexibleLink'
 import Button from 'primevue/button'
@@ -81,9 +81,20 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  /**
+   * desired ratio of the image if responsive
+   */
+  ratio: {
+    type: String,
+    default: "3:2",
+  },
 })
 
 const emit = defineEmits(['componentEvent'])
+
+const refThisImg = ref(null)
+let thisWidth = ref(null)
+let responsive = ref(false)
 
 let captionVisible = ref(false)
 
@@ -99,10 +110,26 @@ const toggleCaption = () => {
     emit('componentEvent', 'Collapsed')
   }
 }
+
+onBeforeMount(() => {
+  if (!props.width) { responsive.value = true }
+})
+onMounted(() => {
+  thisWidth.value = refThisImg.value.offsetWidth
+})
+
+const getCurrentDimensions = computed(() => {
+  const hRatio = Number(props.ratio.charAt(0))
+  const vRatio = Number(props.ratio.charAt(props.ratio.length - 1))
+  console.log('width = ', thisWidth.value)
+  console.log('height = ', thisWidth.value * vRatio / hRatio)
+  return { width: thisWidth.value, height: Math.round(thisWidth.value * vRatio / hRatio) }
+})
+
 </script>
 
 <template>
-  <figure class="image-with-caption" :class="variation">
+  <figure ref="refThisImg" class="image-with-caption" :class="variation">
     <div class="image-with-caption-wrapper">
       <div class="image-with-caption-image">
         <v-flexible-link
@@ -113,11 +140,11 @@ const toggleCaption = () => {
           rel="noopener noreferrer"
         >
           <v-simple-responsive-image
-            v-if="image"
+            v-if="image && thisWidth || width"
             :src="image"
             :alt="altText"
-            :width="width"
-            :height="height"
+            :width="width ? width : getCurrentDimensions.width"
+            :height="height ? height : getCurrentDimensions.height"
             :max-width="maxWidth || Infinity"
             :max-height="maxHeight || Infinity"
             :allow-vertical-effect="allowVerticalEffect"

@@ -1,4 +1,4 @@
-import VFlexibleLink from './VFlexibleLink.vue'
+import VFlexibleLink from '../src/components/VFlexibleLink.vue'
 
 export default {
     title: 'Components-V2/VFlexibleLink',

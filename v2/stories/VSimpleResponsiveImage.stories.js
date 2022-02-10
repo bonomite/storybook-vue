@@ -1,4 +1,4 @@
-import VSimpleResponsiveImage from './VSimpleResponsiveImage.vue'
+import VSimpleResponsiveImage from '../src/components/VSimpleResponsiveImage.vue'
 
 export default {
     title: 'Components-V2/VSimpleResponsiveImage',

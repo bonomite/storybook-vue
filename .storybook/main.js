@@ -1,12 +1,12 @@
 const path = require('path')
 module.exports = {
-  "stories": ["../stories/v2/**/*.stories.mdx", "../stories/v2/**/*.stories.@(js|jsx|ts|tsx)"],
+  "stories": ["../v2/**/*.stories.mdx", "../v2/**/*.stories.@(js|jsx|ts|tsx)"],
   "addons": ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-docs", "@storybook/preset-scss"],
   "framework": "@storybook/vue3",
   core: {
     builder: "webpack5"
   },
-  staticDirs: ['../stories/assets-shared'],
+  staticDirs: ['../assets-shared'],
   webpackFinal: async (config, { configType }) => {
 
     config.module.rules.push({
@@ -22,8 +22,6 @@ module.exports = {
             // additionalData: '@import "./assets/scss/main.scss";',
             //@import "primeflex/primeflex.scss";
             //@import "primevue/resources/themes/lara-light-blue/theme.css";
-            // @import "~/stories/assets-shared/scss/main.scss";
-            // @import "~/stories/assets-shared/scss/variables.module.scss";
           },
         },
       ],

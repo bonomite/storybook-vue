@@ -1,4 +1,4 @@
-import VCard from './VCard.vue'
+import VCard from '../src/components/VCard.vue'
 
 export default {
     title: 'Components-V2/VCard',

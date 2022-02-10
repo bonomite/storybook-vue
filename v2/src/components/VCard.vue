@@ -1,11 +1,11 @@
 <script setup>
 
 import { ref, computed, useSlots, onBeforeMount } from 'vue'
-import breakpoint from '../../src/assets/library/breakpoints.module.scss'
+import breakpoint from '../../../src/assets/library/breakpoints.module.scss'
 import VTag from './VTag'
 import VFlexibleLink from './VFlexibleLink'
 import VSimpleResponsiveImage from './VSimpleResponsiveImage'
-import GalleryIcon from '../assets-shared/icons/GalleryIcon'
+import GalleryIcon from '../../../assets-shared/icons/GalleryIcon'
 
 const props = defineProps({
   alt: {
@@ -107,10 +107,10 @@ const getMobileImageScale = computed(() => {
 })
 
 const getRatio = computed(() => {
-  const verticalImage = props.imageMaxWidth < props.imageMaxHeight
+  const isVerticalImage = props.imageMaxWidth < props.imageMaxHeight
   const hRatio = Number(props.ratio.charAt(0))
   const vRatio = Number(props.ratio.charAt(props.ratio.length - 1))
-  return verticalImage ? vRatio / hRatio : hRatio / vRatio
+  return isVerticalImage ? vRatio / hRatio : hRatio / vRatio
 })
 
 onBeforeMount(() => {

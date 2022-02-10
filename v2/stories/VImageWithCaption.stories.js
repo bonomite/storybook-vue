@@ -1,4 +1,4 @@
-import VImageWithCaption from './VImageWithCaption.vue'
+import VImageWithCaption from '../src/components/VImageWithCaption.vue'
 
 export default {
     title: 'Components-V2/VImageWithCaption',
@@ -95,4 +95,27 @@ CaptionAndEnlarge.args = {
     height: 400,
     allowPreview: true,
     imageUrl: 'https://www.google.com',
+}
+
+export const Responsive = Template.bind({})
+Responsive.args = {
+    // variation: 'gothamist',
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+}
+
+export const ResponsiveCustomRatio = Template.bind({})
+ResponsiveCustomRatio.args = {
+    // variation: 'gothamist',
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+    ratio: '3:1',
 }

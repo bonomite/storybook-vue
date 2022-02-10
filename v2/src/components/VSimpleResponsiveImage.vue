@@ -88,7 +88,7 @@ const emit = defineEmits(['click', 'keypress'])
 let isVertical = ref(false)
 let isLoaded = ref(false)
 let loadingEnlargedImage = ref(false)
-let skeletonHeight = ref('0px')
+let skeletonHeight = ref(null)
 
 const refThisImg = ref(null)
 
@@ -222,7 +222,7 @@ const closeEnlarge = () => {
       <img :src="computedSrcBg" :width="width" :height="height" :alt="alt" loading="lazy" />
     </div>
     <Skeleton
-      v-if="!isLoaded"
+      v-if="!isLoaded && skeletonHeight"
       shape="Rectangle"
       border-radius="0px"
       width="100%"
@@ -249,9 +249,9 @@ const closeEnlarge = () => {
       @click="$emit('click', $event.target.value)"
       @keypress="$emit('keypress', $event.target.value)"
     >
-      <!-- <template v-if="allowPreview" #indicator>
+      <template v-if="allowPreview" #indicator>
         <Button icon="pi pi-arrows-v" class="p-button-sm enlarge-button"></Button>
-      </template>-->
+      </template>
     </Image>
     <span v-if="loadingEnlargedImage">
       <Teleport to=".p-component-overlay">
