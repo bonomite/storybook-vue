@@ -204,7 +204,7 @@ onBeforeMount(() => {
   .card-details {
     align-self: flex-start;
     flex: 1;
-    padding: var(--space-3);
+    padding: spacing(3);
     overflow: hidden;
     .card-tags {
       display: flex;
