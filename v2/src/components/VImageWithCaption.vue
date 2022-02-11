@@ -121,8 +121,6 @@ onMounted(() => {
 const getCurrentDimensions = computed(() => {
   const hRatio = Number(props.ratio.charAt(0))
   const vRatio = Number(props.ratio.charAt(props.ratio.length - 1))
-  console.log('width = ', thisWidth.value)
-  console.log('height = ', thisWidth.value * vRatio / hRatio)
   return { width: thisWidth.value, height: Math.round(thisWidth.value * vRatio / hRatio) }
 })
 
