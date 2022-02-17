@@ -278,7 +278,7 @@ $dangerButtonTextActiveColor: $dangerButtonTextColor !default;
 $dangerButtonActiveBorderColor: scale-color($dangerButtonBg, $lightness: -20%) !default;
 $dangerButtonFocusShadow: 0 0 0 0.2rem scale-color($dangerButtonBg, $lightness: 60%) !default;
 
-$linkButtonColor: $primaryDarkerColor !default;
+$linkButtonColor: $primaryColor !default;
 $linkButtonHoverColor: $primaryDarkerColor !default;
 $linkButtonTextHoverDecoration: underline !default;
 $linkButtonFocusShadow: 0 0 0 0.2rem $focusOutlineColor !default;

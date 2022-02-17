@@ -37,6 +37,15 @@ Default.args = {
     height: 400,
 }
 
+export const NoText = Template.bind({})
+NoText.args = {
+    // variation: 'gothamist',
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    width: 600,
+    height: 400,
+}
+
 export const Caption = Template.bind({})
 Caption.args = {
     // variation: 'gothamist',

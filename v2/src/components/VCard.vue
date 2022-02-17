@@ -5,7 +5,6 @@ import breakpoint from '../../../src/assets/library/breakpoints.module.scss'
 import VTag from './VTag'
 import VFlexibleLink from './VFlexibleLink'
 import VSimpleResponsiveImage from './VSimpleResponsiveImage'
-import GalleryIcon from '../../../assets-shared/icons/GalleryIcon'
 
 const props = defineProps({
   alt: {
@@ -24,9 +23,13 @@ const props = defineProps({
     type: Number,
     default: null,
   },
-  showGalleryIcon: {
-    type: Boolean,
-    default: false,
+  icon: {
+    type: String,
+    default: null,
+  },
+  customIcon: {
+    type: Object,
+    default: null,
   },
   sponsored: {
     type: Boolean,
@@ -168,8 +171,9 @@ onBeforeMount(() => {
           :class="{ 'disabled': !titleLink }"
           :to="titleLink"
         >
-          <h2 v-html="title" />
-          <gallery-icon v-if="showGalleryIcon" title="Gallery" />
+          <h2 v-html="title"></h2>
+          <h2 v-if="icon" :class="`pi pi-${icon}`"></h2>
+          <slot name="customIcon"></slot>
         </v-flexible-link>
       </div>
       <p v-if="subtitle" class="card-subtitle">{{ subtitle }}</p>
@@ -214,22 +218,32 @@ onBeforeMount(() => {
       margin-bottom: spacing(2);
     }
     .card-title-link {
-      display: inline-flex;
+      display: flex;
+      justify-content: space-between;
       text-decoration: none;
       overflow-wrap: anywhere;
       word-break: break-word;
-      .o-gallery-icon {
-        width: 1.5rem;
-        height: auto;
+      .pi {
+        font-size: revert;
         margin-left: spacing(2);
-        margin-bottom: 2px;
-        path {
-          fill: $linkButtonColor;
+        text-decoration: none;
+        &:before {
+          color: $linkButtonColor;
         }
       }
+      // .o-gallery-icon {
+      //   width: 1.5rem;
+      //   height: auto;
+      //   margin-left: spacing(2);
+      //   margin-bottom: 2px;
+      //   path {
+      //     fill: $linkButtonColor;
+      //   }
+      // }
     }
   }
   .card-slot {
+    word-break: break-word;
     margin-top: spacing(5);
   }
 }

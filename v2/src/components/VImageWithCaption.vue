@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onBeforeMount, onMounted } from 'vue'
-import GothamistArrow from '../../../assets-shared/icons/gothamist/GothamistArrow'
+// import GothamistArrow from '../../../assets-shared/icons/gothamist/GothamistArrow'
 import VSimpleResponsiveImage from './VSimpleResponsiveImage'
 import VFlexibleLink from './VFlexibleLink'
 import Button from 'primevue/button'
@@ -135,7 +135,6 @@ const getCurrentDimensions = computed(() => {
           :class="!imageUrl && !allowPreview ? 'disabled' : ''"
           :to="imageUrl && !allowPreview ? imageUrl : null"
           target="_blank"
-          rel="noopener noreferrer"
         >
           <v-simple-responsive-image
             v-if="image && thisWidth || width"
@@ -207,8 +206,17 @@ const getCurrentDimensions = computed(() => {
   }
 }
 
-.image-with-caption .image-with-caption-image-link.disabled {
-  pointer-events: none;
+.image-with-caption .image-with-caption-image-link {
+  .enlarge-button {
+    text-decoration: none !important;
+    span {
+      text-decoration: none !important;
+      color: $white !important;
+    }
+  }
+  &.disabled {
+    pointer-events: none;
+  }
 }
 
 .image-with-caption .image-with-caption-caption {
@@ -286,10 +294,6 @@ const getCurrentDimensions = computed(() => {
   bottom: spacing(2);
   right: spacing(2);
   z-index: 999;
-  .p-button {
-    background-color: $primaryColor + CC;
-    border-color: transparent;
-  }
 }
 
 // keep X white on rollover

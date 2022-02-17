@@ -1,4 +1,5 @@
 import VCard from '../src/components/VCard.vue'
+import GothamistArrow from '../../assets-shared/icons/gothamist/GothamistArrow'
 
 export default {
     title: 'Components-V2/VCard',
@@ -23,6 +24,21 @@ const Template = (args) => ({
     },
     template: '<v-card v-bind="args"></v-card>',
 })
+const TemplateIcons = (args) => ({
+    components: { VCard },
+    setup() {
+        return { args }
+    },
+    template: '<v-card v-bind="args"><a href="https://primefaces.org/primevue/showcase/#/icons">Get icons here</a></v-card>',
+})
+
+const TemplateCustomIcons = (args) => ({
+    components: { VCard },
+    setup() {
+        return { args }
+    },
+    template: '<v-card v-bind="args"><code>&lt;template #customIcon&gt; &lt;gothamist-arrow/&gt; &lt;/template&gt;</code><template #customIcon> <gothamist-arrow/> </template></v-card>',
+})
 
 
 const TemplateWithSlot = (args) => ({
@@ -45,8 +61,8 @@ Default.args = {
     imageMaxHeight: 2560,
 }
 
-export const GalleryIcon = Template.bind({})
-GalleryIcon.args = {
+export const Icon = TemplateIcons.bind({})
+Icon.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
     titleLink: 'https://www.google.com',
@@ -55,7 +71,19 @@ GalleryIcon.args = {
     imageHeight: 175,
     imageMaxWidth: 1440,
     imageMaxHeight: 2560,
-    showGalleryIcon: true,
+    icon: "images"
+}
+
+export const CustomIcon = TemplateCustomIcons.bind({})
+CustomIcon.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    titleLink: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    imageWidth: 175,
+    imageHeight: 175,
+    imageMaxWidth: 1440,
+    imageMaxHeight: 2560,
 }
 
 export const SmallerImageOnPhone = Template.bind({})

@@ -25,7 +25,10 @@ const isExternal = computed(() => {
     v-bind="{ ...$props, ...$attrs }"
     :href="to"
     :target="target"
-    rel="noopener noreferrer"
+    :rel="[
+      'noopener ',
+      props.target === '_blank' ? 'noreferrer' : ''
+    ]"
     class="flexible-link external"
   >
     <slot name="default"></slot>
