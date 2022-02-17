@@ -31,9 +31,15 @@ const props = defineProps({
       <i
         v-if="props.icon === 'comment'"
         class="pi pi-comment"
+        role="img"
         :aria-label="props.value + ' comments'"
       ></i>
-      <i v-if="props.icon === 'gallery'" class="pi pi-images" :aria-label="props.value + ' photos'"></i>
+      <i
+        v-if="props.icon === 'gallery'"
+        class="pi pi-images"
+        role="img"
+        :aria-label="props.value + ' photos'"
+      ></i>
     </span>
     {{ props.value }} {{ props.text }}
   </v-flexible-link>

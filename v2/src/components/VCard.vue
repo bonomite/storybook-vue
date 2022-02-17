@@ -172,7 +172,7 @@ onBeforeMount(() => {
           :to="titleLink"
         >
           <h2 v-html="title"></h2>
-          <h2 v-if="icon" :class="`pi pi-${icon}`"></h2>
+          <i v-if="icon" :class="`pi pi-${icon}`" role="img" :aria-label="icon + ' icon'"></i>
           <slot name="customIcon"></slot>
         </v-flexible-link>
       </div>
@@ -224,8 +224,9 @@ onBeforeMount(() => {
       overflow-wrap: anywhere;
       word-break: break-word;
       .pi {
-        font-size: revert;
+        font-size: 1.278rem;
         margin-left: spacing(2);
+        margin-top: spacing(0.5);
         text-decoration: none;
         &:before {
           color: $linkButtonColor;
