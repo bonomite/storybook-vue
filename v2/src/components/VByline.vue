@@ -10,6 +10,7 @@ const props = defineProps({
     default: 'by '
   }
 })
+console.log('authors - ',props.authors)
 </script>
 
 <template>

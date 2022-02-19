@@ -1,5 +1,4 @@
 import VCard from '../src/components/VCard.vue'
-import GothamistArrow from '../../assets-shared/icons/gothamist/GothamistArrow'
 
 export default {
     title: 'Components-V2/VCard',
@@ -194,5 +193,5 @@ CustomImageRatio.args = {
     imageMaxHeight: 2560,
     responsive: true,
     bp: 'md',
-    ratio: '3:1'
+    ratio: [3, 1]
 }

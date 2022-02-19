@@ -91,8 +91,8 @@ const props = defineProps({
    * ratio (in landscape)
    */
   ratio: {
-    type: String,
-    default: '3:2',
+    type: Array,
+    default: () => [3, 2],
   },
 })
 const slots = useSlots()
@@ -111,8 +111,8 @@ const getMobileImageScale = computed(() => {
 
 const getRatio = computed(() => {
   const isVerticalImage = props.imageMaxWidth < props.imageMaxHeight
-  const hRatio = Number(props.ratio.charAt(0))
-  const vRatio = Number(props.ratio.charAt(props.ratio.length - 1))
+  const hRatio = Number(props.ratio[0])
+  const vRatio = Number(props.ratio[1])
   return isVerticalImage ? vRatio / hRatio : hRatio / vRatio
 })
 
@@ -208,7 +208,7 @@ onBeforeMount(() => {
   .card-details {
     align-self: flex-start;
     flex: 1;
-    padding: spacing(3);
+    padding: spacing(3) spacing(6) spacing(6) spacing(3);
     overflow: hidden;
     .card-tags {
       display: flex;

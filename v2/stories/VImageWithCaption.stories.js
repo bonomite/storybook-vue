@@ -126,5 +126,5 @@ ResponsiveCustomRatio.args = {
     creditUrl: 'https://www.Credit-URL-Here.com',
     title: 'Title Text Here',
     description: 'Description Text Here',
-    ratio: '3:1',
+    ratio: [3, 1],
 }

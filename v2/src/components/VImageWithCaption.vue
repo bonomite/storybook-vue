@@ -85,8 +85,8 @@ const props = defineProps({
    * desired ratio of the image if responsive
    */
   ratio: {
-    type: String,
-    default: "3:2",
+    type: Array,
+    default: () => [3, 2],
   },
 })
 
@@ -119,8 +119,8 @@ onMounted(() => {
 })
 
 const getCurrentDimensions = computed(() => {
-  const hRatio = Number(props.ratio.charAt(0))
-  const vRatio = Number(props.ratio.charAt(props.ratio.length - 1))
+  const hRatio = Number(props.ratio[0])
+  const vRatio = Number(props.ratio[1])
   return { width: thisWidth.value, height: Math.round(thisWidth.value * vRatio / hRatio) }
 })
 
