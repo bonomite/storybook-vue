@@ -1,6 +1,32 @@
 <script setup>
 import { computed, defineAsyncComponent } from 'vue'
 
+// import Email from '../../../assets-shared/icons/EmailIcon'
+// import Phone from '../../../assets-shared/icons/PhoneIcon'
+// import Facebook from '../../../assets-shared/icons/FacebookIcon'
+// import Instagram from '../../../assets-shared/icons/InstagramIcon'
+// import Linkedin from '../../../assets-shared/icons/LinkedinIcon'
+
+// import Newsletter from '../../../assets-shared/icons/EmailIcon'
+// import Reddit from '../../../assets-shared/icons/RedditIcon'
+// import Spotify from '../../../assets-shared/icons/SpotifyIcon'
+// import Twitter from '../../../assets-shared/icons/TwitterIcon'
+// import Youtube from '../../../assets-shared/icons/YoutubeIcon'
+
+const icons = {
+  email: "EmailIcon",
+  phone: "PhoneIcon",
+  facebook: "FacebookIcon",
+  instagram: "InstagramIcon",
+  linkedin: "LinkedinIcon",
+  newsletter: "EmailIcon",
+  reddit: "RedditIcon",
+  spotify: "SpotifyIcon",
+  twitter: "TwitterIcon",
+  youtube: "YoutubeIcon",
+}
+
+
 const URL_PLACEHOLDER_PATTERN = new RegExp('%URL%', 'g')
 const SOCIAL_SERVICE_MAP = {
   spotify: {
@@ -76,7 +102,7 @@ const props = defineProps({
   }
 })
 
-const getServiceComponent = computed(() => defineAsyncComponent(() => import("../../../assets-shared/icons/" + props.service + ".vue")))
+const getServiceComponent = computed(() => defineAsyncComponent(() => import("../../../assets-shared/icons/" + icons[props.service] + ".vue")))
 
 const socialLink = computed(() => {
   return SOCIAL_SERVICE_MAP[props.service]?.profileBase + props.username || ''

@@ -27,6 +27,9 @@ const Template = (args) => ({
             <v-share-tools-item service="facebook" username="WNYC" />
             <v-share-tools-item service="twitter" username="WNYC" />
             <v-share-tools-item service="instagram" username="WNYC" />
+            <v-share-tools-item service="linkedin" username="WNYC" />
+            <v-share-tools-item service="reddit" username="WNYC" />
+            <v-share-tools-item service="spotify" username="WNYC" />
             <v-share-tools-item service="youtube" username="UCbysmY4hyViQAAYEzOR-uCQ" />
             <v-share-tools-item service="phone" link="tel:19731231234" />
             <v-share-tools-item service="email" link="mailto:sample@gmail.com" />
@@ -52,6 +55,11 @@ const TemplateShare = (args) => ({
 
 export const Default = Template.bind({})
 Default.args = {
+
+}
+
+export const DefaultWithLabel = Template.bind({})
+DefaultWithLabel.args = {
     label: 'Connect'
 }
 
