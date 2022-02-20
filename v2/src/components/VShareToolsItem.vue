@@ -1,38 +1,5 @@
-<template>
-  <a
-    v-if="action === 'follow'"
-    :href="username ? socialLink : link"
-    class="c-share-tools__link o-icon"
-    :class="service"
-    :aria-label="ariaLabel"
-    target="_blank"
-    rel="noopener noreferrer"
-    :title="username ? socialLink : link"
-    @click="$emit('follow', service)"
-  >
-    <component :is="service" v-if="service !== 'site'" />
-    <span v-else>{{ label }}</span>
-  </a>
-
-  <button v-else-if="action === 'share'" class="share-tools-button" @click="share">
-    <component :is="service" />
-  </button>
-</template>
-
-<script>
-
-import Email from '../../../assets-shared/icons/EmailIcon'
-import Phone from '../../../assets-shared/icons/PhoneIcon'
-import Facebook from '../../../assets-shared/icons/FacebookIcon'
-import Instagram from '../../../assets-shared/icons/InstagramIcon'
-import Linkedin from '../../../assets-shared/icons/LinkedinIcon'
-
-import Newsletter from '../../../assets-shared/icons/EmailIcon'
-import Reddit from '../../../assets-shared/icons/RedditIcon'
-import Spotify from '../../../assets-shared/icons/SpotifyIcon'
-import Twitter from '../../../assets-shared/icons/TwitterIcon'
-import Youtube from '../../../assets-shared/icons/YoutubeIcon'
-//import VButton from './VButton'
+<script setup>
+import { computed, defineAsyncComponent } from 'vue'
 
 const URL_PLACEHOLDER_PATTERN = new RegExp('%URL%', 'g')
 const SOCIAL_SERVICE_MAP = {
@@ -74,215 +41,210 @@ const SOCIAL_SERVICE_MAP = {
   }
 }
 
-export default {
-  name: 'ShareToolsLink',
-  components: {
-    Email,
-    Phone,
-    Facebook,
-    Instagram,
-    Linkedin,
-    Newsletter,
-    Reddit,
-    Spotify,
-    Twitter,
-    Youtube
-    //VButton
+const props = defineProps({
+  action: {
+    type: String,
+    default: 'follow'
   },
-  props: {
-    action: {
-      type: String,
-      default: 'follow'
-    },
-    service: {
-      type: String,
-      default: ''
-    },
-    username: {
-      type: String,
-      default: null
-    },
-    label: {
-      type: String,
-      default: null
-    },
-    link: {
-      type: String,
-      default: null
-    },
-    url: {
-      type: String,
-      default: null
-    },
-    shareParameters: {
-      type: Object,
-      default: () => ({})
-    },
-    utmParameters: {
-      type: Object,
-      default: () => ({})
-    }
+  service: {
+    type: String,
+    default: ''
   },
-  computed: {
-    socialLink() {
-      return SOCIAL_SERVICE_MAP[this.service]?.profileBase + this.username || ''
-    },
-    shareBase() {
-      return SOCIAL_SERVICE_MAP[this.service]?.shareBase || ''
-    },
-    shareUrl() {
-      const utmParams = Object.entries(this.utmParameters).map(
-        ([key, value]) => {
-          return 'utm_' + key + '=' + encodeURIComponent(value)
-        }
-      )
-      let url = this.url
-      if (utmParams.length > 0) {
-        url = url + '?' + utmParams.join('&')
-      }
-
-      const shareParams = Object.entries(this.shareParameters).map(
-        ([key, value]) => {
-          return (
-            key +
-            '=' +
-            encodeURIComponent(value.replace(URL_PLACEHOLDER_PATTERN, url))
-          )
-        }
-      )
-
-      let params = shareParams
-
-      const shouldOmitUrl = SOCIAL_SERVICE_MAP[this.service]?.omitUrl
-      if (!shouldOmitUrl) {
-        const urlKey = SOCIAL_SERVICE_MAP[this.service]?.urlKey || 'url'
-        const urlParam = urlKey + '=' + encodeURIComponent(url)
-        params = [urlParam, ...params]
-      }
-
-      return this.shareBase + '?' + params.join('&')
-    },
-    ariaLabel() {
-      if (this.label) {
-        return this.label
-      } else if (this.action === 'follow') {
-        return 'Follow us on ' + this.service
-      } else if (this.action === 'share') {
-        return 'Share on ' + this.service
-      }
-      return ''
-    }
+  username: {
+    type: String,
+    default: null
   },
-  methods: {
-    share() {
-      if (!this.service) {
-        return
-      }
+  label: {
+    type: String,
+    default: null
+  },
+  link: {
+    type: String,
+    default: null
+  },
+  url: {
+    type: String,
+    default: null
+  },
+  shareParameters: {
+    type: Object,
+    default: () => ({})
+  },
+  utmParameters: {
+    type: Object,
+    default: () => ({})
+  }
+})
 
-      this.$emit('share', this.service)
+const getServiceComponent = computed(() => defineAsyncComponent(() => import("../../../assets-shared/icons/" + props.service + ".vue")))
 
-      // get the position of the popup window   
-      function getPopupPosition() {
-        const screenLeft = screen.availLeft
-        const screenTop = screen.availTop
-
-        const windowWidth = screen.availWidth
-        const windowheight = screen.availHeight
-
-        const left = windowWidth / 2 - 600 / 2 + screenLeft
-        const top = windowheight / 2 - 600 / 2 + screenTop
-
-        return { left: left, top: top }
-      }
-
-      // get the position of the window
-      const windowString = ({ top, left }) =>
-        `location=no,toolbar=no,menubar=no,scrollbars=no,status=no,width=550,height=600,top=${top},left=${left}`
-      const popupPosition = getPopupPosition()
-      const newWindow = window.open(
-        this.shareUrl,
-        'share window',
-        windowString(popupPosition)
-      )
-
-      // make sure it actually opened and bring it to the front
-      if (
-        typeof newWindow !== 'undefined' &&
-        newWindow !== null &&
-        newWindow.focus
-      ) {
-        newWindow.focus()
-      }
+const socialLink = computed(() => {
+  return SOCIAL_SERVICE_MAP[props.service]?.profileBase + props.username || ''
+})
+const shareBase = computed(() => {
+  return SOCIAL_SERVICE_MAP[props.service]?.shareBase || ''
+})
+const shareUrl = computed(() => {
+  const utmParams = Object.entries(props.utmParameters).map(
+    ([key, value]) => {
+      return 'utm_' + key + '=' + encodeURIComponent(value)
     }
+  )
+  let url = props.url
+  if (utmParams.length > 0) {
+    url = url + '?' + utmParams.join('&')
+  }
+
+  const shareParams = Object.entries(props.shareParameters).map(
+    ([key, value]) => {
+      return (
+        key +
+        '=' +
+        encodeURIComponent(value.replace(URL_PLACEHOLDER_PATTERN, url))
+      )
+    }
+  )
+
+  let params = shareParams
+
+  const shouldOmitUrl = SOCIAL_SERVICE_MAP[props.service]?.omitUrl
+  if (!shouldOmitUrl) {
+    const urlKey = SOCIAL_SERVICE_MAP[props.service]?.urlKey || 'url'
+    const urlParam = urlKey + '=' + encodeURIComponent(url)
+    params = [urlParam, ...params]
+  }
+
+  return shareBase.value + '?' + params.join('&')
+})
+const ariaLabel = computed(() => {
+  if (props.label) {
+    return props.label
+  } else if (props.action === 'follow') {
+    return 'Follow us on ' + props.service
+  } else if (props.action === 'share') {
+    return 'Share on ' + props.service
+  }
+  return ''
+})
+
+const share = () => {
+  if (!props.service) {
+    return
+  }
+
+  this.$emit('share', props.service)
+
+  // get the position of the popup window   
+  function getPopupPosition() {
+    const screenLeft = screen.availLeft
+    const screenTop = screen.availTop
+
+    const windowWidth = screen.availWidth
+    const windowheight = screen.availHeight
+
+    const left = windowWidth / 2 - 600 / 2 + screenLeft
+    const top = windowheight / 2 - 600 / 2 + screenTop
+
+    return { left: left, top: top }
+  }
+
+  // get the position of the window
+  const windowString = ({ top, left }) =>
+    `location=no,toolbar=no,menubar=no,scrollbars=no,status=no,width=550,height=600,top=${top},left=${left}`
+  const popupPosition = getPopupPosition()
+  const newWindow = window.open(
+    shareUrl,
+    'share window',
+    windowString(popupPosition)
+  )
+
+  // make sure it actually opened and bring it to the front
+  if (
+    typeof newWindow !== 'undefined' &&
+    newWindow !== null &&
+    newWindow.focus
+  ) {
+    newWindow.focus()
   }
 }
+
+
 </script>
 
-<style
-  lang="scss"
->
-.share-tools-button,
-.c-share-tools__link {
-  width: 30px;
-  height: 30px;
-  padding: 5px;
-  margin: 0 4px;
+<template>
+  <a
+    v-if="action === 'follow'"
+    :href="username ? socialLink : link"
+    class="follow-link"
+    :class="service"
+    :aria-label="ariaLabel"
+    :target="service !== 'phone' ? '_blank' : '_self'"
+    rel="noopener noreferrer"
+    :title="username ? socialLink : link"
+    @click="$emit('follow', service)"
+  >
+    <component :is="getServiceComponent" v-if="service !== 'site'" />
+    <span v-else>{{ label }}</span>
+  </a>
 
-  @include media(">small") {
-    width: 40px;
+  <button v-else-if="action === 'share'" class="share-button" @click="share">
+    <component :is="getServiceComponent" />
+  </button>
+</template>
+
+
+
+<style lang="scss" >
+.share-button,
+.follow-link,
+.follow-link svg,
+.share-button svg {
+  width: 24px;
+  height: 24px;
+
+  @include media("<small") {
+    width: 30px;
+    height: 30px;
   }
 }
 
-.share-tools-button svg > *,
-.c-share-tools__link svg > * {
-  transition: var(--animation-easing-standard)
-    var(--animation-duration-standard);
+.share-button svg > *,
+.follow-link svg > *,
+.follow-link {
+  color: $textColor;
+  fill: $textColor;
+  transition: $transitionEase $transitionDuration;
 }
 
-.c-share-tools__link:hover {
-  cursor: pointer;
-}
-
-.share-tools-button:hover svg > *,
-.c-share-tools__link:hover svg > * {
-  fill: RGB(var(--color-primary-2)) !important;
-}
-
-.c-share-tools__link.phone svg {
-  padding: 1px;
-  margin: auto;
-  position: relative;
-  display: block;
-}
-.c-share-tools__link.site {
-  color: var(--color-text);
-  width: auto;
-  display: grid;
-  align-content: center;
-  font-size: var(--font-size-3);
-  font-weight: var(--font-weight-subheader);
-  line-height: var(--line-height-1);
-  transition: var(--animation-easing-standard)
-    var(--animation-duration-standard);
+.follow-link,
+.share-button {
   &:hover {
-    color: RGB(var(--color-primary-2));
+    cursor: pointer;
+    svg > * {
+      fill: $primaryColor !important;
+    }
+    color: $primaryColor !important;
+  }
+}
+.follow-link.phone svg {
+  padding: 2px;
+}
+.follow-link.site {
+  width: auto;
+  &:hover {
+    color: $primaryColor;
     text-decoration: underline;
   }
-  @include media(">small") {
-    font-size: var(--font-size-4);
-  }
 }
 
-.share-tools-button > *,
-.c-share-tools__link > * {
+.share-button > *,
+.follow-link > * {
   pointer-events: none;
 }
 
-.share-tools-button {
-  display: inline-block;
+.share-button {
   border: none;
   border-radius: 0;
   background: none;
-  cursor: pointer;
 }
 </style>

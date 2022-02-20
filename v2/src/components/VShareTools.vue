@@ -1,107 +1,52 @@
+<script setup>
+const props = defineProps({
+  label: {
+    type: String,
+    default: null
+  },
+  responsive: {
+    type: Boolean,
+    default: false
+  },
+  vertical: {
+    type: Boolean,
+    default: false
+  }
+})
+</script>
+
 <template>
-  <div class="c-share-tools">
-    <span
-      v-if="label"
-      class="c-share-tools__label u-font--secondary-style u-font--xs u-color--white"
-    >{{ label }}</span>
-    <div class="c-share-tools__group">
+  <div
+    class="v-share-tools"
+    :class="[{ 'responsive': props.responsive }, { 'vertical': props.vertical }]"
+  >
+    <div class="group">
+      <p v-if="props.label" class="label">{{ props.label }}</p>
       <slot />
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'ShareTools',
-  props: {
-    label: {
-      type: String,
-      default: null
-    }
-  }
-}
-</script>
-
 <style lang="scss">
-.c-share-tools {
-  display: flex;
-  align-items: center;
-
-  @include media("<=large") {
+.v-share-tools {
+  .group {
+    display: flex;
+    align-items: center;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: spacing(4);
   }
-
-  &.mod-vertical {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-.c-share-tools .c-share-tools__link:hover path {
-  //fill: (var(--color-text, --opacity-hover));
-  fill: $primaryTextColor;
-}
-
-@include media("<=large") {
-  .c-share-tools__label {
-    flex-basis: 100%;
-    margin: 0 0 2px 0;
-
-    + .c-share-tools__group > .c-share-tools__link:first-of-type {
-      margin-left: -14px;
-      @include media("<=small") {
-        margin-left: -10px;
+  &.responsive {
+    @include media("<small") {
+      .label {
+        width: 100%;
       }
     }
   }
-
-  .share-tools-button,
-  .c-share-tools__link {
-    margin: 0;
-  }
-
-  .c-share-tools__group > * + * {
-    margin: 0 0 0 spacing(1);
-  }
-}
-
-.c-share-tools .c-share-tools__label {
-  margin-right: spacing(2);
-}
-
-.c-share-tools.mod-vertical .c-share-tools__label {
-  margin-bottom: spacing(1);
-  + .c-share-tools__group > .share-tools-button:first-of-type,
-  + .c-share-tools__group > .c-share-tools__link:first-of-type {
-    margin-left: -14px; /* align first icon with label if present*/
-    @include media("<=small") {
-      margin-left: -10px;
+  &.vertical {
+    .group {
+      flex-direction: column;
     }
   }
-}
-
-.c-share-tools__group {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.c-share-tools.mod-vertical .c-share-tools__group {
-  flex-direction: column;
-}
-
-.c-share-tools.mod-vertical .c-share-tools__group .share-tools-button,
-.c-share-tools.mod-vertical .c-share-tools__group .c-share-tools__link {
-  margin-bottom: spacing(2);
-}
-
-.c-share-tools.mod-vertical
-  .c-share-tools__group
-  .share-tools-button:last-of-type,
-.c-share-tools.mod-vertical
-  .c-share-tools__group
-  .c-share-tools__link:last-of-type {
-  margin-bottom: 0;
 }
 </style>

@@ -23,18 +23,53 @@ const Template = (args) => ({
         return { args }
     },
     template: `
-        <v-share-tools label="Connect">
+        <v-share-tools v-bind="args">
             <v-share-tools-item service="facebook" username="WNYC" />
             <v-share-tools-item service="twitter" username="WNYC" />
             <v-share-tools-item service="instagram" username="WNYC" />
             <v-share-tools-item service="youtube" username="UCbysmY4hyViQAAYEzOR-uCQ" />
+            <v-share-tools-item service="phone" link="tel:19731231234" />
+            <v-share-tools-item service="email" link="mailto:sample@gmail.com" />
+            <v-share-tools-item service="site" label="google.com" link="https://www.google.com" />
+        </v-share-tools>
+    `,
+})
+
+const TemplateShare = (args) => ({
+    components: { VShareTools, VShareToolsItem },
+    setup() {
+        return { args }
+    },
+    template: `
+        <v-share-tools v-bind="args">
+            <v-share-tools-item service="facebook" username="WNYC" action="share"/>
+            <v-share-tools-item service="twitter" username="WNYC" action="share"/>
+            <v-share-tools-item service="instagram" username="WNYC" action="share"/>
+            <v-share-tools-item service="youtube" username="UCbysmY4hyViQAAYEzOR-uCQ" action="share"/>
         </v-share-tools>
     `,
 })
 
 export const Default = Template.bind({})
 Default.args = {
-    url: 'https://player.vimeo.com/video/90283590'
+    label: 'Connect'
+}
+
+export const Share = TemplateShare.bind({})
+Share.args = {
+    label: 'Share'
+}
+
+export const DefaultResponsive = Template.bind({})
+DefaultResponsive.args = {
+    label: 'Connect',
+    responsive: true,
+}
+
+export const DefaultVertical = Template.bind({})
+DefaultVertical.args = {
+    label: 'Connect',
+    vertical: true,
 }
 
 
