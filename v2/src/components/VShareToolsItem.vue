@@ -1,18 +1,6 @@
 <script setup>
 import { computed, defineAsyncComponent } from 'vue'
 
-// import Email from '../../../assets-shared/icons/EmailIcon'
-// import Phone from '../../../assets-shared/icons/PhoneIcon'
-// import Facebook from '../../../assets-shared/icons/FacebookIcon'
-// import Instagram from '../../../assets-shared/icons/InstagramIcon'
-// import Linkedin from '../../../assets-shared/icons/LinkedinIcon'
-
-// import Newsletter from '../../../assets-shared/icons/EmailIcon'
-// import Reddit from '../../../assets-shared/icons/RedditIcon'
-// import Spotify from '../../../assets-shared/icons/SpotifyIcon'
-// import Twitter from '../../../assets-shared/icons/TwitterIcon'
-// import Youtube from '../../../assets-shared/icons/YoutubeIcon'
-
 const icons = {
   email: "EmailIcon",
   phone: "PhoneIcon",
