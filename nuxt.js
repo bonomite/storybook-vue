@@ -7,6 +7,7 @@ export default defineNuxtModule({
       // Add ./components dir to the list
       dirs.push({
         path: join(__dirname, 'v2/src/components'),
+        prefix: 'v2'
       })
       dirs.push({
         path: join(__dirname, 'v1/src/components'),
