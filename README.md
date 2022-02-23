@@ -1,6 +1,5 @@
 # NODE version 14.7.0 
 
-
 ## Installation
 npm i
 
@@ -14,3 +13,11 @@ npm run storybook
 
 ## Nuxt instance
 npm run dev
+
+
+## Themes location
+src/assets/themes/
+
+## global scss location
+src/assets/library/
+
