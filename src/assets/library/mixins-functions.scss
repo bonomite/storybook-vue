@@ -1,5 +1,3 @@
-@use "sass:map";
-
 // v1 legacy support
 @mixin typeface($type, $size) {
   font-family: var(--font-family-#{$type});
@@ -49,7 +47,7 @@ $spacing-base: 0.25; //  matches prime-flex
 
 @function strip-unit($number) {
   @if type-of($number) == "number" and not unitless($number) {
-    @return $number / ($number * 0 + 1);
+    @return math.div($number, $number * 0 + 1);
   }
   @return $number;
 }
