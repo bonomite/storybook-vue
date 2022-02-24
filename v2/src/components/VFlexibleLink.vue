@@ -4,7 +4,7 @@ import { computed } from 'vue'
 const props = defineProps({
   to: {
     type: [String, Object],
-    default: '',
+    default: null,
   },
   target: {
     type: String,
@@ -20,8 +20,9 @@ const isExternal = computed(() => {
 </script>
 
 <template>
+  <slot v-if="!to" name="default"></slot>
   <a
-    v-if="isExternal"
+    v-else-if="isExternal"
     v-bind="{ ...$props, ...$attrs }"
     :href="to"
     :target="target"
