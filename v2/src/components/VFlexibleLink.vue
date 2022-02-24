@@ -20,7 +20,7 @@ const isExternal = computed(() => {
 </script>
 
 <template>
-  <div v-if="!to" class="null" v-bind="{ ...$props, ...$attrs }">
+  <div v-if="!to" class="flexible-link null" v-bind="{ ...$props, ...$attrs }">
     <slot name="default"></slot>
   </div>
   <a

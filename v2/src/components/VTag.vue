@@ -32,7 +32,7 @@ const props = defineProps({
 
 <style lang="scss">
 .p-tag-holder {
-  a {
+  .flexible-link {
     text-decoration: none !important;
     display: inline-flex;
     &.disabled {
