@@ -4,7 +4,6 @@ import GothamistArrow from '../../../assets-shared/icons/gothamist/GothamistArro
 import VSimpleResponsiveImage from './VSimpleResponsiveImage'
 import VFlexibleLink from './VFlexibleLink'
 import Button from 'primevue/button'
-import breakpoint from '../../../src/assets/library/breakpoints.module.scss'
 
 const props = defineProps({
   altText: {
@@ -123,10 +122,8 @@ onBeforeMount(() => {
   if (!props.width) { responsive.value = true }
 })
 onMounted(() => {
-  console.log('refThisImg.value.offsetWidth = ', refThisImg.value.offsetWidth)
-  console.log('breakpoint.md = ', breakpoint.md)
+  // if it gets a width of refThisImg, it will use it, otherwise, it will use the browsers width as the default, unless if it specifically overwritten by the defaultWidth prop
   thisWidth.value = refThisImg.value.offsetWidth != 0 ? refThisImg.value.offsetWidth : props.defaultWidth ? props.defaultWidth : window.innerWidth
-  //thisWidth.value = 640
 })
 
 const getCurrentDimensions = computed(() => {
