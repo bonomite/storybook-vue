@@ -34,7 +34,7 @@ const isExternal = computed(() => {
   >
     <slot name="default"></slot>
   </a>
-  <nuxt-link v-else class="flexible-link external" v-bind="{ ...$props, ...$attrs }">
+  <nuxt-link v-else class="flexible-link internal" v-bind="{ ...$props, ...$attrs }">
     <slot name="default"></slot>
   </nuxt-link>
 </template>

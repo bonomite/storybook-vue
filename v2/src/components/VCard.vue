@@ -15,11 +15,11 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  imageHeight: {
+  height: {
     type: Number,
     default: null,
   },
-  imageWidth: {
+  width: {
     type: Number,
     default: null,
   },
@@ -51,11 +51,11 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  imageMaxHeight: {
+  maxHeight: {
     type: Number,
     default: Infinity,
   },
-  imageMaxWidth: {
+  maxWidth: {
     type: Number,
     default: Infinity,
   },
@@ -126,8 +126,8 @@ const getMobileImageScale = computed(() => {
           :image="image"
           :alt-text="title"
           :image-url="titleLink"
-          :max-width="imageMaxWidth"
-          :max-height="imageMaxHeight"
+          :max-width="maxWidth"
+          :max-height="maxHeight"
           :allow-vertical-effect="allowVerticalEffect"
           :ratio="ratio"
           role="presentation"
@@ -137,8 +137,8 @@ const getMobileImageScale = computed(() => {
           class="card-image w-full"
           :class="{ [`hidden ${bp}:w-max ${bp}:block`]: responsive }"
           :image="image"
-          :width="Math.round(imageWidth * getMobileImageScale)"
-          :height="Math.round(imageHeight * getMobileImageScale)"
+          :width="Math.round(width * getMobileImageScale)"
+          :height="Math.round(height * getMobileImageScale)"
           :alt-text="title"
           role="presentation"
           :image-url="titleLink"

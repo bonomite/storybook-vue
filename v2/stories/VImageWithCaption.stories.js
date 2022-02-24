@@ -90,6 +90,21 @@ ImageIsLink.args = {
     imageUrl: 'https://www.google.com',
 }
 
+export const ImageIsRoute = Template.bind({})
+ImageIsRoute.args = {
+    // variation: 'gothamist',
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+    width: 600,
+    height: 400,
+    allowPreview: false,
+    imageUrl: 'news',
+}
+
 export const CaptionAndEnlarge = Template.bind({})
 CaptionAndEnlarge.args = {
     // variation: 'gothamist',
@@ -127,4 +142,18 @@ ResponsiveCustomRatio.args = {
     title: 'Title Text Here',
     description: 'Description Text Here',
     ratio: [3, 1],
+}
+
+export const ResponsiveVerticalEffect = Template.bind({})
+ResponsiveVerticalEffect.args = {
+    // variation: 'gothamist',
+    altText: 'Fallback alt text here',
+    image: 'https://cms.demo.nypr.digital/images/212136/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+    maxWidth: 1440,
+    maxHeight: 2560,
+    allowVerticalEffect: true
 }
