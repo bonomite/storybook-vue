@@ -12,7 +12,7 @@ $large: 992px;
 $xlarge: 1200px;
 $xxlarge: 1366px;
 $xxxlarge: 1920px;
-$full: 7680px;
+$max: 7680px;
 
 $breakpoints: (
     "phone": $xsmall,
@@ -25,7 +25,7 @@ $breakpoints: (
     "xlarge": $xlarge,
     "xxlarge": $xxlarge,
     "xxxlarge": $xxxlarge,
-    "full": $full,
+    "max": $max,
 );
 
 //colors
