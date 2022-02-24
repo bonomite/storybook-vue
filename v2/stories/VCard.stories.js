@@ -222,7 +222,7 @@ ResponsiveAlways.args = {
     imageMaxWidth: 1440,
     imageMaxHeight: 2560,
     responsive: true,
-    bp: 'full',
+    bp: 'max',
 }
 
 export const CustomImageRatio = Template.bind({})
