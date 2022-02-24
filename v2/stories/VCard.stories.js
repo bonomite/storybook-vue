@@ -58,7 +58,7 @@ Default.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
 }
 
 export const Icon = TemplateIcons.bind({})
@@ -70,7 +70,7 @@ Icon.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
     icon: "images"
 }
 
@@ -83,7 +83,7 @@ CustomIcon.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
 }
 
 export const SmallerImageOnPhone = Template.bind({})
@@ -95,7 +95,7 @@ SmallerImageOnPhone.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
     mobileImageScale: 0.65,
 }
 
@@ -108,7 +108,7 @@ SmallerImageCustomBreapoint.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
     mobileImageScale: 0.65,
     bp: "lg"
 }
@@ -122,7 +122,7 @@ VerticalImageEffect.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
     allowVerticalEffect: true,
     responsive: true,
 }
@@ -136,7 +136,7 @@ Tags.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
     tags: [{ 'name': 'news', 'slug': 'news' }, { 'name': 'food', 'food': '' }],
 }
 
@@ -150,7 +150,7 @@ TagsSponsored.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
     tags: [{ 'name': 'news', 'slug': 'news' }, { 'name': 'food', 'food': '' }],
     sponsored: true,
 }
@@ -164,7 +164,7 @@ DefaultWithSlotContent.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
     tags: [{ 'name': 'news', 'slug': 'news' }, { 'name': 'food', 'food': '' }],
     sponsored: true,
 }
@@ -178,7 +178,7 @@ ResponsiveWithSlotContent.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
     tags: [{ 'name': 'news', 'slug': 'news' }, { 'name': 'food', 'food': '' }],
     sponsored: true,
     responsive: true,
@@ -193,7 +193,7 @@ ResponsiveDefaultAtSM.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
     responsive: true,
 }
 
@@ -206,7 +206,7 @@ ResponsiveAtMdBreakpoint.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
     responsive: true,
     bp: 'md',
 }
@@ -220,7 +220,7 @@ ResponsiveAlways.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
     responsive: true,
     bp: 'max',
 }
@@ -234,7 +234,7 @@ CustomImageRatio.args = {
     width: 175,
     height: 175,
     maxWidth: 1440,
-    height: 2560,
+    maxHeight: 2560,
     responsive: true,
     bp: 'md',
     ratio: [3, 1]
