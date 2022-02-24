@@ -1,4 +1,5 @@
 import VCard from '../src/components/VCard.vue'
+import GothamistArrow from '../../assets-shared/icons/gothamist/GothamistArrow.vue'
 
 export default {
     title: 'Components-V2/VCard',
@@ -32,7 +33,7 @@ const TemplateIcons = (args) => ({
 })
 
 const TemplateCustomIcons = (args) => ({
-    components: { VCard },
+    components: { VCard, GothamistArrow },
     setup() {
         return { args }
     },
@@ -95,7 +96,21 @@ SmallerImageOnPhone.args = {
     imageHeight: 175,
     imageMaxWidth: 1440,
     imageMaxHeight: 2560,
-    mobileImageScale: 0.5,
+    mobileImageScale: 0.65,
+}
+
+export const SmallerImageCustomBreapoint = Template.bind({})
+SmallerImageCustomBreapoint.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    titleLink: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    imageWidth: 175,
+    imageHeight: 175,
+    imageMaxWidth: 1440,
+    imageMaxHeight: 2560,
+    mobileImageScale: 0.65,
+    bp: "lg"
 }
 
 export const VerticalImageEffect = Template.bind({})
@@ -152,6 +167,21 @@ DefaultWithSlotContent.args = {
     imageMaxHeight: 2560,
     tags: [{ 'name': 'news', 'slug': 'news' }, { 'name': 'food', 'food': '' }],
     sponsored: true,
+}
+
+export const ResponsiveWithSlotContent = TemplateWithSlot.bind({})
+ResponsiveWithSlotContent.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    titleLink: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    imageWidth: 175,
+    imageHeight: 175,
+    imageMaxWidth: 1440,
+    imageMaxHeight: 2560,
+    tags: [{ 'name': 'news', 'slug': 'news' }, { 'name': 'food', 'food': '' }],
+    sponsored: true,
+    responsive: true,
 }
 
 export const ResponsiveDefaultAtSM = Template.bind({})

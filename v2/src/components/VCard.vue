@@ -1,10 +1,10 @@
 <script setup>
 
-import { ref, computed, useSlots, onBeforeMount } from 'vue'
+import { ref, computed, useSlots, onBeforeMount, onMounted } from 'vue'
 import breakpoint from '../../../src/assets/library/breakpoints.module.scss'
 import VTag from './VTag'
 import VFlexibleLink from './VFlexibleLink'
-import VSimpleResponsiveImage from './VSimpleResponsiveImage'
+import VImageWithCaption from './VImageWithCaption'
 
 const props = defineProps({
   alt: {
@@ -97,8 +97,6 @@ const props = defineProps({
 })
 const slots = useSlots()
 
-let currentWidth = ref(null)
-
 const emit = defineEmits(['componentEvent'])
 
 const hasDetails = computed(() => {
@@ -106,59 +104,51 @@ const hasDetails = computed(() => {
 })
 
 const getMobileImageScale = computed(() => {
-  return currentWidth.value < breakpoint.sm ? props.mobileImageScale : 1
+  // console.log('window.innerWidth = ', window.innerWidth)
+  // console.log('breakpoint[props.bp] = ', breakpoint[props.bp])
+  return window.innerWidth < breakpoint[props.bp] ? props.mobileImageScale : 1
 })
 
-const getRatio = computed(() => {
-  const isVerticalImage = props.imageMaxWidth < props.imageMaxHeight
-  const hRatio = Number(props.ratio[0])
-  const vRatio = Number(props.ratio[1])
-  return isVerticalImage ? vRatio / hRatio : hRatio / vRatio
+const getResponsiveImg = computed(() => {
+  // console.log('window.innerWidth = ', window.innerWidth)
+  // console.log('breakpoint[props.bp] = ', breakpoint[props.bp])
+  return window.innerWidth < breakpoint[props.bp] ? true : false
 })
 
-onBeforeMount(() => {
-  currentWidth.value = Math.round(window.innerWidth)
-})
 </script>
 
 <template>
   <div class="card" :class="{ [`flex-column ${bp}:flex-row`]: responsive }">
     <template v-if="image">
-      <v-flexible-link
+      <div
         class="card-image-link card-image-wrapper"
-        :class="{ 'disabled': !titleLink, [`w-full ${bp}:w-max`]: responsive }"
-        :to="titleLink"
-        aria-hidden="true"
-        role="presentation"
-        tabindex="-1"
-        @click="$emit('componentEvent', titleLink)"
+        :class="{ [`w-full ${bp}:w-max`]: responsive }"
       >
         <!-- mobile, uses window width to load the image size-->
-        <v-simple-responsive-image
+        <v-image-with-caption
           class="card-image w-full"
           :class="responsive ? `${bp}:hidden ${bp}:w-max` : 'hidden'"
-          :src="image"
-          :width="currentWidth"
-          :height="Math.round(currentWidth * getRatio)"
-          :max-width="imageMaxWidth || Infinity"
-          :max-height="imageMaxHeight || Infinity"
-          :alt="title"
+          :image="image"
+          :alt-text="title"
+          :image-url="titleLink"
+          :max-width="imageMaxWidth"
+          :max-height="imageMaxHeight"
           :allow-vertical-effect="allowVerticalEffect"
+          :ratio="ratio"
           role="presentation"
         />
         <!-- desktop, uses width and height props -->
-        <v-simple-responsive-image
+        <v-image-with-caption
           class="card-image w-full"
           :class="{ [`hidden ${bp}:w-max ${bp}:block`]: responsive }"
-          :src="image"
+          :image="image"
           :width="Math.round(imageWidth * getMobileImageScale)"
           :height="Math.round(imageHeight * getMobileImageScale)"
-          :max-width="imageMaxWidth || Infinity"
-          :max-height="imageMaxHeight || Infinity"
-          :alt="title"
+          :alt-text="title"
           role="presentation"
+          :image-url="titleLink"
         />
-      </v-flexible-link>
+      </div>
     </template>
     <div v-if="hasDetails" class="card-details">
       <div v-if="tags || sponsored" class="card-tags">
@@ -217,30 +207,32 @@ onBeforeMount(() => {
       gap: spacing(2);
       margin-bottom: spacing(2);
     }
-    .card-title-link {
-      display: flex;
-      justify-content: space-between;
-      text-decoration: none;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-      .pi {
-        font-size: 1.278rem;
-        margin-left: spacing(2);
-        margin-top: spacing(0.5);
+    .card-title {
+      .card-title-link {
+        display: flex;
+        justify-content: space-between;
         text-decoration: none;
-        &:before {
-          color: $linkButtonColor;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        .pi {
+          font-size: 1.278rem;
+          margin-left: spacing(2);
+          margin-top: spacing(0.5);
+          text-decoration: none;
+          &:before {
+            color: $linkButtonColor;
+          }
         }
+        // .o-gallery-icon {
+        //   width: 1.5rem;
+        //   height: auto;
+        //   margin-left: spacing(2);
+        //   margin-bottom: 2px;
+        //   path {
+        //     fill: $linkButtonColor;
+        //   }
+        // }
       }
-      // .o-gallery-icon {
-      //   width: 1.5rem;
-      //   height: auto;
-      //   margin-left: spacing(2);
-      //   margin-bottom: 2px;
-      //   path {
-      //     fill: $linkButtonColor;
-      //   }
-      // }
     }
   }
   .card-slot {

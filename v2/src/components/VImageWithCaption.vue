@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed, onBeforeMount, onMounted } from 'vue'
-// import GothamistArrow from '../../../assets-shared/icons/gothamist/GothamistArrow'
+import { ref, computed, onBeforeMount, onMounted, onRenderTriggered } from 'vue'
+import GothamistArrow from '../../../assets-shared/icons/gothamist/GothamistArrow'
 import VSimpleResponsiveImage from './VSimpleResponsiveImage'
 import VFlexibleLink from './VFlexibleLink'
 import Button from 'primevue/button'
@@ -115,7 +115,13 @@ onBeforeMount(() => {
   if (!props.width) { responsive.value = true }
 })
 onMounted(() => {
+  console.log('mounted image with caption')
   thisWidth.value = refThisImg.value.offsetWidth
+})
+
+onRenderTriggered(() => {
+  console.log('renderTriggered')
+
 })
 
 const getCurrentDimensions = computed(() => {
@@ -135,6 +141,8 @@ const getCurrentDimensions = computed(() => {
           :class="!imageUrl && !allowPreview ? 'disabled' : ''"
           :to="imageUrl && !allowPreview ? imageUrl : null"
           target="_blank"
+          aria-hidden="true"
+          @click="imageUrl && !allowPreview ? $emit('componentEvent', imageUrl) : null"
         >
           <v-simple-responsive-image
             v-if="image && thisWidth || width"
