@@ -20,12 +20,12 @@ const isExternal = computed(() => {
 </script>
 
 <template>
-  <slot v-if="!to" name="default"></slot>
   <a
-    v-else-if="isExternal"
+    v-if="isExternal || !to"
     v-bind="{ ...$props, ...$attrs }"
-    :href="to"
+    :href="to ? to : '#'"
     :target="target"
+    :style="!to ? 'cursor: default;' : ''"
     :rel="[
       'noopener ',
       props.target === '_blank' ? 'noreferrer' : ''
