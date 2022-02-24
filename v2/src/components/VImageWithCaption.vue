@@ -1,9 +1,10 @@
 <script setup>
-import { ref, computed, onBeforeMount, onMounted, onRenderTriggered } from 'vue'
+import { ref, computed, onBeforeMount, onMounted } from 'vue'
 import GothamistArrow from '../../../assets-shared/icons/gothamist/GothamistArrow'
 import VSimpleResponsiveImage from './VSimpleResponsiveImage'
 import VFlexibleLink from './VFlexibleLink'
 import Button from 'primevue/button'
+import breakpoint from '../../../src/assets/library/breakpoints.module.scss'
 
 const props = defineProps({
   altText: {
@@ -88,6 +89,13 @@ const props = defineProps({
     type: Array,
     default: () => [3, 2],
   },
+  /**
+   * desired default image
+   */
+  defaultWidth: {
+    type: Number,
+    default: window.innerWidth,
+  },
 })
 
 const emit = defineEmits(['componentEvent'])
@@ -115,13 +123,10 @@ onBeforeMount(() => {
   if (!props.width) { responsive.value = true }
 })
 onMounted(() => {
-  console.log('mounted image with caption')
-  thisWidth.value = refThisImg.value.offsetWidth
-})
-
-onRenderTriggered(() => {
-  console.log('renderTriggered')
-
+  console.log('refThisImg.value.offsetWidth = ', refThisImg.value.offsetWidth)
+  console.log('breakpoint.md = ', breakpoint.md)
+  thisWidth.value = refThisImg.value.offsetWidth != 0 ? refThisImg.value.offsetWidth : props.defaultWidth
+  //thisWidth.value = 640
 })
 
 const getCurrentDimensions = computed(() => {

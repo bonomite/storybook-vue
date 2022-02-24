@@ -1,6 +1,6 @@
 <script setup>
 
-import { ref, computed, useSlots, onBeforeMount, onMounted } from 'vue'
+import { computed, useSlots } from 'vue'
 import breakpoint from '../../../src/assets/library/breakpoints.module.scss'
 import VTag from './VTag'
 import VFlexibleLink from './VFlexibleLink'
@@ -109,11 +109,6 @@ const getMobileImageScale = computed(() => {
   return window.innerWidth < breakpoint[props.bp] ? props.mobileImageScale : 1
 })
 
-const getResponsiveImg = computed(() => {
-  // console.log('window.innerWidth = ', window.innerWidth)
-  // console.log('breakpoint[props.bp] = ', breakpoint[props.bp])
-  return window.innerWidth < breakpoint[props.bp] ? true : false
-})
 
 </script>
 

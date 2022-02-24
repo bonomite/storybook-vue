@@ -211,6 +211,20 @@ ResponsiveAtMdBreakpoint.args = {
     bp: 'md',
 }
 
+export const ResponsiveAlways = Template.bind({})
+ResponsiveAlways.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    titleLink: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    imageWidth: 175,
+    imageHeight: 175,
+    imageMaxWidth: 1440,
+    imageMaxHeight: 2560,
+    responsive: true,
+    bp: 'full',
+}
+
 export const CustomImageRatio = Template.bind({})
 CustomImageRatio.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
