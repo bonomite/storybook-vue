@@ -94,7 +94,7 @@ const props = defineProps({
    */
   defaultWidth: {
     type: Number,
-    default: window.innerWidth,
+    default: null,
   },
 })
 
@@ -125,7 +125,7 @@ onBeforeMount(() => {
 onMounted(() => {
   console.log('refThisImg.value.offsetWidth = ', refThisImg.value.offsetWidth)
   console.log('breakpoint.md = ', breakpoint.md)
-  thisWidth.value = refThisImg.value.offsetWidth != 0 ? refThisImg.value.offsetWidth : props.defaultWidth
+  thisWidth.value = refThisImg.value.offsetWidth != 0 ? refThisImg.value.offsetWidth : props.defaultWidth ? props.defaultWidth : window.innerWidth
   //thisWidth.value = 640
 })
 
