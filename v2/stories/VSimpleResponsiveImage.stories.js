@@ -43,6 +43,16 @@ Enlarge.args = {
     allowPreview: true,
 }
 
+export const RawImageEnlarge = Template.bind({})
+RawImageEnlarge.args = {
+    alt: 'Fallback alt text here',
+    src: 'https://images.ctfassets.net/pjshm78m9jt4/6LU8pkJjaDEZBnPdOwgAY5/df1dc98c5cb25c8efe0cc70e38fa7040/CATS_010721_PA.jpg',
+    width: 600,
+    height: 400,
+    allowVerticalEffect: false,
+    allowPreview: true,
+}
+
 export const Vertical = Template.bind({})
 Vertical.args = {
     alt: 'Fallback alt text here',

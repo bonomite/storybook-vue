@@ -89,6 +89,7 @@ let isVertical = ref(false)
 let isLoaded = ref(false)
 let loadingEnlargedImage = ref(false)
 let skeletonHeight = ref(null)
+let rawImage = true
 
 const refThisImg = ref(null)
 
@@ -100,6 +101,16 @@ const computedWidth = computed(() => {
 
 const computedSrc = computed(() => {
   const template = props.src
+
+  // detect if src has tokens
+  const tokensArray = [props.widthToken, props.heightToken, props.qualityToken]
+  for (var value of tokensArray) {
+    if (template.includes(value)) {
+      rawImage = false
+      break
+    }
+  }
+
   return template
     ? template
       .replace(props.widthToken, computedWidth.value)
@@ -183,10 +194,14 @@ const calcQuality = (quality, size) => {
 const enlarge = () => {
   loadingEnlargedImage.value = true
   const img = document.getElementsByClassName('p-image-preview')
-  const sizeList = srcset.value.split(',')
-  const lastSize = sizeList[sizeList.length - 1]
-  const biggestSize = lastSize.slice(0, -3)
-  img[0].setAttribute('src', biggestSize)
+  if (rawImage) {
+    img[0].setAttribute('src', props.src)
+  } else {
+    const sizeList = srcset.value.split(',')
+    const lastSize = sizeList[sizeList.length - 1]
+    const biggestSize = lastSize.slice(0, -3)
+    img[0].setAttribute('src', biggestSize)
+  }
 }
 
 const closeEnlarge = () => {
