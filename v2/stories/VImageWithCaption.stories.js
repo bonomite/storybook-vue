@@ -24,6 +24,14 @@ const Template = (args) => ({
     template: '<v-image-with-caption v-bind="args" />',
 })
 
+const TemplateFullHeight = (args) => ({
+    components: { VImageWithCaption },
+    setup() {
+        return { args }
+    },
+    template: '<div style="max-width:400px;"><v-image-with-caption v-bind="args" /></div>',
+})
+
 export const Default = Template.bind({})
 Default.args = {
     // variation: 'gothamist',
@@ -156,4 +164,27 @@ ResponsiveVerticalEffect.args = {
     maxWidth: 1440,
     maxHeight: 2560,
     allowVerticalEffect: true
+}
+
+export const Raw = Template.bind({})
+Raw.args = {
+    // variation: 'gothamist',
+    altText: 'Fallback alt text here',
+    image: 'https://images.ctfassets.net/pjshm78m9jt4/6LU8pkJjaDEZBnPdOwgAY5/df1dc98c5cb25c8efe0cc70e38fa7040/CATS_010721_PA.jpg',
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+}
+
+export const RawFullHeight = TemplateFullHeight.bind({})
+RawFullHeight.args = {
+    // variation: 'gothamist',
+    altText: 'Fallback alt text here',
+    image: 'https://images.ctfassets.net/pjshm78m9jt4/6LU8pkJjaDEZBnPdOwgAY5/df1dc98c5cb25c8efe0cc70e38fa7040/CATS_010721_PA.jpg',
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+    fullHeight: true,
 }
