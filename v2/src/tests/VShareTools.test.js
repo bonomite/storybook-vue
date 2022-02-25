@@ -1,16 +1,16 @@
 import { mount, shallowMount } from '@vue/test-utils'
 import { describe, test, expect } from '@jest/globals'
 import { toHaveNoViolations } from 'jest-axe'
-import ShareTools from '../components/ShareTools'
-import AudioIcon from '../components/icons/AudioIcon'
+import VShareTools from '../components/VShareTools'
+import AudioIcon from '../../../assets-shared/icons/AudioIcon'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
 
-describe('ShareTools', () => {
+describe('VShareTools', () => {
   const label = 'The Label'
   test('label prop works', () => {
-    const wrapper = mount(ShareTools, {
+    const wrapper = mount(VShareTools, {
       propsData: {
         label
       }
@@ -18,12 +18,12 @@ describe('ShareTools', () => {
     // check if prop works
     expect(wrapper.props().label).toBe(label)
     // check if it was rendered correctly
-    const div = wrapper.find('.c-share-tools__label')
-    expect(div.text()).toContain('The Label')
+    const p = wrapper.find('.label')
+    expect(p.text()).toContain('The Label')
   })
 
   test('slot works', () => {
-    const wrapper = shallowMount(ShareTools, {
+    const wrapper = shallowMount(VShareTools, {
       slots: {
         default: AudioIcon
       }
@@ -33,7 +33,7 @@ describe('ShareTools', () => {
   })
 
   test('it passes basic accessibility tests', async () => {
-    const wrapper = mount(ShareTools, {
+    const wrapper = mount(VShareTools, {
       propsData: { label },
       slots: {
         default: AudioIcon
