@@ -95,13 +95,6 @@ const props = defineProps({
     type: Number,
     default: null,
   },
-  /**
-   * switches image to height 100% and width auto
-   */
-  fullHeight: {
-    type: Boolean,
-    default: false,
-  },
 })
 
 const emit = defineEmits(['componentEvent'])
@@ -142,11 +135,7 @@ const getCurrentDimensions = computed(() => {
 </script>
 
 <template>
-  <figure
-    ref="refThisImg"
-    class="image-with-caption"
-    :class="[{ variation, 'full-height': fullHeight }]"
-  >
+  <figure ref="refThisImg" class="image-with-caption" :class="variation">
     <div class="image-with-caption-wrapper">
       <div class="image-with-caption-image">
         <v-flexible-link
@@ -214,19 +203,11 @@ const getCurrentDimensions = computed(() => {
 <style lang="scss">
 .image-with-caption {
   width: 100%;
-  &.full-height {
-    overflow: hidden;
-    * {
-      height: 100% !important;
-      width: auto !important;
-    }
-  }
 }
 
 .image-with-caption .image-with-caption-image,
 .image-with-caption .image-with-caption-wrapper {
   position: relative;
-  width: 100%;
 }
 
 .image-with-caption .simple-responsive-image-holder.addPointer {
