@@ -128,7 +128,7 @@ const getMobileImageScale = computed(() => {
           :max-height="maxHeight"
           :allow-vertical-effect="allowVerticalEffect"
           :ratio="ratio"
-          :default-width="Number(breakpoint[props.bp])"
+          :default-width="breakpoint[props.bp]"
           role="presentation"
         />
         <!-- desktop, uses width and height props -->
