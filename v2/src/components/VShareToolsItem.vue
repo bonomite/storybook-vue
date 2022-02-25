@@ -1,6 +1,8 @@
 <script setup>
 import { computed, defineAsyncComponent } from 'vue'
 
+const emit = defineEmits(['share', 'follow'])
+
 const icons = {
   email: "EmailIcon",
   phone: "PhoneIcon",
@@ -146,7 +148,7 @@ const share = () => {
     return
   }
 
-  this.$emit('share', props.service)
+  emit('share', props.service)
 
   // get the position of the popup window   
   function getPopupPosition() {
@@ -189,13 +191,13 @@ const share = () => {
   <a
     v-if="action === 'follow'"
     :href="username ? socialLink : link"
-    class="follow-link"
+    class="follow-link c-share-tools__link"
     :class="service"
     :aria-label="ariaLabel"
     :target="service !== 'phone' ? '_blank' : '_self'"
     rel="noopener noreferrer"
     :title="username ? socialLink : link"
-    @click="$emit('follow', service)"
+    @click="emit('follow', service)"
   >
     <component :is="getServiceComponent" v-if="service !== 'site'" />
     <span v-else>{{ label }}</span>

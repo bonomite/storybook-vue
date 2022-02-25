@@ -1,7 +1,7 @@
 <script setup>
 import Button from 'primevue/button'
 import VFlexibleLink from './VFlexibleLink'
-const emit = defineEmits(['componentEvent'])
+const emit = defineEmits(['tagClick'])
 const props = defineProps({
   slug: {
     type: String,
@@ -25,7 +25,7 @@ const props = defineProps({
         :class="props.name"
         :label="props.name"
         :style="props.radius !== null ? `border-radius: ${props.radius}px;` : ''"
-        @click="props.slug ? emit('componentEvent', props.slug) : null"
+        @click="props.slug ? emit('tagClick', props.slug) : null"
       ></Button>
     </v-flexible-link>
   </span>
