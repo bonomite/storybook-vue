@@ -97,8 +97,6 @@ const props = defineProps({
 })
 const slots = useSlots()
 
-const emit = defineEmits(['componentEvent'])
-
 const hasDetails = computed(() => {
   return !!props.title || !!props.subtitle || !!slots.default
 })
@@ -130,6 +128,7 @@ const getMobileImageScale = computed(() => {
           :max-height="maxHeight"
           :allow-vertical-effect="allowVerticalEffect"
           :ratio="ratio"
+          :default-width="breakpoint[props.bp]"
           role="presentation"
         />
         <!-- desktop, uses width and height props -->
