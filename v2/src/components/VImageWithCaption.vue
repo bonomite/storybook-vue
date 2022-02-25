@@ -122,10 +122,7 @@ onBeforeMount(() => {
   if (!props.width) { responsive.value = true }
 })
 onMounted(() => {
-  // if it gets a width of refThisImg, it will use it, otherwise, it will use the browsers width as the default, unless if it specifically overwritten by the defaultWidth prop
-  console.log('refThisImg.value.offsetWidth = ', refThisImg.value.offsetWidth)
-  console.log('window.innerWidth = ', window.innerWidth)
-  console.log('defaultWidth = ', props.defaultWidth)
+  // if it gets a width of refThisImg, it will use it, otherwise, it will use the browsers width as the default, unless if it specifically overwritten by the defaultWidth prop which is controlled by the breakpoints
   thisWidth.value = refThisImg.value.offsetWidth != 0 ? refThisImg.value.offsetWidth : props.defaultWidth ? props.defaultWidth : window.innerWidth
 })
 
