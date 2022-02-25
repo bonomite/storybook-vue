@@ -6,9 +6,10 @@ describe('FlexibleLink', () => {
   let wrapper = {}
 
   // find NuxtLink 
-  const findNuxtLink = () => wrapper.find('nuxt-link-stub')
+  const findNuxtLink = () => wrapper.find('nuxt-link')
   // find an 'a' tag
   const findAnchor = () => wrapper.find('a')
+  const findNullDiv = () => wrapper.find('.null')
 
   //component factory
   const createComponent = ({ propsData = {} } = {}) => {
@@ -40,6 +41,15 @@ describe('FlexibleLink', () => {
     expect(findNuxtLink().attributes('to')).toBe('/abc')
   })
 
+
+  it('should render with null link', () => {
+    createComponent({
+      propsData: {
+        to: null
+      }
+    })
+    expect(findNullDiv().exists()).toBe(true)
+  })
 
   it('should render with an external link', () => {
     createComponent({
