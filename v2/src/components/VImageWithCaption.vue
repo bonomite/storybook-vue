@@ -144,7 +144,7 @@ const getCurrentDimensions = computed(() => {
           :to="imageUrl && !allowPreview ? imageUrl : null"
           target="_blank"
           aria-hidden="true"
-          @click="imageUrl && !allowPreview ? $emit('componentEvent', imageUrl) : null"
+          @click="imageUrl && !allowPreview ? emit('componentEvent', imageUrl) : null"
         >
           <v-simple-responsive-image
             v-if="image && thisWidth || width"

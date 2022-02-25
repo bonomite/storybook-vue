@@ -1,7 +1,6 @@
 <script setup>
-import { ref, computed, onMounted, onBeforeMount } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue'
 import Image from 'primevue/image'
-import Skeleton from 'primevue/skeleton'
 import ProgressSpinner from 'primevue/progressspinner'
 import Button from 'primevue/button'
 /** * Responsive image component, generates a srcset with multiple image sizes for different display densities. */
@@ -86,12 +85,8 @@ const props = defineProps({
 const emit = defineEmits(['click', 'keypress'])
 
 let isVertical = ref(false)
-let isLoaded = ref(false)
 let loadingEnlargedImage = ref(false)
-let skeletonHeight = ref(null)
 let rawImage = true
-
-const refThisImg = ref(null)
 
 const computedWidth = computed(() => {
   return isVertical.value
@@ -102,7 +97,7 @@ const computedWidth = computed(() => {
 const computedSrc = computed(() => {
   const template = props.src
 
-  // detect if src has tokens
+  // detect if src has tokens or just a regular url
   const tokensArray = [props.widthToken, props.heightToken, props.qualityToken]
   for (var value of tokensArray) {
     if (template.includes(value)) {
@@ -127,8 +122,6 @@ const computedSrcBg = computed(() => {
       .replace(props.qualityToken, 15)
     : undefined
 })
-
-
 
 const srcset = computed(() => {
   const template = props.src
@@ -173,18 +166,6 @@ const srcset = computed(() => {
 onBeforeMount(() => {
   isVertical.value =
     props.allowVerticalEffect && props.maxHeight > props.maxWidth
-})
-
-onMounted(() => {
-  //gets skeleton height of image based on widht and height ratio of the image
-  const thisWidth = refThisImg.value.offsetWidth
-  skeletonHeight.value = (props.height * thisWidth / props.width) + 'px'
-
-  const img = refThisImg.value.getElementsByClassName('prime-img-class')[0]
-  img.onload = () => {
-    isLoaded.value = true
-  }
-  img.src = computedSrc.value
 })
 
 const calcQuality = (quality, size) => {
@@ -232,37 +213,29 @@ const closeEnlarge = () => {
 
 
 <template>
-  <div ref="refThisImg" class="simple-responsive-image-holder">
+  <div class="simple-responsive-image-holder">
     <div v-if="isVertical" class="bg">
       <img :src="computedSrcBg" :width="width" :height="height" :alt="alt" loading="lazy" />
     </div>
-    <Skeleton
-      v-if="!isLoaded && skeletonHeight"
-      shape="Rectangle"
-      border-radius="0px"
-      width="100%"
-      :height="skeletonHeight"
-    />
     <Image
       class="image"
       :class="isVertical ? 'is-vertical' : ''"
       image-class="prime-img-class"
       image-style="width: 100%; height: auto;"
       :srcset="srcset"
-      src
+      :src="computedSrc"
       :width="computedWidth"
       :height="height"
       :style="[
-        isVertical ? `width:${computedWidth}px;` : '',
-        isLoaded ? 'visibility:visible; position:relative;' : 'visibility:hidden; position:absolute;',
+        isVertical ? `width:${computedWidth}px;` : ''
       ]"
       :alt="alt"
       :preview="allowPreview"
       loading="lazy"
       @show="enlarge"
       @hide="closeEnlarge"
-      @click="$emit('click', $event.target.value)"
-      @keypress="$emit('keypress', $event.target.value)"
+      @click="emit('click', $event.target.value)"
+      @keypress="emit('keypress', $event.target.value)"
     >
       <template v-if="allowPreview" #indicator>
         <Button icon="pi pi-arrows-v" class="p-button-sm enlarge-button"></Button>
