@@ -24,14 +24,6 @@ const Template = (args) => ({
     template: '<v-image-with-caption v-bind="args" />',
 })
 
-const TemplateFullHeight = (args) => ({
-    components: { VImageWithCaption },
-    setup() {
-        return { args }
-    },
-    template: '<div style="max-width:400px;"><v-image-with-caption v-bind="args" /></div>',
-})
-
 export const Default = Template.bind({})
 Default.args = {
     // variation: 'gothamist',
@@ -170,21 +162,22 @@ export const Raw = Template.bind({})
 Raw.args = {
     // variation: 'gothamist',
     altText: 'Fallback alt text here',
-    image: 'https://images.ctfassets.net/pjshm78m9jt4/6LU8pkJjaDEZBnPdOwgAY5/df1dc98c5cb25c8efe0cc70e38fa7040/CATS_010721_PA.jpg',
+    image: 'https://www.helpguide.org/wp-content/uploads/king-charles-spaniel-resting-head-768.jpg',
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
     title: 'Title Text Here',
     description: 'Description Text Here',
 }
 
-export const RawFullHeight = TemplateFullHeight.bind({})
-RawFullHeight.args = {
+export const RawEnlarged = Template.bind({})
+RawEnlarged.args = {
     // variation: 'gothamist',
     altText: 'Fallback alt text here',
-    image: 'https://images.ctfassets.net/pjshm78m9jt4/6LU8pkJjaDEZBnPdOwgAY5/df1dc98c5cb25c8efe0cc70e38fa7040/CATS_010721_PA.jpg',
+    image: 'https://www.helpguide.org/wp-content/uploads/king-charles-spaniel-resting-head-768.jpg',
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
     title: 'Title Text Here',
     description: 'Description Text Here',
-    fullHeight: true,
+    allowPreview: true,
+    imageEnlarged: 'https://static01.nyt.com/images/2019/06/17/science/17DOGS/17DOGS-mobileMasterAt3x-v2.jpg'
 }
