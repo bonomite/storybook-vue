@@ -95,6 +95,11 @@ const props = defineProps({
     type: Number,
     default: null,
   },
+  /** * if specified, will use this image for the enlarged image for RAW images only */
+  imageEnlarged: {
+    type: String,
+    default: null,
+  },
 })
 
 const emit = defineEmits(['componentEvent'])
@@ -156,6 +161,7 @@ const getCurrentDimensions = computed(() => {
             :max-height="maxHeight || Infinity"
             :allow-vertical-effect="allowVerticalEffect"
             :allow-preview="allowPreview"
+            :image-enlarged="imageEnlarged"
             :class="imageUrl && !allowPreview ? 'addPointer' : ''"
           />
         </v-flexible-link>

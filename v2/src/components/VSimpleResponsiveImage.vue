@@ -82,7 +82,7 @@ const props = defineProps({
     default: false,
   },
   /** * if specified, will use this image for the enlarged image for RAW images only */
-  imageEnlarge: {
+  imageEnlarged: {
     type: String,
     default: null,
   },
@@ -181,7 +181,7 @@ const enlarge = () => {
   loadingEnlargedImage.value = true
   const img = document.getElementsByClassName('p-image-preview')
   if (rawImage) {
-    img[0].setAttribute('src', props.imageEnlarge ? props.imageEnlarge : props.src)
+    img[0].setAttribute('src', props.imageEnlarged ? props.imageEnlarged : props.src)
   } else {
     const sizeList = srcset.value.split(',')
     const lastSize = sizeList[sizeList.length - 1]
