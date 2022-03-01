@@ -105,6 +105,7 @@ $formElementTransition: background-color $transitionDuration, color $transitionD
     border-color $transitionDuration, box-shadow $transitionDuration !default;
 $actionIconTransition: background-color $transitionDuration, color $transitionDuration, box-shadow $transitionDuration !default;
 $listItemTransition: none !default;
+$primeIconFont: "primeicons";
 $primeIconFontSize: 1rem !default;
 $divider: 1px solid $white200 !default;
 $inlineSpacing: 0.5rem !default;
