@@ -1,29 +1,29 @@
 <template>
   <div :class="$route.name">
     <div>header</div>
-    <ul>
+    <!-- <ul>
       <li>
         <nuxt-link to="/">Home</nuxt-link>
       </li>
       <li>
         <nuxt-link to="/other">Other</nuxt-link>
       </li>
-    </ul>
-    <v-audio-player-system persistent always />
+    </ul>-->
+    <!-- <v-audio-player-system persistent always /> -->
     <main>
-      <slot> </slot>
+      <slot></slot>
     </main>
     <div>footer</div>
   </div>
 </template>
 
 <script>
-import VAudioPlayerSystem from '~/stories/VAudioPlayerSystem'
+// import VAudioPlayerSystem from '~/v1/src/components/VAudioPlayerSystem'
 
 export default {
   name: 'HomePage',
   components: {
-    VAudioPlayerSystem,
+    // VAudioPlayerSystem,
   },
   mixins: [],
   data() {
@@ -40,7 +40,7 @@ export default {
     this.handleNewPage()
   },
   methods: {
-    handleNewPage() {},
+    handleNewPage() { },
   },
 }
 </script>

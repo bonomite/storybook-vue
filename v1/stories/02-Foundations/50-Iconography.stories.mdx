@@ -1,0 +1,133 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import BaseIcons from '../../src/components/storybook/BaseIcons';
+import GothamistIcons from '../../src/components/storybook/GothamistIcons';
+import WnycIcons from '../../src/components/storybook/WnycIcons';
+import WqxrIcons from '../../src/components/storybook/WqxrIcons';
+import AudioIcon from '../../src/components/icons/AudioIcon';
+
+<Meta title="Foundations/Iconography" />
+
+# Iconography
+
+Icons reduce cognitive load by supplementing context and meaning to UI. Good icons are quickly recognizable, afford interactivity, and add visual interest. Icons, like salt, perform best when used sparingly and purposefully. Do not oversalt your designs.
+
+## Usage
+
+Radial uses SVG icons across all brands, many of them sourced from [https://thenounproject.com/](https://thenounproject.com/)
+
+## Updates
+Icons change, especially social media icons. If a company updates their logo (i.e. Twitter rebrands to Tweeter) it is up to a designer/developer pair to update the logo to the latest iteration.
+
+## Accessibility
+
+If an icon is used without accompanying text, a title attribute is needed on the containing element.
+
+Icons that are interactive must follow the same WCAG 2.0 contrast standards as typography, requiring a minimum contrast ratio 3.0. Non-interactive icons like status symbols or brand logos don’t need to follow these standards.
+
+## Base Icons
+
+<Canvas>
+    <Story name="Base Icons">
+        {{
+            components: { BaseIcons },
+            template: `<base-icons />`,
+        }}
+    </Story>
+</Canvas>
+
+## Gothamist Icons
+
+<Canvas>
+    <Story name="Gothamist Icons">
+        {{
+            components: { GothamistIcons },
+            template: `<gothamist-icons />`,
+        }}
+    </Story>
+</Canvas>
+
+## WNYC Icons
+
+<Canvas>
+    <Story name="Wnyc Icons">
+        {{
+            components: { WnycIcons },
+            template: `<wnyc-icons />`,
+        }}
+    </Story>
+</Canvas>
+
+## WQXR Icons
+
+<Canvas>
+    <Story name="Wqxr Icons">
+        {{
+            components: { WqxrIcons },
+            template: `<wqxr-icons />`,
+        }}
+    </Story>
+</Canvas>
+
+## Sizing
+
+Our default icons come in four sizes: 16px (XS), 24px (S), 32px (M), and 40px (L). These sizes are the dimensions of the SVG and include the icon as well as the padding. This consistency helps when sourcing third party icons. Larger sizes may be available to other brands.
+
+| Size | Measurement |
+| -- | -- |
+| XS | 16px |
+| S | 24px |
+| M | 32px |
+| L | 40px |
+
+When creating new icons, padding can be determined by using at least ⅛ of the icon frame’s width.
+
+## Sizing Examples
+
+<Canvas>
+    <Story name="Sizing Examples">
+        {{
+            components: { AudioIcon },
+            template: `
+  <div class="l-grid l-grid--4up">
+    <div>
+      <div class="u-flex u-align-items--center u-space--bottom">
+        <span class="o-icon u-icon--s u-space--right">
+          <audio-icon title="test title" />
+        </span>
+        <div>small</div>
+      </div>
+    </div>
+    <div>
+      <div class="u-flex u-align-items--center u-space--bottom">
+        <span class="o-icon u-icon--m u-space--right">
+          <audio-icon title="test title" />
+        </span>
+        <div>medium</div>
+      </div>
+    </div>
+    <div>
+      <div class="u-flex u-align-items--center u-space--bottom">
+        <span class="o-icon u-icon--i u-space--right">
+          <audio-icon title="test title" />
+        </span>
+        <div>large</div>
+      </div>
+    </div>
+    <div>
+      <div class="u-flex u-align-items--center u-space--bottom">
+        <span class="o-icon u-icon--xl u-space--right">
+          <audio-icon title="test title" />
+        </span>
+        <div>xlarge</div>
+      </div>
+    </div>
+  </div>
+`,
+        }}
+    </Story>
+</Canvas>
+
+## Audio Icon Guidelines
+
+Design & Dev Team TBD
+

@@ -1,0 +1,78 @@
+/*------------------------------------*\
+    $LINKS
+\*------------------------------------*/
+
+a {
+  text-decoration: none;
+  color: RGB(var(--color-link));
+  text-decoration: var(--text-decoration-link);
+  transition: all var(--animation-duration-fast) var(--animation-easing-standard);
+}
+
+a:hover {
+  color: RGB(var(--color-link-hover));
+  text-decoration: var(--text-decoration-link-hover);
+  opacity: var(--opacity-link-hover);
+}
+
+a.disabled {
+  cursor: default;
+  pointer-events: none;
+  color: RGB(var(--color-gray));
+}
+
+a > span {
+  transition: var(--animation-easing-standard) var(--animation-duration-fast);
+}
+
+.u-has-accent,
+.o-rte-text .u-has-accent {
+  display: inline-block;
+  padding-bottom: 2px;
+  border-bottom: 2px dotted RGB(var(--color-border-standard));
+  text-decoration: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.u-has-accent:hover,
+.o-rte-text .u-has-accent:hover {
+  color: RGB(var(--color-background));
+}
+
+.u-has-accent--neutral,
+.o-rte-text .u-has-accent--neutral {
+  color: RGB(var(--color-border-bold));
+  border-bottom-color: RGB(var(--color-border-bold));
+}
+
+.u-has-accent--primary,
+.o-rte-text .u-has-accent--primary {
+  color: RGB(var(--color-primary-2));
+  border-bottom-color: RGB(var(--color-primary-2));
+}
+
+.u-has-accent--quaternary,
+.o-rte-text .u-has-accent--quaternary {
+  color: RGB(var(--color-primary-1));
+  border-bottom-color: RGB(var(--color-primary-1));
+}
+
+.u-has-accent--secondary,
+.o-rte-text .u-has-accent--secondary {
+  color: RGB(var(--color-link));
+  border-bottom-color: RGB(var(--color-link));
+}
+
+.u-has-accent--secondary path {
+  transition: var(--animation-duration-fast);
+}
+
+.u-has-accent--secondary:hover path,
+.o-rte-text .u-has-accent--secondary:hover path {
+  fill: RGB(var(--color-link-hover));
+}
+
+.u-has-accent-inline {
+  @include inline-accent;
+}

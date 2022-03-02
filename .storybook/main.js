@@ -1,30 +1,42 @@
 const path = require('path')
 module.exports = {
-  "stories": ["../stories/**/*.stories.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
-  "addons": ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/preset-scss"],
+  "stories": ["../v2/**/*.stories.mdx", "../v2/**/*.stories.@(js|jsx|ts|tsx)"],
+  "addons": ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-docs", "@storybook/preset-scss"],
   "framework": "@storybook/vue3",
   core: {
     builder: "webpack5"
   },
+  staticDirs: ['../assets-shared'],
   webpackFinal: async (config, { configType }) => {
 
     config.module.rules.push({
       test: /\.scss$/,
       use: [
-        'style-loader',
-        'css-loader',
+        // 'style-loader',
+        // 'css-loader',
         'sass-loader',
         {
           loader: 'sass-loader',
           options: {
-            additionalData: '@import "primevue/resources/themes/lara-light-blue/theme.css"; @import "primevue/resources/primevue.css"; @import "primeicons/primeicons.css"; @import "primeflex/primeflex.scss"; @import "~/stories/assets/scss/variables.module.scss";',
+            additionalData: '@import "~/src/assets/themes/white-paper/_theme.scss"; @import "primevue/resources/primevue.min.css"; @import "primeicons/primeicons.css"; ',
             // additionalData: '@import "./assets/scss/main.scss";',
+            //@import "primeflex/primeflex.scss";
+            //@import "primevue/resources/themes/lara-light-blue/theme.css";
           },
         },
       ],
-      include: path.resolve(__dirname, '../'),
+      // include: path.resolve(__dirname, '../'),
     })
-
+    // config.module.rules.push({
+    //   test: /\.css$/,
+    //   use: [
+    //     'style-loader',
+    //     'css-loader',
+    //     {
+    //       loader: 'css-loader',
+    //     },
+    //   ],
+    // })
     return config
   },
 }

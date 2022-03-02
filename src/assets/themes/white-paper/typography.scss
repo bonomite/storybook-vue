@@ -1,0 +1,151 @@
+@use "sass:map";
+:root {
+    font-size: 18px;
+}
+$thin-weight: 200;
+$light-weight: 300;
+$normal-weight: 400;
+$semibold-weight: 500;
+$bold-weight: 700;
+$black-weight: 900;
+
+$h1-config: (
+    "default": (
+        "values": (
+            "font-family": $fontFamilyHeader,
+            "font-size": 1.778rem,
+            "line-height": 2.722rem,
+            "font-weight": $bold-weight,
+            "color": $textColor,
+        ),
+    ),
+    $medium: (
+        "values": (
+            "font-size": 2rem,
+            "line-height": 3.056rem,
+        ),
+    ),
+);
+$h2-config: (
+    "default": (
+        "values": (
+            "font-family": $fontFamilyHeader,
+            "font-size": 1.278rem,
+            "line-height": 1.889rem,
+            "font-weight": $normal-weight,
+            "color": $textColor,
+        ),
+    ),
+);
+$h3-config: (
+    "default": (
+        "values": (
+            "font-family": $fontFamilyHeader,
+            "font-size": 1.111rem,
+            "line-height": 1.667rem,
+            "font-weight": $normal-weight,
+            "color": $textColor,
+        ),
+    ),
+);
+$h4-config: (
+    "default": (
+        "values": (
+            "font-family": $fontFamily,
+            "font-size": 1.278rem,
+            "line-height": 1.889rem,
+            "font-weight": $bold-weight,
+            "color": $textColor,
+        ),
+    ),
+);
+
+$h5-config: (
+    "default": (
+        "values": (
+            "font-family": $fontFamily,
+            "font-size": 1rem,
+            "line-height": 1rem,
+            "font-weight": $bold-weight,
+            "text-transform": uppercase,
+            "color": $textColor,
+        ),
+    ),
+);
+
+$h6-config: (
+    "default": (
+        "values": (
+            "font-family": $fontFamily,
+            "font-size": 0.75rem,
+            "line-height": 0.75rem,
+            "font-weight": $bold-weight,
+            "text-transform": uppercase,
+            "letter-spacing": 0.2rem,
+            "color": $textColor,
+        ),
+    ),
+);
+
+$p-config: (
+    "default": (
+        "values": (
+            "font-family": $fontFamily,
+            "font-size": $fontSize,
+            "line-height": normal,
+            "font-weight": $fontWeight,
+            "color": $textColor,
+        ),
+    ),
+);
+
+$footer-config: (
+    "default": (
+        "values": (
+            "font-family": $fontFamily,
+            "font-size": 0.75rem,
+            "line-height": 0.75rem,
+            "font-weight": $fontWeight,
+            "color": $textColor,
+        ),
+    ),
+);
+
+h1 {
+    @include font-config($h1-config);
+}
+
+h2 {
+    @include font-config($h2-config);
+}
+
+h3 {
+    @include font-config($h3-config);
+}
+
+h4 {
+    @include font-config($h4-config);
+}
+h5 {
+    @include font-config($h5-config);
+}
+h6 {
+    @include font-config($h6-config);
+}
+ul,
+ol {
+    padding-left: 1rem;
+    li {
+        @include font-config($p-config);
+    }
+}
+
+p {
+    @include font-config($p-config);
+}
+
+p.footer {
+    @include font-config($footer-config);
+}
+
+// special configs below

@@ -1,6 +1,23 @@
-# NODE version 16.13.2 # Nuxt 3 Minimal Starter We recommend to look at the
-[documentation](https://v3.nuxtjs.org). ## Setup Make sure to install the
-dependencies ```bash yarn install ``` ## Development Start the development
-server on http://localhost:3000 ```bash yarn dev ``` ## Production Build the
-application for production: ```bash yarn build ``` Checkout the [deployment
-documentation](https://v3.nuxtjs.org/docs/deployment).
+# NODE version 14.7.0 
+
+## Installation
+npm i
+
+## Prime Theme View
+first, rename config file to "vite.config.js" 
+npm run prime-serve
+
+
+## Storybook
+npm run storybook
+
+## Nuxt instance
+npm run dev
+
+
+## Themes location
+src/assets/themes/
+
+## global scss location
+src/assets/library/
+

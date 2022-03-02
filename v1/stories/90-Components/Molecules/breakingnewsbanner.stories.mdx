@@ -1,0 +1,140 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import VBanner from '../../../src/components/VBanner'
+import ArticleMetadata from '../../../src/components/ArticleMetadata'
+import VByline from '../../../src/components/VByline'
+import VCounter from '../../../src/components/VCounter'
+
+<Meta title="Components/Molecules/Breaking News Banners" />
+
+
+# Breaking News Banner
+
+The Breaking News Banner will be used to display important developing news stories that matter to our users in a prominent and eye-catching develop, alerting users to growing news stories. as they develop. As a news organization, it is incredibly important to put news that users are looking for in a prominent position to call attention as soon as a user lands on an NYPR website.  When the Breaking News Banner is live, it will appear across all site pages.
+
+You can find instructions on how to populate this banner here: https://wiki.nypr.digital/display/DS/How+to+Create+a+Breaking+News+Banner
+
+## Rules
+
+The Breaking News Banner should use the same rules set for Cards.
+
+Required fields include:  “Breaking News” label, Headline, and Timestamp.
+
+## Brand Examples (Mobile & Desktop)
+
+<!-- ### Whitelabel
+ <img alt="examples of a Whitelabel breaking news callout banner" src="./images/Molecules-Organisms-CalloutBanner-WhitelabelBreakingNews.png" width="1000" />
+<br/> -->
+
+### Gothamist
+<img alt="examples of a Gothamist breaking news callout banner" src="./images/Molecules-Organisms-CalloutBanner-GothamistBreakingNews.png" width="1000" />
+
+
+## Code Examples
+
+<Canvas>
+    <Story name="Default">
+        {{
+            components: { VBanner, ArticleMetadata },
+            template:
+            `
+            <v-banner
+                tag="Breaking News"
+                headline="Lorem Ipsum Dolor Sit Amet"
+                headline-link="https://www.google.com"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            >
+                <article-metadata
+                    publish-date="JUST NOW"
+                />
+            </v-banner>
+            `
+        }}
+    </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="With HTML In the Description">
+        {{
+            components: { VBanner, ArticleMetadata, VCounter, VByline },
+            template:
+                `
+            <v-banner
+                tag="Breaking News"
+                headline="Lorem Ipsum Dolor Sit Amet"
+                headline-link="https://www.google.com"
+                description="<p>full description test with more text that <a href='http://www.google.com'>links</a> and has <i>other</i> <b>formatting.</b></p>"
+            />
+            `
+        }}
+    </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="With Article Metadata In The Slot">
+        {{
+            components: { VBanner, ArticleMetadata, VCounter, VByline },
+            template:
+            `
+            <v-banner
+                tag="Breaking News"
+                headline="Lorem Ipsum Dolor Sit Amet"
+                headline-link="https://www.google.com"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            >
+                <article-metadata
+                    publish-date="Jan 1, 2020"
+                    updated-date="Mar 2, 2020"
+                >
+                    <template v-slot:comments><v-counter icon="comment" text="Comments" value="40" href="http://www.google.com"/></template>
+                    <template v-slot:photos><v-counter icon="gallery" text="Photos" value="40" href="http://www.google.com"/></template>
+                </article-metadata>
+            </v-banner>
+            `
+        }}
+    </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="With A Close Button">
+        {{
+            components: { VBanner },
+            template:
+                `
+            <v-banner
+                :show-close-button="true"
+                tag="Breaking News"
+                headline="Lorem Ipsum Dolor Sit Amet"
+                headline-link="https://www.google.com"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            />
+            `
+        }}
+    </Story>
+</Canvas>
+
+<Canvas>
+    <Story name="With Thumbnail Image">
+        {{
+            components: { VBanner, ArticleMetadata, VCounter, VByline },
+            template:
+            `
+            <v-banner
+                thumbnail="./images/Placeholder-Image-1_1.png"
+                thumbnail-alt-text="Breaking News alt text"
+                tag="Breaking News"
+                headline="Lorem Ipsum Dolor Sit Amet"
+                headline-link="https://www.google.com"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            >
+                <article-metadata
+                    publish-date="Jan 1, 2020"
+                    updated-date="Mar 2, 2020"
+                >
+                    <template v-slot:comments><v-counter icon="comment" text="Comments" value="40" href="http://www.google.com"/></template>
+                    <template v-slot:photos><v-counter icon="gallery" text="Photos" value="40" href="http://www.google.com"/></template>
+                </article-metadata>
+            </v-banner>
+            `
+        }}
+    </Story>
+</Canvas>

@@ -1,0 +1,19 @@
+@mixin typeface($type, $size) {
+  font-family: var(--font-family-#{$type});
+  letter-spacing: var(--letter-spacing-#{$type});
+  font-weight: var(--font-weight-#{$type});
+
+  line-height: var(--line-height-#{$size});
+  font-size: var(--font-size-#{$size});
+}
+
+@mixin button_clear {
+  display: inline-block;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  padding: 0;
+}
