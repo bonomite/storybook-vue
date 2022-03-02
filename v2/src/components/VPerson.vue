@@ -2,7 +2,7 @@
   <div ref="thisPerson" class="person override" :style="cssVars">
     <div
       v-resize="onResize"
-      class="person-inner grid"
+      class="person-inner grid grid-nogutter"
       :class="[
         hasDetails ? 'has-details' : '',
         image ? '' : 'no-image',
