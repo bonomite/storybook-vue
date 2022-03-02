@@ -14,17 +14,19 @@
         class="person-image-link"
         :class="[
           { [`col-12 ${bp}:col-4`]: orientation === 'responsive' },
-          { [`col-12 w-${imgScale}`]: orientation === 'vertical' },
+          { [`col-12 w-${imgScale} m-auto`]: orientation === 'vertical' },
           { 'col-4': orientation === 'horizontal' },
         ]"
       >
         <div
           ref="imgRef"
+          class="visual-holder"
           :class="[
             { [`w-${imgScale} m-auto ${bp}:w-12`]: orientation === 'responsive' },
+            { [`w-${imgScale} m-auto w-12`]: orientation === 'vertical' },
           ]"
         >
-          <span ref="visual" class="visual" :class="[circle ? 'circle' : '']">
+          <div ref="visual" class="visual" :class="[circle ? 'circle' : '']">
             <canvas ref="canvas" class="person-image" />
             <img
               v-if="isGIF(image)"
@@ -47,7 +49,7 @@
               loading="lazy"
               decoding="async"
             />
-          </span>
+          </div>
           <Button
             v-if="video"
             :label="null"
@@ -70,7 +72,7 @@
         class="person-details flex flex-column justify-content-center"
         :class="[
           { [`col-12 p-2 text-center ${bp}:text-left ${bp}:col-8 ${bp}:p-3`]: orientation === 'responsive' },
-          { 'col-12 p-2': orientation === 'vertical' },
+          { [`col-12 p-2 text-center`]: orientation === 'vertical' },
           { 'col-8 p-3': orientation === 'horizontal' },
         ]"
       >
@@ -115,7 +117,11 @@
             @click="handleBlurb()"
           >{{ readMore ? 'read less' : 'read more' }}</a>
         </div>
-        <v-share-tools v-if="socialArrayData.length > 0" class="social">
+        <v-share-tools
+          v-if="socialArrayData.length > 0"
+          class="social"
+          :class="[`text-center justify-content-center ${bp}:justify-content-start ${bp}:text-left`]"
+        >
           <v-share-tools-item
             v-for="(item, index) in socialArrayData"
             :key="index"
@@ -546,19 +552,6 @@ export default {
 </script>
 
 <style lang="scss">
-@mixin person-vertical-styles {
-  // grid-template-columns: 1fr;
-  // grid-template-rows: 1fr auto;
-  text-align: center;
-  // justify-items: center;
-  .person-details .social {
-    // justify-self: center;
-    margin-left: 0;
-  }
-  .person-image-link {
-    // width: var(--img-scale);
-  }
-}
 @mixin aspect-ratio($width, $height) {
   position: relative;
   &:before {
@@ -589,22 +582,11 @@ export default {
   }
   .person-inner {
     color: $textColor;
-    @include media("<sm") {
-      // gap: spacing(2);
-    }
-    &.has-details {
-      // grid-template-columns: 1fr 3fr;
-    }
-    &.no-image {
-      // grid-template-columns: 1fr;
-    }
     .person-image-link {
       padding: 0;
       position: relative;
-      // align-self: start;
-      // justify-self: center;
       line-height: 0;
-      span.circle {
+      div.circle {
         position: relative;
         display: block;
         border-radius: 100%;
@@ -619,12 +601,16 @@ export default {
       width: 100%;
       object-fit: cover;
     }
-    .visual {
-      background: transparent;
-      canvas {
-        display: none;
-        &.show {
-          display: block;
+    .visual-holder {
+      position: relative;
+      display: block;
+      .visual {
+        background: transparent;
+        canvas {
+          display: none;
+          &.show {
+            display: block;
+          }
         }
       }
     }
@@ -644,14 +630,6 @@ export default {
         right: 70%;
         margin: auto;
       }
-      // @include media("<sm") {
-      //   top: spacing(1);
-      //   bottom: unset;
-      //   &.circle {
-      //     top: 0;
-      //     bottom: unset;
-      //   }
-      // }
     }
     .person-details {
       color: $textColor;
@@ -720,11 +698,6 @@ export default {
 
       .social {
         margin-top: spacing(4);
-        .group {
-          // @include media("<sm") {
-          //   justify-content: center;
-          // }
-        }
       }
 
       .read-more {
@@ -747,8 +720,6 @@ export default {
     .video-holder {
       position: relative;
       display: block;
-      // align-self: stretch;
-      // grid-column: 1 / -1;
       margin: 15px auto 0 auto;
       width: 100%;
       .iframeHolder {

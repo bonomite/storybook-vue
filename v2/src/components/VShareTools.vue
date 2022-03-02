@@ -11,42 +11,36 @@ const props = defineProps({
   vertical: {
     type: Boolean,
     default: false
-  }
+  },
+  bp: {
+    type: String,
+    default: 'sm',
+  },
 })
 </script>
 
 <template>
-  <div
-    class="v-share-tools"
-    :class="[{ 'responsive': props.responsive }, { 'vertical': props.vertical }]"
-  >
-    <div class="group">
-      <p v-if="props.label" class="label">{{ props.label }}</p>
-      <slot />
-    </div>
+  <div class="v-share-tools group" :class="[{ 'vertical': props.vertical }]">
+    <p
+      v-if="props.label"
+      class="label"
+      :class="[
+        { [`w-full ${bp}:w-auto`]: responsive },
+      ]"
+    >{{ props.label }}</p>
+    <slot />
   </div>
 </template>
 
 <style lang="scss">
-.v-share-tools {
-  .group {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: spacing(4);
-  }
-  &.responsive {
-    @include media("<sm") {
-      .label {
-        width: 100%;
-      }
-    }
-  }
-  &.vertical {
-    .group {
-      flex-direction: column;
-    }
+.v-share-tools.group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: spacing(4);
+  &.group.vertical {
+    flex-direction: column;
   }
 }
 </style>
