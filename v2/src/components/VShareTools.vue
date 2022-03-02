@@ -37,7 +37,7 @@ const props = defineProps({
     gap: spacing(4);
   }
   &.responsive {
-    @include media("<small") {
+    @include media("<sm") {
       .label {
         width: 100%;
       }

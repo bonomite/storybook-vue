@@ -47,8 +47,16 @@ const Template = (args) => ({
     template: '<v-person v-bind="args" />',
 })
 
-export const Default = Template.bind({})
-Default.args = {
+export const DefaultHorizontal = Template.bind({})
+DefaultHorizontal.args = {
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    fullName: 'Jen Chung',
+    role: 'Executive Editor and Co-founder',
+}
+
+export const VerticalLayout = Template.bind({})
+VerticalLayout.args = {
+    orientation: 'vertical',
     image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     fullName: 'Jen Chung',
     role: 'Executive Editor and Co-founder',

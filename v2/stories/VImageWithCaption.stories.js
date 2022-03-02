@@ -46,6 +46,15 @@ NoText.args = {
     height: 400,
 }
 
+export const PublisherImageNoText = Template.bind({})
+PublisherImageNoText.args = {
+    // variation: 'gothamist',
+    altText: 'Fallback alt text here',
+    image: 'https://media.wnyc.org/i/%width%/%height%/c/%quality%/2022/02/RL_Hello_EpisodeImage.png',
+    width: 600,
+    height: 400,
+}
+
 export const Caption = Template.bind({})
 Caption.args = {
     // variation: 'gothamist',

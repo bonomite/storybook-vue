@@ -1,10 +1,10 @@
 :export {
-    xs: strip-unit(map-get($breakpoints, "xsmall"));
-    sm: strip-unit(map-get($breakpoints, "small"));
-    md: strip-unit(map-get($breakpoints, "medium"));
-    lg: strip-unit(map-get($breakpoints, "large"));
-    xl: strip-unit(map-get($breakpoints, "xlarge"));
-    xxl: strip-unit(map-get($breakpoints, "xxlarge"));
-    xxxl: strip-unit(map-get($breakpoints, "xxxlarge"));
+    xs: strip-unit(map-get($breakpoints, "xs"));
+    sm: strip-unit(map-get($breakpoints, "sm"));
+    md: strip-unit(map-get($breakpoints, "md"));
+    lg: strip-unit(map-get($breakpoints, "lg"));
+    xl: strip-unit(map-get($breakpoints, "xl"));
+    xxl: strip-unit(map-get($breakpoints, "xxl"));
+    xxxl: strip-unit(map-get($breakpoints, "xxxl"));
     max: strip-unit(map-get($breakpoints, "max"));
 }

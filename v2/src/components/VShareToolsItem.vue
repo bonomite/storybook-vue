@@ -218,7 +218,7 @@ const share = () => {
   width: 24px;
   height: 24px;
 
-  @include media("<small") {
+  @include media("<sm") {
     width: 30px;
     height: 30px;
   }

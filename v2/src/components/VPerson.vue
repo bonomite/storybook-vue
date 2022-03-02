@@ -2,17 +2,28 @@
   <div ref="thisPerson" class="person override" :style="cssVars">
     <div
       v-resize="onResize"
-      class="person-inner"
+      class="person-inner grid"
       :class="[
         hasDetails ? 'has-details' : '',
         image ? '' : 'no-image',
-        orientation === 'vertical' ? 'vertical' : '',
-        orientation === 'responsive' ? 'responsive' : '',
       ]"
     >
       <!-- Image section -->
-      <div v-if="image" class="person-image-link">
-        <div ref="imgRef">
+      <div
+        v-if="image"
+        class="person-image-link"
+        :class="[
+          { [`col-12 ${bp}:col-4`]: orientation === 'responsive' },
+          { [`col-12 w-${imgScale}`]: orientation === 'vertical' },
+          { 'col-4': orientation === 'horizontal' },
+        ]"
+      >
+        <div
+          ref="imgRef"
+          :class="[
+            { [`w-${imgScale} m-auto ${bp}:w-12`]: orientation === 'responsive' },
+          ]"
+        >
           <span ref="visual" class="visual" :class="[circle ? 'circle' : '']">
             <canvas ref="canvas" class="person-image" />
             <img
@@ -53,7 +64,16 @@
       </div>
 
       <!-- Detail section -->
-      <div v-if="hasDetails" ref="detailsRef" class="person-details">
+      <div
+        v-if="hasDetails"
+        ref="detailsRef"
+        class="person-details flex flex-column justify-content-center"
+        :class="[
+          { [`col-12 p-2 text-center ${bp}:text-left ${bp}:col-8 ${bp}:p-3`]: orientation === 'responsive' },
+          { 'col-12 p-2': orientation === 'vertical' },
+          { 'col-8 p-3': orientation === 'horizontal' },
+        ]"
+      >
         <div class="person-name-link-holder">
           <a
             v-if="fullName"
@@ -66,7 +86,7 @@
             <span v-html="fullName" />
           </a>
         </div>
-        <span v-if="role" class="person-role">
+        <div v-if="role" class="person-role">
           <span v-html="role" />
           <a
             v-if="organization"
@@ -77,7 +97,7 @@
             :class="[organizationLink ? 'link' : 'no-link']"
             v-html="organizationComputed"
           />
-        </span>
+        </div>
         <div ref="blurbHolderRef" class="blurbHolder">
           <div
             v-if="blurb"
@@ -111,7 +131,7 @@
       <div
         v-if="video && showVideo"
         ref="videoHolderRef"
-        class="video-holder"
+        class="video-holder col-12"
         @click="handleVideoClick($event)"
       >
         <iframe
@@ -192,11 +212,11 @@ export default {
       default: null,
     },
     /**
-     *  image scale in its container in vertical orientation only
+     *  image scale in its container in vertical orientation only, 1(8.333%) through 12(100%) 
      */
     imgScale: {
       type: String,
-      default: '40',
+      default: '5',
     },
     /**
      *  adds a circle mask around the image.
@@ -315,7 +335,7 @@ export default {
      */
     bp: {
       type: String,
-      default: 'small',
+      default: 'sm',
     },
     /**
      *  If component is on the Author page, disables image and name links
@@ -333,12 +353,12 @@ export default {
       windowSize: {},
       socialArrayData: [],
       initTruncHeight: 0,
+      bpVar: this.bp,
     }
   },
   computed: {
     cssVars() {
       return {
-        '--img-scale': this.imgScale ? this.imgScale + '%' : '100%',
         '--trunc-lines': this.truncate ? this.truncate : 'unset',
       }
     },
@@ -526,18 +546,17 @@ export default {
 </script>
 
 <style lang="scss">
-$bp: "<#{v-bind(bp)}";
 @mixin person-vertical-styles {
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto;
+  // grid-template-columns: 1fr;
+  // grid-template-rows: 1fr auto;
   text-align: center;
-  justify-items: center;
+  // justify-items: center;
   .person-details .social {
-    justify-self: center;
+    // justify-self: center;
     margin-left: 0;
   }
   .person-image-link {
-    width: var(--img-scale);
+    // width: var(--img-scale);
   }
 }
 @mixin aspect-ratio($width, $height) {
@@ -569,39 +588,21 @@ $bp: "<#{v-bind(bp)}";
     opacity: 0;
   }
   .person-inner {
-    display: grid;
-    grid-template-columns: auto;
-    align-items: center;
     color: $textColor;
-    gap: spacing(4);
-    @include media($bp) {
-      gap: spacing(2);
+    @include media("<sm") {
+      // gap: spacing(2);
     }
     &.has-details {
-      grid-template-columns: 1fr 3fr;
+      // grid-template-columns: 1fr 3fr;
     }
     &.no-image {
-      grid-template-columns: 1fr;
-    }
-    &.responsive {
-      @include media($bp) {
-        @include person-vertical-styles;
-        .person-details {
-          padding: 0 spacing(1);
-        }
-      }
-    }
-    &.vertical {
-      @include person-vertical-styles;
-      .person-details {
-        padding: 0 spacing(1);
-      }
+      // grid-template-columns: 1fr;
     }
     .person-image-link {
+      padding: 0;
       position: relative;
-      align-self: start;
-      justify-self: center;
-      width: 100%;
+      // align-self: start;
+      // justify-self: center;
       line-height: 0;
       span.circle {
         position: relative;
@@ -629,7 +630,6 @@ $bp: "<#{v-bind(bp)}";
     }
     .video-play-button {
       position: absolute;
-      display: grid;
       bottom: spacing(1);
       left: spacing(1);
       min-width: 40px;
@@ -644,17 +644,16 @@ $bp: "<#{v-bind(bp)}";
         right: 70%;
         margin: auto;
       }
-      @include media($bp) {
-        top: spacing(1);
-        bottom: unset;
-        &.circle {
-          top: 0;
-          bottom: unset;
-        }
-      }
+      // @include media("<sm") {
+      //   top: spacing(1);
+      //   bottom: unset;
+      //   &.circle {
+      //     top: 0;
+      //     bottom: unset;
+      //   }
+      // }
     }
     .person-details {
-      display: grid;
       color: $textColor;
       .person-name-link-holder {
         margin-bottom: spacing(1);
@@ -722,9 +721,9 @@ $bp: "<#{v-bind(bp)}";
       .social {
         margin-top: spacing(4);
         .group {
-          @include media($bp) {
-            justify-content: center;
-          }
+          // @include media("<sm") {
+          //   justify-content: center;
+          // }
         }
       }
 
@@ -748,8 +747,8 @@ $bp: "<#{v-bind(bp)}";
     .video-holder {
       position: relative;
       display: block;
-      align-self: stretch;
-      grid-column: 1 / -1;
+      // align-self: stretch;
+      // grid-column: 1 / -1;
       margin: 15px auto 0 auto;
       width: 100%;
       .iframeHolder {

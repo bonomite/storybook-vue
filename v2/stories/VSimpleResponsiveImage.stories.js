@@ -63,3 +63,13 @@ Vertical.args = {
     maxHeight: 952,
     allowVerticalEffect: true,
 }
+
+export const PublisherSupport = Template.bind({})
+PublisherSupport.args = {
+    alt: 'Fallback alt text here',
+    src: 'https://media.wnyc.org/i/%width%/%height%/c/%quality%/2022/02/RL_Hello_EpisodeImage.png',
+    width: 600,
+    height: 400,
+    maxWidth: 1860,
+    maxHeight: 1395,
+}
