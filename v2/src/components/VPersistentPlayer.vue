@@ -180,14 +180,14 @@ const togglePlay = () => {
           @volume-toggle-mute="emit('volume-toggle-mute')"
           @volume-change="emit('volume-change', $event)"
         />
-        <a
+        <Button
           v-if="props.showSkip && !props.livestream"
-          class="player-back-15-icon"
+          class="player-back-15-icon p-button-icon-only p-button-text p-button-secondary"
           aria-label="go back 15 seconds"
           @click="goBack15"
         >
           <i class="pi pi-replay"></i>
-        </a>
+        </Button>
         <Button
           class="play-button p-button-icon-only"
           :class="[
@@ -197,25 +197,25 @@ const togglePlay = () => {
           ]"
           @click="togglePlay"
         ></Button>
-        <a
+        <Button
           v-if="props.showSkip && !props.livestream"
-          class="player-ahead-15-icon"
+          class="player-ahead-15-icon p-button-icon-only p-button-text p-button-secondary"
           aria-label="go ahead 15 seconds"
           @click="goAhead15"
         >
           <i class="pi pi-refresh"></i>
-        </a>
+        </Button>
       </template>
-      <a
+      <Button
         v-if="props.showDownload && !props.livestream"
         tabindex="0"
-        class="player-download-icon"
+        class="player-download-icon p-button-icon-only p-button-text p-button-secondary"
         aria-label="download"
         @click="download"
         @keypress.space.enter="download"
       >
         <i class="pi pi-download download-icon"></i>
-      </a>
+      </Button>
     </div>
   </div>
 </template>

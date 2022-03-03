@@ -1,10 +1,15 @@
 <template>
   <div class="track-info">
     <div v-if="image" class="track-info-image">
-      <a v-if="image && titleLink" :href="titleLink" target="_blank" rel="noopener noreferrer">
-        <img v-if="image" :src="image" :alt="title" />
-      </a>
-      <img v-else-if="image" :src="image" :alt="title" />
+      <v-image-with-caption
+        :image="image"
+        :width="84"
+        :height="84"
+        :alt-text="title"
+        :image-url="titleLink ? titleLink : null"
+        :ratio="[1, 1]"
+        role="presentation"
+      />
     </div>
     <div class="track-info-details">
       <div v-if="livestream" class="track-info-livestream">
@@ -16,24 +21,18 @@
       </div>
       <div class="track-info-title">
         <h2 v-if="title && titleLink">
-          <a
-            :href="titleLink"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="track-info-title-link"
-          >{{ title }}</a>
+          <v-flexible-link class="track-info-title-link" :to="titleLink">{{ title }}</v-flexible-link>
         </h2>
         <h2 v-if="title && !titleLink">{{ title }}</h2>
       </div>
       <div v-if="description" class="track-info-description">
         <div v-if="description && !descriptionLink" class="track-info-description">{{ description }}</div>
-        <a
+
+        <v-flexible-link
           v-if="description && descriptionLink"
-          :href="descriptionLink"
-          target="_blank"
-          rel="noopener noreferrer"
           class="track-info-description-link"
-        >{{ description }}</a>
+          :to="descriptionLink"
+        >{{ description }}</v-flexible-link>
       </div>
       <template v-if="!livestream">
         <div class="track-info-progress" @click="$emit('seek', $event)">
@@ -51,8 +50,11 @@
 </template>
 
 <script>
+import VImageWithCaption from './VImageWithCaption'
+import VFlexibleLink from './VFlexibleLink'
 export default {
   name: 'TrackInfo',
+  components: { VImageWithCaption, VFlexibleLink },
   props: {
     description: {
       type: String,
@@ -113,29 +115,28 @@ export default {
 </script>
 
 <style lang="scss">
+$track-info-image-size: 84px;
 .track-info {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
   height: inherit;
   flex: auto;
   align-self: center;
   overflow: hidden;
-}
-
-.track-info-image {
-  display: none;
-  @media all and (min-width: $medium) {
-    display: block;
+  .track-info-image {
+    display: none;
+    @media all and (min-width: $medium) {
+      display: block;
+    }
+    width: $track-info-image-size;
+    max-width: $track-info-image-size;
+    height: $track-info-image-size;
+    //flex: 1 0 $track-info-image-size;
+    .image-with-caption {
+      width: $track-info-image-size;
+    }
   }
-}
-
-.track-info-image img {
-  --track-info-image-size: 80px;
-  width: var(--track-info-image-size);
-  max-width: var(--track-info-image-size);
-  height: var(--track-info-image-size);
-  flex: 1 0 var(--track-info-image-size);
 }
 
 .track-info-details {

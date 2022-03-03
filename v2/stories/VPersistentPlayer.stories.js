@@ -42,3 +42,13 @@ DescriptionLink.args = {
     descriptionLink: "http://www.bing.com",
     file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
 }
+
+export const WithImage = Template.bind({})
+WithImage.args = {
+    title: "The Takeaway",
+    station: "WNYC 93.9 FM",
+    titleLink: "http://www.google.com",
+    image: "https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
+}
