@@ -50,12 +50,14 @@ let previousVolume = ref(props.volume)
 <style lang="scss">
 .volume-control {
   display: none;
-  @media all and (min-width: $medium) {
+  @media all and (min-width: $md) {
     display: flex;
     align-items: center;
     justify-content: flex-end;
   }
-  &:hover {
+  &:hover,
+  &:focus-within,
+  &:focus-visible {
     .volume-control-slider {
       width: 116px;
       opacity: 1;
@@ -63,6 +65,7 @@ let previousVolume = ref(props.volume)
       margin-right: 0;
     }
   }
+
   &.show-volume .volume-control-slider,
   & .volume-control-slider.focus-visible {
     width: 116px;
@@ -75,50 +78,27 @@ let previousVolume = ref(props.volume)
     line-height: 0px;
     margin-right: 4px;
   }
-}
-
-.volume-control-icon {
-  flex: 1 0;
-  appearance: none;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  display: inline-block;
-  height: 36px;
-  min-width: 36px;
-  max-width: 36px;
-}
-
-.volume-control-icon {
-  color: $textColor;
-}
-
-.volume-control .volume-control-slider {
-  transition: width 0.5s, opacity 0.25s, margin-right 0.25s;
-  -webkit-transition: width 0.5s, opacity 0.25s, margin-right 0.25s;
-  margin-right: 0;
-  width: 0px;
-  opacity: 0;
-  border: none;
-}
-
-.volume-control-slider.slide-left-enter,
-.volume-control-slider.slide-left-leave-to {
-  width: 0px;
-  min-width: 0px;
-}
-
-.volume-control-slider.slide-left-leave,
-.volume-control-slider.slide-left-enter-to {
-  width: 116px;
-  min-width: 116px;
-}
-
-.volume-control-slider.slide-left-enter-active {
-  transition: all $transitionEase $transitionDuration;
-}
-
-.volume-control-slider.slide-left-leave-active {
-  transition: all $transitionEase $transitionDuration;
+  .volume-control-icon {
+    color: $textColor;
+    flex: 1 0;
+    appearance: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: inline-block;
+    height: 36px;
+    min-width: 36px;
+    max-width: 36px;
+  }
+  .volume-control-slider {
+    transition: width $transitionDuration, opacity $transitionDuration,
+      margin-right $transitionDuration;
+    -webkit-transition: width $transitionDuration, opacity $transitionDuration,
+      margin-right $transitionDuration;
+    margin-right: 0;
+    width: 0px;
+    opacity: 0;
+    border: none;
+  }
 }
 </style>

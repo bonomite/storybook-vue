@@ -185,6 +185,7 @@ const togglePlay = () => {
         />
         <Button
           v-if="props.showSkip && !props.livestream"
+          title="Go Back 15 Seconds"
           class="player-back-15-icon p-button-icon-only p-button-text p-button-secondary"
           aria-label="go back 15 seconds"
           @click="goBack15"
@@ -192,6 +193,7 @@ const togglePlay = () => {
           <i class="pi pi-replay"></i>
         </Button>
         <Button
+          :title="isPlaying ? 'Pause' : 'Play'"
           class="play-button"
           :class="[
             { ['pi pi-play']: !isPlaying && !isLoading },
@@ -205,6 +207,7 @@ const togglePlay = () => {
         </Button>
         <Button
           v-if="props.showSkip && !props.livestream"
+          title="Go Ahead 15 Seconds"
           class="player-ahead-15-icon p-button-icon-only p-button-text p-button-secondary"
           aria-label="go ahead 15 seconds"
           @click="goAhead15"
@@ -214,6 +217,7 @@ const togglePlay = () => {
       </template>
       <Button
         v-if="props.showDownload && !props.livestream"
+        title="Download"
         tabindex="0"
         class="player-download-icon p-button-icon-only p-button-text p-button-secondary"
         aria-label="download"
@@ -236,46 +240,28 @@ const togglePlay = () => {
   width: 100%;
   padding: 8px 16px 8px 8px;
   color: $textColor;
-  background-color: $gray-200;
-}
-
-.persistent-player a,
-.persistent-player a:visited,
-.persistent-player a:active {
-  color: $textColor;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: none;
+  background-color: $gray-100;
+  .player-controls {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 16px;
+    .player-cta-play-button {
+      min-width: 150px;
+    }
+    .play-button {
+      min-width: 55px;
+    }
   }
-}
+  a,
+  a:visited,
+  a:active {
+    color: $textColor;
+    text-decoration: none;
 
-.player-controls {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  gap: 16px;
-}
-
-.player-controls .player-cta-play-button {
-  min-width: 150px;
-}
-
-.player-controls .play-button {
-  min-width: 55px;
-}
-
-.player-controls .back-15-icon,
-.player-controls .ahead-15-icon,
-.player-controls .download-icon {
-  min-width: 30px;
-  min-height: 30px;
-  vertical-align: middle;
-  cursor: pointer;
-}
-
-.player-controls .loading-icon {
-  width: 16px !important;
-  height: 16px !important;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 </style>
