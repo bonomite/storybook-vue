@@ -1,5 +1,4 @@
 import { createApp, reactive } from 'vue'
-import { Vue3Mq } from "vue3-mq"
 import router from './router'
 import App from './App.vue'
 
@@ -72,7 +71,6 @@ app.config.globalProperties.$allowDownload = true
 app.config.globalProperties.$appState = reactive({ inputStyle: 'outlined' })
 
 app.use(PrimeVue, { ripple: true })
-app.use(Vue3Mq)
 app.use(ToastService)
 app.use(ConfirmationService)
 app.use(router)
