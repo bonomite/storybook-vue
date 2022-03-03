@@ -7,72 +7,72 @@ import Button from 'primevue/button'
 const props = defineProps({
   autoPlay: {
     type: Boolean,
-    default: false
+    default: false,
   },
   description: {
     type: String,
-    default: null
+    default: null,
   },
   descriptionLink: {
     type: String,
-    default: null
+    default: null,
   },
   file: {
     type: String,
-    default: null
+    default: null,
   },
   livestream: {
     type: Boolean,
-    default: false
+    default: false,
   },
   loop: {
     type: Boolean,
-    default: false
+    default: false,
   },
   isLoading: {
     type: Boolean,
-    default: false
+    default: false,
   },
   isPlaying: {
     type: Boolean,
-    default: false
+    default: false,
   },
   shouldShowCta: {
     type: Boolean,
-    default: false
+    default: false,
   },
   showDownload: {
     type: Boolean,
-    default: false
+    default: false,
   },
   showSkip: {
     type: Boolean,
-    default: true
+    default: true,
   },
   showTrack: {
     type: Boolean,
-    default: true
+    default: true,
   },
   station: {
     type: String,
-    default: null
+    default: null,
   },
   image: {
     type: String,
-    default: null
+    default: null,
   },
   title: {
     type: String,
-    default: null
+    default: null,
   },
   titleLink: {
     type: String,
-    default: null
+    default: null,
   },
   isMuted: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 let currentSeconds = ref(0)
 let durationSeconds = ref(0)
@@ -97,10 +97,14 @@ onMounted(() => {
         togglePlay()
         break
       case 'ArrowUp':
-        if (volume.value < 100) { volume.value++ }
+        if (volume.value < 100) {
+          volume.value++
+        }
         break
       case 'ArrowDown':
-        if (volume.value > 0) { volume.value-- }
+        if (volume.value > 0) {
+          volume.value--
+        }
         break
       case 'ArrowLeft':
         goBack15()
@@ -111,7 +115,6 @@ onMounted(() => {
     }
   })
 })
-
 
 const convertTime = (val) => {
   const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
@@ -139,7 +142,6 @@ const seek = (e) => {
 const togglePlay = () => {
   emit('togglePlay')
 }
-
 </script>
 
 <template>
@@ -198,7 +200,7 @@ const togglePlay = () => {
           :class="[
             { ['pi pi-play']: !isPlaying && !isLoading },
             { ['pi pi-pause']: isPlaying },
-          
+
             { 'p-button-icon-only': !shouldShowCta },
           ]"
           @click="togglePlay"
@@ -236,7 +238,7 @@ const togglePlay = () => {
   left: 0;
   height: 100px;
   position: fixed;
-  z-index: $z-index-15;
+  z-index: $z-index-10;
   width: 100%;
   padding: 8px 16px 8px 8px;
   color: $textColor;
