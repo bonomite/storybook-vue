@@ -1,57 +1,51 @@
+<script setup>
+import { ref } from 'vue'
+import Slider from 'primevue/slider'
+
+const props = defineProps({
+  volume: {
+    type: Number,
+    default: 50
+  },
+  isMuted: {
+    type: Boolean,
+    default: false
+  },
+  showVolume: {
+    type: Boolean,
+    default: false
+  }
+})
+
+const emit = defineEmits(['volume-toggle-mute', 'volume-change'])
+
+let previousVolume = ref(props.volume)
+
+</script>
+
 <template>
-  <div class="volume-control" :class="{ 'show-volume': showVolume }">
-    <label for="playerVolume" class="is-vishidden label">Volume</label>
-    <!-- <transition name="slide-left"> -->
-    <input
-      v-show="!isMuted"
-      id="playerVolume"
+  <div class="volume-control" :class="{ 'show-volume': props.showVolume }">
+    <Slider
+      v-show="!props.isMuted"
+      v-model="previousVolume"
       class="volume-control-slider"
-      type="range"
-      min="0"
-      max="100"
-      :value="volume"
-      @change="$emit('volume-change', parseInt($event.target.value))"
+      :min="0"
+      :max="100"
+      @change="emit('volume-change', previousVolume)"
     />
-    <!-- </transition> -->
     <button
       class="volume-control-icon"
-      :aria-label="isMuted ? 'unmute' : 'mute'"
-      @click="$emit('volume-toggle-mute')"
+      :aria-label="props.isMuted ? 'unmute' : 'mute'"
+      @click="emit('volume-toggle-mute')"
       @keypress.space.enter="mute"
     >
-      <i v-if="!isMuted" class="pi pi-volume-up"></i>
-      <i v-if="isMuted" class="pi pi-volume-off"></i>
+      <i v-if="!props.isMuted" class="pi pi-volume-up"></i>
+      <i v-if="props.isMuted" class="pi pi-volume-off"></i>
     </button>
   </div>
 </template>
 
-<script>
 
-export default {
-  name: 'VolumeControl',
-  components: {},
-  props: {
-    volume: {
-      type: Number,
-      default: 100
-    },
-    isMuted: {
-      type: Boolean,
-      default: false
-    },
-    showVolume: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data() {
-    return {
-      previousVolume: 35
-    }
-  },
-  mounted() { }
-}
-</script>
 
 <style lang="scss">
 .volume-control {
@@ -62,15 +56,15 @@ export default {
     justify-content: flex-end;
   }
   &:hover {
-    input.volume-control-slider {
+    .volume-control-slider {
       width: 116px;
       opacity: 1;
       visibility: visible;
       margin-right: 0;
     }
   }
-  &.show-volume input.volume-control-slider,
-  & input.volume-control-slider.focus-visible {
+  &.show-volume .volume-control-slider,
+  & .volume-control-slider.focus-visible {
     width: 116px;
     opacity: 1;
     visibility: visible;
@@ -99,11 +93,10 @@ export default {
   color: $textColor;
 }
 
-.volume-control input.volume-control-slider {
+.volume-control .volume-control-slider {
   transition: width 0.5s, opacity 0.25s, margin-right 0.25s;
   -webkit-transition: width 0.5s, opacity 0.25s, margin-right 0.25s;
   margin-right: 0;
-  padding: 24px 0;
   width: 0px;
   opacity: 0;
   border: none;

@@ -169,9 +169,12 @@ const togglePlay = () => {
           <play-simple class="button-icon" />
           <span class="button-text">Listen Live</span>
         </button>-->
-        <Button icon="pi pi-play" class="button player-cta-play-button" @click="togglePlay">
-          <span class="button-text">Listen Live</span>
-        </Button>
+        <Button
+          label="Listen Live"
+          icon="pi pi-play"
+          class="player-cta-play-button"
+          @click="togglePlay"
+        ></Button>
       </template>
       <template v-else>
         <v-volume-control
@@ -189,14 +192,17 @@ const togglePlay = () => {
           <i class="pi pi-replay"></i>
         </Button>
         <Button
-          class="play-button p-button-icon-only"
+          class="play-button"
           :class="[
             { ['pi pi-play']: !isPlaying && !isLoading },
             { ['pi pi-pause']: isPlaying },
-            { ['pi pi-spin pi-spinner']: isLoading },
+          
+            { 'p-button-icon-only': !shouldShowCta },
           ]"
           @click="togglePlay"
-        ></Button>
+        >
+          <i v-if="isLoading" class="pi pi-spin pi-spinner"></i>
+        </Button>
         <Button
           v-if="props.showSkip && !props.livestream"
           class="player-ahead-15-icon p-button-icon-only p-button-text p-button-secondary"
@@ -251,30 +257,8 @@ const togglePlay = () => {
   gap: 16px;
 }
 
-.player-controls svg {
-  fill: $textColor;
-}
-
 .player-controls .player-cta-play-button {
-  .p-button-label {
-    display: none;
-  }
-  margin-right: 4px;
-  @media all and (min-width: $medium) {
-    margin-right: 24px;
-  }
-}
-
-.player-controls .volume-control {
-  margin-left: 16px;
-}
-
-.player-controls .player-cta-play-button svg {
-  min-width: 20px;
-}
-
-.player-controls .player-cta-play-button svg path {
-  fill: $textColor;
+  min-width: 150px;
 }
 
 .player-controls .play-button {
